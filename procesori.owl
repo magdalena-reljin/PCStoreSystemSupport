@@ -1,0 +1,776 @@
+@prefix : <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2> .
+
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#areCompatible
+:areCompatible rdf:type owl:ObjectProperty ,
+                        owl:SymmetricProperty ;
+               rdfs:domain :Processor ;
+               rdfs:range :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsMotherboardElements
+:containsMotherboardElements rdf:type owl:ObjectProperty ;
+                             rdfs:domain :Motherboard ;
+                             rdfs:range :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsProcessorElements
+:containsProcessorElements rdf:type owl:ObjectProperty ;
+                           rdfs:domain :Processor ;
+                           rdfs:range :ProcessorElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasHardware
+:hasHardware rdf:type owl:ObjectProperty ;
+             rdfs:domain :PC ;
+             rdfs:range :Hardware .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasSoftware
+:hasSoftware rdf:type owl:ObjectProperty ;
+             rdfs:domain :PC ;
+             rdfs:range :Software .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorIsCompatibleWithChipset
+:processorIsCompatibleWithChipset rdf:type owl:ObjectProperty ;
+                                  rdfs:domain :Processor ;
+                                  rdfs:range :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorIsCompatibleWithSocket
+:processorIsCompatibleWithSocket rdf:type owl:ObjectProperty ;
+                                 rdfs:domain :Generation ;
+                                 rdfs:range :CPUSocket .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#agpType
+:agpType rdf:type owl:DatatypeProperty ;
+         rdfs:domain :AGPSlot ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#agpVoltage
+:agpVoltage rdf:type owl:DatatypeProperty ;
+            rdfs:domain :AGPSlot ;
+            rdfs:range xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#chipsetSeries
+:chipsetSeries rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Chipset ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#connectorExists
+:connectorExists rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Connector ;
+                 rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hardDriveConnectorExists
+:hardDriveConnectorExists rdf:type owl:DatatypeProperty ;
+                          rdfs:domain :HardDriveConnector ;
+                          rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#motherboardProducer
+:motherboardProducer rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Motherboard ;
+                     rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#motherboardSize
+:motherboardSize rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Motherboard ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#motherboardVoltage
+:motherboardVoltage rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#numOfConnectors
+:numOfConnectors rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :IntegratedPeripheralsConnector ;
+                 rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramFrequency
+:ramFrequency rdf:type owl:DatatypeProperty ;
+              rdfs:comment "[MHz]" .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramSize
+:ramSize rdf:type owl:DatatypeProperty ;
+         rdfs:comment "[GB]" .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramType
+:ramType rdf:type owl:DatatypeProperty ;
+         rdfs:domain :RAMSlot ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#socketType
+:socketType rdf:type owl:DatatypeProperty ;
+            rdfs:domain :CPUSocket ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#yearOfProduction
+:yearOfProduction rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Motherboard ;
+                  rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AGPSlot
+:AGPSlot rdf:type owl:Class ;
+         rdfs:subClassOf :Connector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Audio
+:Audio rdf:type owl:Class ;
+       rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1356
+:BGA1356 rdf:type owl:Class ;
+         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1440
+:BGA1440 rdf:type owl:Class ;
+         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1515
+:BGA1515 rdf:type owl:Class ;
+         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1526
+:BGA1526 rdf:type owl:Class ;
+         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1528
+:BGA1528 rdf:type owl:Class ;
+         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA2270
+:BGA2270 rdf:type owl:Class ;
+         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BIOSChip
+:BIOSChip rdf:type owl:Class ;
+          rdfs:subClassOf :BIOSElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BIOSElements
+:BIOSElements rdf:type owl:Class ;
+              rdfs:subClassOf :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMOSBattery
+:CMOSBattery rdf:type owl:Class ;
+             rdfs:subClassOf :BIOSElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMOSChip
+:CMOSChip rdf:type owl:Class ;
+          rdfs:subClassOf :BIOSElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CPUSocket
+:CPUSocket rdf:type owl:Class ;
+           rdfs:subClassOf :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Chipset
+:Chipset rdf:type owl:Class ;
+         rdfs:subClassOf :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CombinedConnector
+:CombinedConnector rdf:type owl:Class ;
+                   rdfs:subClassOf :Audio .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ComponentElements
+:ComponentElements rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Connector
+:Connector rdf:type owl:Class ;
+           rdfs:subClassOf :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Cooler
+:Cooler rdf:type owl:Class ;
+        rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CpuCooler
+:CpuCooler rdf:type owl:Class ;
+           rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DVI
+:DVI rdf:type owl:Class ;
+     rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Desktop
+:Desktop rdf:type owl:Class ;
+         rdfs:subClassOf :PC ;
+         owl:disjointWith :Laptop .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#External
+:External rdf:type owl:Class ;
+          rdfs:subClassOf :Hardware .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#FCBGA1440
+:FCBGA1440 rdf:type owl:Class ;
+           rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#FCBGA1528
+:FCBGA1528 rdf:type owl:Class ;
+           rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#FloppyDriveConnector
+:FloppyDriveConnector rdf:type owl:Class ;
+                      rdfs:subClassOf :Connector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Generation
+:Generation rdf:type owl:Class ;
+            rdfs:subClassOf :ProcessorElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GraphicsCard
+:GraphicsCard rdf:type owl:Class ;
+              rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HDMI
+:HDMI rdf:type owl:Class ;
+      rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HardDrive
+:HardDrive rdf:type owl:Class ;
+           rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HardDriveConnector
+:HardDriveConnector rdf:type owl:Class ;
+                    rdfs:subClassOf :Connector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Hardware
+:Hardware rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneConnector
+:HeadphoneConnector rdf:type owl:Class ;
+                    rdfs:subClassOf :Audio .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IDEConnector
+:IDEConnector rdf:type owl:Class ;
+              rdfs:subClassOf :HardDriveConnector ;
+              owl:disjointWith :SATAConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntegratedPeripheralsConnector
+:IntegratedPeripheralsConnector rdf:type owl:Class ;
+                                rdfs:subClassOf :Connector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelCM246
+:IntelCM246 rdf:type owl:Class ;
+            rdfs:subClassOf :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelCore2Duo
+:IntelCore2Duo rdf:type owl:Class ;
+               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                     owl:onProperty :processorIsCompatibleWithSocket ;
+                                     owl:someValuesFrom :Socket478
+                                   ] ;
+               rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelGL82QM175
+:IntelGL82QM175 rdf:type owl:Class ;
+                rdfs:subClassOf :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelHM170
+:IntelHM170 rdf:type owl:Class ;
+            rdfs:subClassOf :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelHM370
+:IntelHM370 rdf:type owl:Class ;
+            rdfs:subClassOf :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelSoC
+:IntelSoC rdf:type owl:Class ;
+          rdfs:subClassOf :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelXeonE
+:IntelXeonE rdf:type owl:Class ;
+            owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :processorIsCompatibleWithChipset ;
+                                                         owl:someValuesFrom :IntelCM246
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :processorIsCompatibleWithSocket ;
+                                                         owl:someValuesFrom :FCBGA1440
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ;
+            rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Internal
+:Internal rdf:type owl:Class ;
+          rdfs:subClassOf :Hardware .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LAN
+:LAN rdf:type owl:Class ;
+     rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LGA1150_H3
+:LGA1150_H3 rdf:type owl:Class ;
+            rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LGA1151_H4
+:LGA1151_H4 rdf:type owl:Class ;
+            rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LGA1200_H5
+:LGA1200_H5 rdf:type owl:Class ;
+            rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LGA1356_B2
+:LGA1356_B2 rdf:type owl:Class ;
+            rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Laptop
+:Laptop rdf:type owl:Class ;
+        rdfs:subClassOf :PC .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MicrophoneConnector
+:MicrophoneConnector rdf:type owl:Class ;
+                     rdfs:subClassOf :Audio .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Motherboard
+:Motherboard rdf:type owl:Class ;
+             rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MotherboardElements
+:MotherboardElements rdf:type owl:Class ;
+                     rdfs:subClassOf :ComponentElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PC
+:PC rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PCIeSlot
+:PCIeSlot rdf:type owl:Class ;
+          rdfs:subClassOf :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PGA946
+:PGA946 rdf:type owl:Class ;
+        rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PowerSupply
+:PowerSupply rdf:type owl:Class ;
+             rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PowerSupplyConnector
+:PowerSupplyConnector rdf:type owl:Class ;
+                      rdfs:subClassOf :Connector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Processor
+:Processor rdf:type owl:Class ;
+           rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ProcessorElements
+:ProcessorElements rdf:type owl:Class ;
+                   rdfs:subClassOf :ComponentElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAM
+:RAM rdf:type owl:Class ;
+     rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAMSlot
+:RAMSlot rdf:type owl:Class ;
+         rdfs:subClassOf :MotherboardElements .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SATAConnector
+:SATAConnector rdf:type owl:Class ;
+               rdfs:subClassOf :HardDriveConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SSD
+:SSD rdf:type owl:Class ;
+     rdfs:subClassOf :Internal .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Socket478
+:Socket478 rdf:type owl:Class ;
+           rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Software
+:Software rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#USB
+:USB rdf:type owl:Class ;
+     rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#10thGenIntelCoreDesktop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#10thGenIntelCoreDesktop> rdf:type owl:Class ;
+                                                                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                       owl:someValuesFrom :LGA1200_H5
+                                                                                                                     ] ;
+                                                                                                 rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#10thGenerationIntelLaptop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#10thGenerationIntelLaptop> rdf:type owl:Class ;
+                                                                                                   owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                         owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                                owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                                owl:someValuesFrom :IntelSoC
+                                                                                                                                                              ]
+                                                                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                                                                owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                                owl:someValuesFrom :BGA1526
+                                                                                                                                                              ]
+                                                                                                                                                            ) ;
+                                                                                                                                         rdf:type owl:Class
+                                                                                                                                       ]
+                                                                                                                                       [ rdf:type owl:Restriction ;
+                                                                                                                                         owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                         owl:someValuesFrom :BGA1528
+                                                                                                                                       ]
+                                                                                                                                     )
+                                                                                                                       ] ;
+                                                                                                   rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#300series
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#300series> rdf:type owl:Class ;
+                                                                                   rdfs:subClassOf :Chipset .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#4thGenIntelCoreDesktop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#4thGenIntelCoreDesktop> rdf:type owl:Class ;
+                                                                                                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                      owl:someValuesFrom :LGA1150_H3
+                                                                                                                    ] ;
+                                                                                                rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#4thGenerationIntelLaptop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#4thGenerationIntelLaptop> rdf:type owl:Class ;
+                                                                                                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                        owl:someValuesFrom :PGA946
+                                                                                                                      ] ;
+                                                                                                  rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#6thGenIntelCoreDesktop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#6thGenIntelCoreDesktop> rdf:type owl:Class ;
+                                                                                                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                      owl:someValuesFrom :LGA1151_H4
+                                                                                                                    ] ;
+                                                                                                rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#6thGenerationIntelLaptop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#6thGenerationIntelLaptop> rdf:type owl:Class ;
+                                                                                                  owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                        owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelHM170
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :BGA1440
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA1356
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :LGA1356_B2
+                                                                                                                                      ]
+                                                                                                                                    )
+                                                                                                                      ] ;
+                                                                                                  rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#7thGenIntelCoreDesktop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#7thGenIntelCoreDesktop> rdf:type owl:Class ;
+                                                                                                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                      owl:someValuesFrom :LGA1151_H4
+                                                                                                                    ] ;
+                                                                                                rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#7thGenerationIntelLaptop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#7thGenerationIntelLaptop> rdf:type owl:Class ;
+                                                                                                  owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                        owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA1356
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA1515
+                                                                                                                                      ]
+                                                                                                                                    )
+                                                                                                                      ] ;
+                                                                                                  rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#8thGenIntelCoreDesktop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#8thGenIntelCoreDesktop> rdf:type owl:Class ;
+                                                                                                owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                             owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                             owl:someValuesFrom <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#300series>
+                                                                                                                                           ]
+                                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                                             owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                             owl:someValuesFrom :LGA1151_H4
+                                                                                                                                           ]
+                                                                                                                                         ) ;
+                                                                                                                      rdf:type owl:Class
+                                                                                                                    ] ;
+                                                                                                rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#8thGenerationIntelLaptop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#8thGenerationIntelLaptop> rdf:type owl:Class ;
+                                                                                                  owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                        owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelCM246
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :BGA1440
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelCM246
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :FCBGA1440
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelGL82QM175
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :BGA2270
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelHM370
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :BGA1440
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelSoC
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :BGA1528
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelSoC
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :FCBGA1528
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA1356
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA1440
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA1528
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :BGA2270
+                                                                                                                                      ]
+                                                                                                                                    )
+                                                                                                                      ] ;
+                                                                                                  rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#9thGenerationIntelLaptop
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#9thGenerationIntelLaptop> rdf:type owl:Class ;
+                                                                                                  owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                        owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelCM246
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :BGA1440
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithChipset ;
+                                                                                                                                                               owl:someValuesFrom :IntelCM246
+                                                                                                                                                             ]
+                                                                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                                                                               owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                                               owl:someValuesFrom :FCBGA1440
+                                                                                                                                                             ]
+                                                                                                                                                           ) ;
+                                                                                                                                        rdf:type owl:Class
+                                                                                                                                      ]
+                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                        owl:onProperty :processorIsCompatibleWithSocket ;
+                                                                                                                                        owl:someValuesFrom :FCBGA1440
+                                                                                                                                      ]
+                                                                                                                                    )
+                                                                                                                      ] ;
+                                                                                                  rdfs:subClassOf :Generation .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> rdf:type owl:Class ;
+                                                                              rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Keyboard
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Keyboard> rdf:type owl:Class ;
+                                                                                      rdfs:subClassOf <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> ;
+                                                                                      owl:disjointWith <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Mouse> .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Mouse
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Mouse> rdf:type owl:Class ;
+                                                                                   rdfs:subClassOf <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BIOSChip
+                :CMOSBattery
+                :CMOSChip
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CombinedConnector
+                :HeadphoneConnector
+                :MicrophoneConnector
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
