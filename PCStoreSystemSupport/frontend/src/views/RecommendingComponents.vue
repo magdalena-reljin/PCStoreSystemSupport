@@ -46,6 +46,9 @@
             <option>
                 RAM 
             </option>
+              <option>
+                CPU_COOLER 
+            </option>
 
         </select>
         </div>
@@ -141,6 +144,14 @@ export default {
            
            if(this.selected2=="PROCESSOR"){
                this.findProcessors()
+           }else if(this.selected2=="RAM"){
+             if(this.selected != "" && this.selecte3 != ""){
+               this.findRamByMotherboardAndProcessor()
+             }else if(this.selected != "") {
+              this.findRamByMotherboard()
+             }
+           }else if(this.selected2=="CPU_COOLER"){
+              this.findCpuCoolerByMotherboardAndProcessor();
            }
 
           
@@ -163,6 +174,69 @@ export default {
                    console.log("rez "+response.data)
                    this.foundComponents=response.data
                })
+       },
+       findRamByMotherboard: function(){
+         this.foundComponents=[]
+         if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+           
+             axios
+               .post("http://localhost:8081/recommendingComponents/findRamByMotherboard/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+       },
+         findRamByMotherboardAndProcessor: function(){
+         this.foundComponents=[]
+         if(this.selected=="" || this.selected3=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard and processor',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+           
+             axios
+               .post("http://localhost:8081/recommendingComponents/findRamByMotherboardAndProcessor/"+this.selected+"/"+this.selected3)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+       },
+       findCpuCoolerByMotherboardAndProcessor: function(){
+            this.foundComponents=[]
+           if(this.selected=="" || this.selected3=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard and processor',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCoolerForProcessor/"+this.selected+"/"+this.selected3)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
        }
 
     }

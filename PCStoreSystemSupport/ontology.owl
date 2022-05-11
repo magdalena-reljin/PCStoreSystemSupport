@@ -9,14 +9,6 @@
 <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2> rdf:type owl:Ontology .
 
 #################################################################
-#    Datatypes
-#################################################################
-
-###  http://www.w3.org/2001/XMLSchema#float
-xsd:float rdfs:comment "GHz" .
-
-
-#################################################################
 #    Object Properties
 #################################################################
 
@@ -27,26 +19,40 @@ xsd:float rdfs:comment "GHz" .
                rdfs:range :CPUSocket .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsMotherboardElements
-:containsMotherboardElements rdf:type owl:ObjectProperty ;
-                             rdfs:domain :Motherboard ;
-                             rdfs:range :MotherboardElements .
-
-
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsProcessorElements
 :containsProcessorElements rdf:type owl:ObjectProperty ;
                            rdfs:domain :Processor ;
                            rdfs:range :ProcessorElements .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsRAMElements
-:containsRAMElements rdf:type owl:ObjectProperty ;
-                     rdfs:domain :RAM ;
-                     rdfs:range :RAMElements .
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsRAMSlot
+:containsRAMSlot rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain :Motherboard ;
+                 rdfs:range :RAM .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsSocket
+:containsSocket rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :Motherboard ;
+                rdfs:range :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#coolerIsCompatibleWithSocket
+:coolerIsCompatibleWithSocket rdf:type owl:ObjectProperty ;
+                              rdfs:domain :CpuCooler ;
+                              rdfs:range :CPUSocket .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasCapacity
 :hasCapacity rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasCoolerSlot
+:hasCoolerSlot rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :Motherboard .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasHardware
@@ -75,7 +81,7 @@ xsd:float rdfs:comment "GHz" .
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramTypeIsCompatibleWithSlotType
 :ramTypeIsCompatibleWithSlotType rdf:type owl:ObjectProperty ;
-                                 rdfs:domain :Type ;
+                                 rdfs:domain :RAM ;
                                  rdfs:range :TypeOfRAMSlot .
 
 
@@ -86,7 +92,8 @@ xsd:float rdfs:comment "GHz" .
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RamSlotCapacity
 :RamSlotCapacity rdf:type owl:DatatypeProperty ;
                  rdfs:domain :RAMSlot ;
-                 rdfs:range xsd:int .
+                 rdfs:range xsd:int ;
+                 rdfs:comment "GB" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#agpType
@@ -113,6 +120,20 @@ xsd:float rdfs:comment "GHz" .
                  rdfs:range xsd:boolean .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#coolerName
+:coolerName rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :CpuCooler ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#coolerTDP
+:coolerTDP rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain :CpuCooler ;
+           rdfs:range xsd:integer .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#daLiSamUPravu
 :daLiSamUPravu rdf:type owl:DatatypeProperty ;
                rdfs:domain :Motherboard ;
@@ -125,6 +146,13 @@ xsd:float rdfs:comment "GHz" .
                           rdfs:range xsd:boolean .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#maxFanSpeed
+:maxFanSpeed rdf:type owl:DatatypeProperty ;
+             rdfs:domain :CpuCooler ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "RPM" .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#maximumInternalMemory
 :maximumInternalMemory rdf:type owl:DatatypeProperty ;
                        rdfs:domain :Motherboard ;
@@ -133,9 +161,9 @@ xsd:float rdfs:comment "GHz" .
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#memoryClockSpeed
 :memoryClockSpeed rdf:type owl:DatatypeProperty ;
-                  rdfs:domain :RAMElements ;
-                  rdfs:range xsd:float ;
-                  rdfs:comment "GHz" .
+                  rdfs:domain :RAM ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "MHz" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#memoryVoltageSupportedByProcessor
@@ -166,6 +194,13 @@ xsd:float rdfs:comment "GHz" .
 :motherboardVoltage rdf:type owl:DatatypeProperty .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#noiseLevel
+:noiseLevel rdf:type owl:DatatypeProperty ;
+            rdfs:domain :CpuCooler ;
+            rdfs:range xsd:integer ;
+            rdfs:comment "dB" .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#numOfConnectors
 :numOfConnectors rdf:type owl:DatatypeProperty ;
                  rdfs:domain :IntegratedPeripheralsConnector ;
@@ -192,43 +227,53 @@ xsd:float rdfs:comment "GHz" .
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorFrequency
 :processorFrequency rdf:type owl:DatatypeProperty ;
-                    rdfs:domain :ProcessorElements ;
-                    rdfs:range xsd:float .
+                    rdfs:domain :Processor ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "MHz" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorName
 :processorName rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
-               rdfs:domain :ProcessorElements .
+               rdfs:domain :Processor .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorProducer
 :processorProducer rdf:type owl:DatatypeProperty ;
-                   rdfs:domain :ProcessorElements ;
+                   rdfs:domain :Processor ;
                    rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorTDP
 :processorTDP rdf:type owl:DatatypeProperty ;
-              rdfs:domain :ProcessorElements ;
+              rdfs:domain :Processor ,
+                          :ProcessorElements ;
               rdfs:range xsd:int ;
               rdfs:comment "W" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramFrequency
 :ramFrequency rdf:type owl:DatatypeProperty ;
-              rdfs:comment "[MHz]" .
+              rdfs:comment "GHz" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramMemoryCapacity
 :ramMemoryCapacity rdf:type owl:DatatypeProperty ;
-                   rdfs:domain :RAMElements ;
-                   rdfs:range xsd:int .
+                   rdfs:domain :RAM ;
+                   rdfs:range xsd:int ;
+                   rdfs:comment "GB" .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramSize
-:ramSize rdf:type owl:DatatypeProperty ;
-         rdfs:comment "[GB]" .
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramName
+:ramName rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramProducer
+:ramProducer rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramType
@@ -423,7 +468,7 @@ xsd:float rdfs:comment "GHz" .
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Generation
 :Generation rdf:type owl:Class ;
-            rdfs:subClassOf :ProcessorElements .
+            rdfs:subClassOf :Processor .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GraphicsCard
@@ -605,11 +650,6 @@ xsd:float rdfs:comment "GHz" .
      rdfs:subClassOf :Internal .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAMElements
-:RAMElements rdf:type owl:Class ;
-             rdfs:subClassOf :ComponentElements .
-
-
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAMSlot
 :RAMSlot rdf:type owl:Class ;
          rdfs:subClassOf :MotherboardElements .
@@ -646,7 +686,7 @@ xsd:float rdfs:comment "GHz" .
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Type
 :Type rdf:type owl:Class ;
-      rdfs:subClassOf :RAMElements .
+      rdfs:subClassOf :RAM .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TypeOfRAMSlot
@@ -935,6 +975,32 @@ xsd:float rdfs:comment "GHz" .
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AEROCOOL_VERKHO_A-3P
+:AEROCOOL_VERKHO_A-3P rdf:type owl:NamedIndividual ,
+                               :CpuCooler ;
+                      :coolerIsCompatibleWithSocket :PGA946 ;
+                      :coolerName "AEROCOOL_VERKHO_A-3P"^^xsd:string ;
+                      :coolerTDP 65 ;
+                      :maxFanSpeed 2200 ;
+                      :noiseLevel 33 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DDR4
+:DDR4 rdf:type owl:NamedIndividual ,
+               :RAM ;
+      :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+      :memoryClockSpeed 2300 ;
+      :ramMemoryCapacity 4 ;
+      :ramName "KVR26N19S6/4" ;
+      :ramProducer "Kingston_ValueRAM" .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DIMM-DDR4
+:DIMM-DDR4 rdf:type owl:NamedIndividual ,
+                    :DIMM-DDR4 ;
+           :RamSlotCapacity 4 .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PGA946
 :PGA946 rdf:type owl:NamedIndividual ,
                  :PGA946 .
@@ -943,16 +1009,19 @@ xsd:float rdfs:comment "GHz" .
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#X570S_AORUS_MASTER
 :X570S_AORUS_MASTER rdf:type owl:NamedIndividual ,
                              :Motherboard ;
-                    :containsMotherboardElements :PGA946 ;
+                    :containsRAMSlot :DIMM-DDR4 ;
+                    :containsSocket :PGA946 ;
+                    :maximumInternalMemory 8 ;
                     :motherBoardProducer "GIGABYTE"^^xsd:string ;
-                    :motherboardName "X570S_AORUS_MASTER"^^xsd:string .
+                    :motherboardName "X570S_AORUS_MASTER"^^xsd:string ;
+                    :numberOfMemorySlots 2 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#probni
 :probni rdf:type owl:NamedIndividual ,
                  :Generation ;
         :processorIsCompatibleWithSocket :PGA946 ;
-        :processorFrequency "3.333"^^xsd:float ;
+        :processorFrequency 3333 ;
         :processorName "proba ime"^^xsd:string ;
         :processorProducer "proba proizvodjac"^^xsd:string ;
         :processorTDP "200"^^xsd:int .
@@ -960,12 +1029,19 @@ xsd:float rdfs:comment "GHz" .
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#treciProcesor
 :treciProcesor rdf:type owl:NamedIndividual ,
-                        :Generation ;
+                        :Processor ;
                :processorIsCompatibleWithSocket :PGA946 ;
-               :processorFrequency "2.666"^^xsd:float ;
-               :processorName "Intel_Corei3-10100F"^^xsd:string ;
+               :processorFrequency 2666 ;
+               :processorName "treciProcesor"^^xsd:string ;
                :processorProducer "Intel"^^xsd:string ;
-               :processorTDP "65"^^xsd:int .
+               :processorTDP 60 .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+xsd:float rdfs:comment "GHz" .
 
 
 #################################################################

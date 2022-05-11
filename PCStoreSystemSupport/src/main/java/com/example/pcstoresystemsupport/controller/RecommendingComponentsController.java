@@ -31,4 +31,17 @@ public class RecommendingComponentsController {
     public ResponseEntity<List<String>> findProcessors(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
         return new ResponseEntity<>(recommendingComponentsService.findProcessors(motherboard), HttpStatus.OK);
     }
+    @PostMapping(value= "/findRamByMotherboard/{motherboard}")
+    public ResponseEntity<List<String>> findRamByMotherboard(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findRamByMotherBoard(motherboard), HttpStatus.OK);
+    }
+    @PostMapping(value= "/findRamByMotherboardAndProcessor/{motherboard}/{processor}")
+    public ResponseEntity<List<String>> findRamByMotherboard(@PathVariable("motherboard") String motherboard,@PathVariable("processor") String processor) throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findRamByMotherBoardAndProcessor(motherboard, processor), HttpStatus.OK);
+    }
+
+    @PostMapping(value= "/findCoolerForProcessor/{motherboard}/{processor}")
+    public ResponseEntity<List<String>> findCoolerForProcessor(@PathVariable("motherboard") String motherboard,@PathVariable("processor") String processor) throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findCoolerForProcessor(motherboard, processor), HttpStatus.OK);
+    }
 }

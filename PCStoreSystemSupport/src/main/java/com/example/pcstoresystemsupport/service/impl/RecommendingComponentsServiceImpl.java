@@ -57,7 +57,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
     public List<String> findProcessors(String motherboard) throws SWRLParseException, SQWRLException {
         List<String> processors=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
-                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsMotherboardElements(?x,?z) -> sqwrl:select(?z) ");
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
         String socket=result1.getColumn(0).get(0).toString().substring(1);
 
         SQWRLResult result2= queryEngine.runSQWRLQuery("q4", "Generation(?x) ^ "+socket+
@@ -65,12 +65,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                 "^ processorTDP(?x,?tdp)-> sqwrl:select(?name,?freq,?tdp) ");
         System.out.println("vracam"+result2);
         for(int i=0 ; i< result2.getColumn(0).size() ; i++){
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa "+result2.getColumn(1).get(i).toString()
-                    .substring(result2.getColumn(1).get(i).toString().indexOf("\"")+1,result2.getColumn(1).get(i).toString().lastIndexOf("\""))
-                    );
             processors.add("Processor "+findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i) +" "+
                     " ["+socket+","+
-                    findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i)+"GHz,"+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i)+"MHz,"+
                     "TDP "+findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+"W"
                     +"]");
         }
@@ -78,5 +75,98 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
     }
     private String findDetailsFromQueryWithoutTypes(SQWRLResultValue result2, int i){
         return result2.toString().substring(result2.toString().indexOf("\"")+1,result2.toString().lastIndexOf("\""));
+    }
+
+    @Override
+    public List<String> findRamByMotherBoard(String motherboard) throws SWRLParseException, SQWRLException {
+        List<String> rams=new ArrayList<>();
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q5", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
+        String ramSlot=result1.getColumn(0).get(0).toString().substring(1);
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q6", "RAM(?x) ^ "+ramSlot+"(?y)"+
+                "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
+                " ramMemoryCapacity(?x,?capacity) ^ memoryClockSpeed(?x,?mcs) ->" +
+                " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
+        System.out.println("vracam"+result2);
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++){
+
+            rams.add("RAM "+findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i) +" "+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+
+                    " ["+
+                    result2.getColumn(0).get(i).toString().substring(1)+", "+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)+"GBx1, "+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(i),i)+"MHz"
+                    +"]");
+        }
+        return rams;
+    }
+
+    @Override
+    public List<String> findRamByMotherBoardAndProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException {
+        List<String> rams=new ArrayList<>();
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Generation(?x) ^ processorName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+processor+"\") ^ processorFrequency(?x,?z) -> sqwrl:select(?z) ");
+        String proccesorFreq= findDetailsFromQueryWithoutTypes(result1.getColumn(0).get(0),0);
+        System.out.println("FREKVENCIJAAA"+proccesorFreq);
+
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q8", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
+        String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
+        System.out.println("vracam  ram slooot"+ramSlot);
+
+        SQWRLResult result3= queryEngine.runSQWRLQuery("q9", "RAM(?x) ^ "+ramSlot+"(?y)"+
+                "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
+                " ramMemoryCapacity(?x,?capacity) ^ memoryClockSpeed(?x,?mcs) ^swrlb:lessThan(?mcs,"+proccesorFreq+") ->" +
+                " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
+        System.out.println("vracam kompatibiln ram"+result3);
+
+        for(int i=0 ; i< result3.getColumn(0).size() ; i++){
+
+            rams.add("RAM "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i) +" "+
+                    findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+
+                    " ["+
+                    result3.getColumn(0).get(i).toString().substring(1)+", "+
+                    findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)+"GBx1, "+
+                    findDetailsFromQueryWithoutTypes(result3.getColumn(4).get(i),i)+"MHz"
+                    +"]");
+        }
+        return rams;
+    }
+
+    @Override
+    public List<String> findCoolerForProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException {
+        List<String> coolers=new ArrayList<>();
+
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
+        String socket=result1.getColumn(0).get(0).toString().substring(1);
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q10", "Generation(?x) ^ processorName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+processor+"\") ^ processorTDP(?x,?z) -> sqwrl:select(?z) ");
+        String proccesorTDP= findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(0),0);
+        System.out.println("PROCESOOR TDP "+proccesorTDP);
+
+
+
+        SQWRLResult result3= queryEngine.runSQWRLQuery("q11", "CpuCooler(?x) ^"+socket+"(?y)"+" coolerIsCompatibleWithSocket(?x,?y) ^" +
+                "coolerTDP(?x,?cooler)" +
+                "^ swrlb:greaterThan(?cooler,"+proccesorTDP+") ^ maxFanSpeed(?x,?speed) ^ noiseLevel(?x,?level) -> sqwrl:select(?x,?cooler,?speed,?level) ");
+        //String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
+        System.out.println("vracam  ram slooot"+result3);
+
+
+
+        for(int i=0 ; i< result3.getColumn(0).size() ; i++){
+
+            coolers.add("CPU_COOLER "+result3.getColumn(0).get(i).toString().substring(1) +
+                    " ["+
+                    "TDP "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i)+"W, "+
+                     "Max fan speed "+findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+"RMP, "+
+                     "Noise level: up to "+findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+"dB"+
+                    "]");
+        }
+        return coolers;
     }
 }
