@@ -46,10 +46,12 @@
             <option>
                 RAM 
             </option>
-              <option>
+            <option>
                 CPU_COOLER 
             </option>
-
+             <option>
+                GRAPHIC_CARD 
+            </option>
         </select>
         </div>
        
@@ -152,6 +154,8 @@ export default {
              }
            }else if(this.selected2=="CPU_COOLER"){
               this.findCpuCoolerByMotherboardAndProcessor();
+           }else if(this.selected2=="GRAPHIC_CARD"){
+              this.findCompatibleGraphicCards();
            }
 
           
@@ -231,6 +235,26 @@ export default {
            }
               axios
                .post("http://localhost:8081/recommendingComponents/findCoolerForProcessor/"+this.selected+"/"+this.selected3)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
+       }, findCompatibleGraphicCards: function(){
+            this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleGraphicCards/"+this.selected)
                .then((response) => {
                    console.log("rez "+response.data)
 

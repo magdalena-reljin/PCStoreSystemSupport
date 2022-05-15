@@ -169,4 +169,38 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         }
         return coolers;
     }
+
+    @Override
+    public List<String> findCompatibleGraphicCards(String motherboard) throws SWRLParseException, SQWRLException {
+        List<String> graphicCards=new ArrayList<>();
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q12", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsGraphicCardSlots(?x,?z) ^ PSU(?x, ?PSUvalue)" +
+                " -> sqwrl:select(?z, ?PSUvalue) ");
+
+        String graphicCardSlot=result1.getColumn(0).get(0).toString().substring(1);
+        String PSU = findDetailsFromQueryWithoutTypes(result1.getColumn(1).get(0), 1);
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery(
+                "q13", "GraphicsCard(?x) ^ " + graphicCardSlot + "(?y)" +
+                "graphicCardIsCompatibleWithGraphicCardSlot(?x, ?y)" +
+                "^graphicCardName(?x, ?name)" +
+                "^graphicCardProducer(?x, ?producer)"+
+                "^minimumPSUForGraphicCard(?x, ?minimumPSU)" +
+                "^ swrlb:lessThan(?minimumPSU," + Double.parseDouble(PSU)*0.4 +")" +
+                "^memoryTypeOfGraphicCard(?x, ?memoryType)" +
+                "^memorySizeOfGraphicCard(?x, ?memorySize)" +
+                " -> sqwrl:select(?x, ?producer, ?name, ?minimumPSU, ?memoryType, ?memorySize)");
+
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++) {
+            graphicCards.add("GraphicCard " +
+            findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i) + " " +
+            findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i) +
+            " ["+ graphicCardSlot+ ", " +
+            findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i) + "W, " +
+            findDetailsFromQueryWithoutTypes(result2.getColumn(5).get(i),i) + "GB, " +
+            findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(i),i)
+            +"]");
+        }
+        return graphicCards;
+    }
 }
