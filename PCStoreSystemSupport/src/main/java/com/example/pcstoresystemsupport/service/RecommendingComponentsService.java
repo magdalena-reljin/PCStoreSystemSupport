@@ -13,4 +13,6 @@ public interface RecommendingComponentsService {
     List<String> findRamByMotherBoardAndProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException;
     List<String> findCoolerForProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException;
     List<String> findCompatibleGraphicCards(String motherboard) throws SWRLParseException, SQWRLException;
+
+    List<String> findCompatibleOS(String processor) throws SWRLParseException, SQWRLException;
 }

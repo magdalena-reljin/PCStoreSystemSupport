@@ -79,6 +79,10 @@
              rdfs:range :Software .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#operatingSystemIsCompatibleWithOperatingMode
+:operatingSystemIsCompatibleWithOperatingMode rdf:type owl:ObjectProperty .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorIsCompatibleWithChipset
 :processorIsCompatibleWithChipset rdf:type owl:ObjectProperty ;
                                   rdfs:domain :Processor ;
@@ -93,8 +97,9 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorOperatingMode
 :processorOperatingMode rdf:type owl:ObjectProperty ;
-                        rdfs:domain :OperatingMode ;
-                        rdfs:range :OperatingSystem .
+                        rdfs:subPropertyOf owl:topObjectProperty ;
+                        rdfs:domain :Processor ;
+                        rdfs:range :OperatingMode .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramTypeIsCompatibleWithSlotType
@@ -292,7 +297,8 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorName
 :processorName rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
-               rdfs:domain :Processor .
+               rdfs:domain :Processor ;
+               rdfs:range xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorProducer
@@ -692,6 +698,62 @@
                      rdfs:subClassOf :ComponentElements .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_32bit
+:OM_32bit rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Linux_32bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows10_32bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows11_32bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows7_32bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows8_32bit
+                                              ]
+                                            )
+                              ] ;
+          rdfs:subClassOf :OperatingMode .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_64bit
+:OM_64bit rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Linux_64bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows10_64bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows11_64bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows7_64bit
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :processorOperatingMode ;
+                                                owl:someValuesFrom :Windows8_64bit
+                                              ]
+                                            )
+                              ] ;
+          rdfs:subClassOf :OperatingMode .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OperatingMode
 :OperatingMode rdf:type owl:Class ;
                rdfs:subClassOf :Processor .
@@ -815,10 +877,6 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_32bit
 :Windows10_32bit rdf:type owl:Class ;
-                 owl:equivalentClass [ rdf:type owl:Restriction ;
-                                       owl:onProperty :processorOperatingMode ;
-                                       owl:hasValue <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit>
-                                     ] ;
                  rdfs:subClassOf :OperatingSystem .
 
 
@@ -829,10 +887,6 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows11_32bit
 :Windows11_32bit rdf:type owl:Class ;
-                 owl:equivalentClass [ rdf:type owl:Restriction ;
-                                       owl:onProperty :processorOperatingMode ;
-                                       owl:hasValue <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit>
-                                     ] ;
                  rdfs:subClassOf :OperatingSystem .
 
 
@@ -843,10 +897,6 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows7_32bit
 :Windows7_32bit rdf:type owl:Class ;
-                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                      owl:onProperty :processorOperatingMode ;
-                                      owl:hasValue <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit>
-                                    ] ;
                 rdfs:subClassOf :OperatingSystem .
 
 
@@ -857,10 +907,6 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows8_32bit
 :Windows8_32bit rdf:type owl:Class ;
-                owl:equivalentClass [ rdf:type owl:Restriction ;
-                                      owl:onProperty :processorOperatingMode ;
-                                      owl:hasValue <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit>
-                                    ] ;
                 rdfs:subClassOf :OperatingSystem .
 
 
@@ -904,34 +950,6 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#300series
 <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#300series> rdf:type owl:Class ;
                                                                                    rdfs:subClassOf :Chipset .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit
-<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit> rdf:type owl:Class ;
-                                                                               owl:equivalentClass [ rdf:type owl:Class ;
-                                                                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                                                                                     owl:onProperty :processorOperatingMode ;
-                                                                                                                     owl:someValuesFrom :Linux_32bit
-                                                                                                                   ]
-                                                                                                                   [ rdf:type owl:Restriction ;
-                                                                                                                     owl:onProperty :processorOperatingMode ;
-                                                                                                                     owl:someValuesFrom :Windows10_32bit
-                                                                                                                   ]
-                                                                                                                   [ rdf:type owl:Restriction ;
-                                                                                                                     owl:onProperty :processorOperatingMode ;
-                                                                                                                     owl:someValuesFrom :Windows11_32bit
-                                                                                                                   ]
-                                                                                                                   [ rdf:type owl:Restriction ;
-                                                                                                                     owl:onProperty :processorOperatingMode ;
-                                                                                                                     owl:someValuesFrom :Windows7_32bit
-                                                                                                                   ]
-                                                                                                                   [ rdf:type owl:Restriction ;
-                                                                                                                     owl:onProperty :processorOperatingMode ;
-                                                                                                                     owl:someValuesFrom :Windows8_32bit
-                                                                                                                   ]
-                                                                                                                 )
-                                                                                                   ] ;
-                                                                               rdfs:subClassOf :OperatingMode .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#4thGenIntelCoreDesktop
@@ -986,11 +1004,6 @@
                                                                                                                                     )
                                                                                                                       ] ;
                                                                                                   rdfs:subClassOf :Generation .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#64bit
-<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#64bit> rdf:type owl:Class ;
-                                                                               rdfs:subClassOf :OperatingMode .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#7thGenIntelCoreDesktop
@@ -1204,6 +1217,28 @@
            :RamSlotCapacity 4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_32bit
+:Linux_32bit rdf:type owl:NamedIndividual ,
+                      :Linux_32bit ;
+             :operatingSystemIsCompatibleWithOperatingMode :OM_32bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_64bit
+:Linux_64bit rdf:type owl:NamedIndividual ,
+                      :Linux_64bit ;
+             :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_32bit
+:OM_32bit rdf:type owl:NamedIndividual ,
+                   :OM_32bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_64bit
+:OM_64bit rdf:type owl:NamedIndividual ,
+                   :OM_64bit .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PCIeSlot
 :PCIeSlot rdf:type owl:NamedIndividual ,
                    :PCIeSlot .
@@ -1227,7 +1262,50 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_32bit
 :Windows10_32bit rdf:type owl:NamedIndividual ,
-                          :Windows10_32bit .
+                          :Windows10_32bit ;
+                 :operatingSystemIsCompatibleWithOperatingMode :OM_32bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_64bit
+:Windows10_64bit rdf:type owl:NamedIndividual ,
+                          :Windows10_64bit ;
+                 :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows11_32bit
+:Windows11_32bit rdf:type owl:NamedIndividual ,
+                          :Windows11_32bit ;
+                 :operatingSystemIsCompatibleWithOperatingMode :OM_32bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows11_64bit
+:Windows11_64bit rdf:type owl:NamedIndividual ,
+                          :Windows11_64bit ;
+                 :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows7_32bit
+:Windows7_32bit rdf:type owl:NamedIndividual ,
+                         :Windows7_32bit ;
+                :operatingSystemIsCompatibleWithOperatingMode :OM_32bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows7_64bit
+:Windows7_64bit rdf:type owl:NamedIndividual ,
+                         :Windows7_64bit ;
+                :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows8_32bit
+:Windows8_32bit rdf:type owl:NamedIndividual ,
+                         :Windows8_32bit ;
+                :operatingSystemIsCompatibleWithOperatingMode :OM_32bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows8_64bit
+:Windows8_64bit rdf:type owl:NamedIndividual ,
+                         :Windows8_64bit ;
+                :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#X570S_AORUS_MASTER
@@ -1245,11 +1323,11 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#probni
 :probni rdf:type owl:NamedIndividual ,
-                 :Generation ;
+                 :Processor ;
         :processorIsCompatibleWithSocket :PGA946 ;
-        :processorOperatingMode <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit> ;
+        :processorOperatingMode :OM_64bit ;
         :processorFrequency 3333 ;
-        :processorName "proba ime"^^xsd:string ;
+        :processorName "probni"^^xsd:string ;
         :processorProducer "proba proizvodjac"^^xsd:string ;
         :processorTDP "200"^^xsd:int .
 
@@ -1258,16 +1336,11 @@
 :treciProcesor rdf:type owl:NamedIndividual ,
                         :Processor ;
                :processorIsCompatibleWithSocket :PGA946 ;
+               :processorOperatingMode :OM_32bit ;
                :processorFrequency 2666 ;
                :processorName "treciProcesor"^^xsd:string ;
                :processorProducer "Intel"^^xsd:string ;
                :processorTDP 60 .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit
-<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#32bit> rdf:type owl:NamedIndividual ,
-                                                                                        :OperatingMode ;
-                                                                               :processorOperatingMode :Windows10_32bit .
 
 
 #################################################################

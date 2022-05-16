@@ -52,6 +52,9 @@
              <option>
                 GRAPHIC_CARD 
             </option>
+             <option>
+                OPERATING_SYSTEM
+            </option>
         </select>
         </div>
        
@@ -156,6 +159,8 @@ export default {
               this.findCpuCoolerByMotherboardAndProcessor();
            }else if(this.selected2=="GRAPHIC_CARD"){
               this.findCompatibleGraphicCards();
+           } else if(this.selected2=="OPERATING_SYSTEM"){
+              this.findCompatibleOS();
            }
 
           
@@ -255,6 +260,26 @@ export default {
            }
               axios
                .post("http://localhost:8081/recommendingComponents/findCompatibleGraphicCards/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
+       }, findCompatibleOS: function(){
+            this.foundComponents=[]
+           if(this.selected3=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose processor',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleOS/"+this.selected3)
                .then((response) => {
                    console.log("rez "+response.data)
 

@@ -203,4 +203,22 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         }
         return graphicCards;
     }
+
+    @Override
+    public List<String> findCompatibleOS(String processor) throws SWRLParseException, SQWRLException {
+        List<String> operatingSystems = new ArrayList<>();
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q14", "Processor(?x) ^ processorName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+processor+"\") ^ processorOperatingMode(?x,?z) -> sqwrl:select(?y, ?z) ");
+
+        String operatingMode = result1.getColumn(1).get(0).toString().substring(1);
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q15", "OperatingSystem(?x) ^ " + operatingMode +
+                "(?y) ^ operatingSystemIsCompatibleWithOperatingMode(?x, ?y)" +
+                "-> sqwrl:select(?x) ");
+
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++) {
+            operatingSystems.add("OperatingSystem " + result2.getColumn(0).get(i).toString().substring(1));
+        }
+        return operatingSystems;
+    }
 }

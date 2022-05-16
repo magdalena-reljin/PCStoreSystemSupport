@@ -49,4 +49,9 @@ public class RecommendingComponentsController {
     public ResponseEntity<List<String>> findCompatibleGraphicCards(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
         return new ResponseEntity<>(recommendingComponentsService.findCompatibleGraphicCards(motherboard), HttpStatus.OK);
     }
+
+    @PostMapping(value= "/findCompatibleOS/{processor}")
+    public ResponseEntity<List<String>> findCompatibleOS(@PathVariable("processor") String processor) throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findCompatibleOS(processor), HttpStatus.OK);
+    }
 }
