@@ -25,12 +25,6 @@
                           rdfs:range :GraphicCardSlot .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsProcessorElements
-:containsProcessorElements rdf:type owl:ObjectProperty ;
-                           rdfs:domain :Processor ;
-                           rdfs:range :ProcessorElements .
-
-
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsRAMSlot
 :containsRAMSlot rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf owl:topObjectProperty ;
@@ -45,6 +39,12 @@
                 rdfs:range :CPUSocket .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsViewConnectors
+:containsViewConnectors rdf:type owl:ObjectProperty ;
+                        rdfs:domain :Motherboard ;
+                        rdfs:range :ViewConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#coolerIsCompatibleWithSocket
 :coolerIsCompatibleWithSocket rdf:type owl:ObjectProperty ;
                               rdfs:domain :CpuCooler ;
@@ -55,10 +55,6 @@
 :graphicCardIsCompatibleWithGraphicCardSlot rdf:type owl:ObjectProperty ;
                                             rdfs:domain :GraphicsCard ;
                                             rdfs:range :GraphicCardSlot .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasCapacity
-:hasCapacity rdf:type owl:ObjectProperty .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasCoolerSlot
@@ -77,6 +73,12 @@
 :hasSoftware rdf:type owl:ObjectProperty ;
              rdfs:domain :PC ;
              rdfs:range :Software .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#monitorIsCompatibleWithViewConnector
+:monitorIsCompatibleWithViewConnector rdf:type owl:ObjectProperty ;
+                                      rdfs:domain :Monitor ;
+                                      rdfs:range :ViewConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#operatingSystemIsCompatibleWithOperatingMode
@@ -271,7 +273,6 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#numberOfCores
 :numberOfCores rdf:type owl:DatatypeProperty ;
-               rdfs:domain :ProcessorElements ;
                rdfs:range xsd:integer .
 
 
@@ -309,8 +310,7 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#processorTDP
 :processorTDP rdf:type owl:DatatypeProperty ;
-              rdfs:domain :Processor ,
-                          :ProcessorElements ;
+              rdfs:domain :Processor ;
               rdfs:range xsd:int ;
               rdfs:comment "W" .
 
@@ -375,9 +375,9 @@
          rdfs:subClassOf :GraphicCardSlot .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Audio
-:Audio rdf:type owl:Class ;
-       rdfs:subClassOf :IntegratedPeripheralsConnector .
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AudioConnector
+:AudioConnector rdf:type owl:Class ;
+                rdfs:subClassOf :IntegratedPeripheralsConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1356
@@ -410,26 +410,6 @@
          rdfs:subClassOf :CPUSocket .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BIOSChip
-:BIOSChip rdf:type owl:Class ;
-          rdfs:subClassOf :BIOSElements .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BIOSElements
-:BIOSElements rdf:type owl:Class ;
-              rdfs:subClassOf :MotherboardElements .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMOSBattery
-:CMOSBattery rdf:type owl:Class ;
-             rdfs:subClassOf :BIOSElements .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMOSChip
-:CMOSChip rdf:type owl:Class ;
-          rdfs:subClassOf :BIOSElements .
-
-
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CPUSocket
 :CPUSocket rdf:type owl:Class ;
            rdfs:subClassOf :MotherboardElements .
@@ -442,7 +422,7 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CombinedConnector
 :CombinedConnector rdf:type owl:Class ;
-                   rdfs:subClassOf :Audio .
+                   rdfs:subClassOf :AudioConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ComponentElements
@@ -509,7 +489,7 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DVI
 :DVI rdf:type owl:Class ;
-     rdfs:subClassOf :IntegratedPeripheralsConnector .
+     rdfs:subClassOf :ViewConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Desktop
@@ -555,7 +535,7 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HDMI
 :HDMI rdf:type owl:Class ;
-      rdfs:subClassOf :IntegratedPeripheralsConnector .
+      rdfs:subClassOf :ViewConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HardDrive
@@ -574,7 +554,7 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneConnector
 :HeadphoneConnector rdf:type owl:Class ;
-                    rdfs:subClassOf :Audio .
+                    rdfs:subClassOf :AudioConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IDEConnector
@@ -685,7 +665,39 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MicrophoneConnector
 :MicrophoneConnector rdf:type owl:Class ;
-                     rdfs:subClassOf :Audio .
+                     rdfs:subClassOf :AudioConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Monitor
+:Monitor rdf:type owl:Class ;
+         rdfs:subClassOf :External .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithDVI
+:MonitorCompatibleWithDVI rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                owl:someValuesFrom :DVI
+                                              ] ;
+                          rdfs:subClassOf :Monitor .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithHDMI
+:MonitorCompatibleWithHDMI rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                 owl:someValuesFrom :HDMI
+                                               ] ;
+                           rdfs:subClassOf :Monitor .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithVGA
+:MonitorCompatibleWithVGA rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                owl:someValuesFrom :VGA
+                                              ] ;
+                          rdfs:subClassOf :Monitor .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Motherboard
@@ -816,11 +828,6 @@
            rdfs:subClassOf :Internal .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ProcessorElements
-:ProcessorElements rdf:type owl:Class ;
-                   rdfs:subClassOf :ComponentElements .
-
-
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAM
 :RAM rdf:type owl:Class ;
      rdfs:subClassOf :Internal .
@@ -873,6 +880,16 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#USB
 :USB rdf:type owl:Class ;
      rdfs:subClassOf :IntegratedPeripheralsConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#VGA
+:VGA rdf:type owl:Class ;
+     rdfs:subClassOf :ViewConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ViewConnector
+:ViewConnector rdf:type owl:Class ;
+               rdfs:subClassOf :IntegratedPeripheralsConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_32bit
@@ -1171,6 +1188,122 @@
                                                                                                   rdfs:subClassOf :Generation .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithDVI&HDMI
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithDVI&HDMI> rdf:type owl:Class ;
+                                                                                                       owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                             owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                                    owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                    owl:someValuesFrom :DVI
+                                                                                                                                                                  ]
+                                                                                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                                                                                    owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                    owl:someValuesFrom :HDMI
+                                                                                                                                                                  ]
+                                                                                                                                                                ) ;
+                                                                                                                                             rdf:type owl:Class
+                                                                                                                                           ]
+                                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                                             owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                             owl:someValuesFrom :DVI
+                                                                                                                                           ]
+                                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                                             owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                             owl:someValuesFrom :HDMI
+                                                                                                                                           ]
+                                                                                                                                         )
+                                                                                                                           ] ;
+                                                                                                       rdfs:subClassOf :Monitor .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithDVI&HDMI&VGA
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithDVI&HDMI&VGA> rdf:type owl:Class ;
+                                                                                                           owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                                 owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                                        owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                        owl:someValuesFrom :DVI
+                                                                                                                                                                      ]
+                                                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                                                        owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                        owl:someValuesFrom :HDMI
+                                                                                                                                                                      ]
+                                                                                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                                                                                        owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                        owl:someValuesFrom :VGA
+                                                                                                                                                                      ]
+                                                                                                                                                                    ) ;
+                                                                                                                                                 rdf:type owl:Class
+                                                                                                                                               ]
+                                                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                                                 owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                 owl:someValuesFrom :DVI
+                                                                                                                                               ]
+                                                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                                                 owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                 owl:someValuesFrom :HDMI
+                                                                                                                                               ]
+                                                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                                                 owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                 owl:someValuesFrom :VGA
+                                                                                                                                               ]
+                                                                                                                                             )
+                                                                                                                               ] ;
+                                                                                                           rdfs:subClassOf :Monitor .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithHDMI&VGA
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithHDMI&VGA> rdf:type owl:Class ;
+                                                                                                       owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                             owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                                    owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                    owl:someValuesFrom :HDMI
+                                                                                                                                                                  ]
+                                                                                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                                                                                    owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                    owl:someValuesFrom :VGA
+                                                                                                                                                                  ]
+                                                                                                                                                                ) ;
+                                                                                                                                             rdf:type owl:Class
+                                                                                                                                           ]
+                                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                                             owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                             owl:someValuesFrom :HDMI
+                                                                                                                                           ]
+                                                                                                                                           [ rdf:type owl:Restriction ;
+                                                                                                                                             owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                             owl:someValuesFrom :VGA
+                                                                                                                                           ]
+                                                                                                                                         )
+                                                                                                                           ] ;
+                                                                                                       rdfs:subClassOf :Monitor .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithVGA&DVI
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MonitorCompatibleWithVGA&DVI> rdf:type owl:Class ;
+                                                                                                      owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                                                            owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                                                                   owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                   owl:someValuesFrom :DVI
+                                                                                                                                                                 ]
+                                                                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                                                                   owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                                                   owl:someValuesFrom :VGA
+                                                                                                                                                                 ]
+                                                                                                                                                               ) ;
+                                                                                                                                            rdf:type owl:Class
+                                                                                                                                          ]
+                                                                                                                                          [ rdf:type owl:Restriction ;
+                                                                                                                                            owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                            owl:someValuesFrom :DVI
+                                                                                                                                          ]
+                                                                                                                                          [ rdf:type owl:Restriction ;
+                                                                                                                                            owl:onProperty :monitorIsCompatibleWithViewConnector ;
+                                                                                                                                            owl:someValuesFrom :VGA
+                                                                                                                                          ]
+                                                                                                                                        )
+                                                                                                                          ] ;
+                                                                                                      rdfs:subClassOf :Monitor .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2
 <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> rdf:type owl:Class ;
                                                                               rdfs:subClassOf :IntegratedPeripheralsConnector .
@@ -1217,6 +1350,16 @@
            :RamSlotCapacity 4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DVI
+:DVI rdf:type owl:NamedIndividual ,
+              :DVI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HDMI
+:HDMI rdf:type owl:NamedIndividual ,
+               :HDMI .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_32bit
 :Linux_32bit rdf:type owl:NamedIndividual ,
                       :Linux_32bit ;
@@ -1258,6 +1401,13 @@
               :memorySizeOfGraphicCard 2 ;
               :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
               :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Samsung_S24D33
+:Samsung_S24D33 rdf:type owl:NamedIndividual ,
+                         :Monitor ;
+                :monitorIsCompatibleWithViewConnector :DVI ,
+                                                      :HDMI .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_32bit
@@ -1314,6 +1464,8 @@
                     :containsGraphicCardSlots :PCIeSlot ;
                     :containsRAMSlot :DIMM-DDR4 ;
                     :containsSocket :PGA946 ;
+                    :containsViewConnectors :DVI ,
+                                            :HDMI ;
                     :PSU "850.0"^^xsd:double ;
                     :maximumInternalMemory 8 ;
                     :motherBoardProducer "GIGABYTE"^^xsd:string ;
@@ -1366,14 +1518,6 @@ xsd:float rdfs:comment "GHz" .
   owl:members ( :AGPSlot
                 :PCI
                 :PCIe
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :BIOSChip
-                :CMOSBattery
-                :CMOSChip
               )
 ] .
 

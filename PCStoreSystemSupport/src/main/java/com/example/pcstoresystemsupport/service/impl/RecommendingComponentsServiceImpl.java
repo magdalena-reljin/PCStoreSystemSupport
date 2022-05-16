@@ -221,4 +221,36 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         }
         return operatingSystems;
     }
+
+    @Override
+    public List<String> findCompatibleMonitors(String motherboard) throws SWRLParseException, SQWRLException {
+        List<String> monitors = new ArrayList<>();
+        List<String> distinctMonitors = new ArrayList<>();
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q16", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsViewConnectors(?x,?z) -> sqwrl:select(?z) ");
+        System.out.println(result1);
+        for(int i=0 ; i< result1.getColumn(0).size() ; i++) {
+            String viewConnector =  result1.getColumn(0).get(i).toString().substring(1);
+            SQWRLResult result2= queryEngine.runSQWRLQuery("q17", "Monitor(?x) ^ " + viewConnector +
+                    "(?y) ^ monitorIsCompatibleWithViewConnector(?x, ?y)" +
+                    "-> sqwrl:select(?x) ");
+            System.out.println(result2);
+            for(int j=0 ; j< result2.getColumn(0).size() ; j++) {
+                monitors.add("Monitor " + result2.getColumn(0).get(j).toString().substring(1));
+            }
+        }
+        Boolean exists = false;
+        for(int j=0 ; j< monitors.size() ; j++) {
+            exists = false;
+            for(int k=0 ; k< distinctMonitors.size(); k++){
+                if(distinctMonitors.get(k).equals(monitors.get(j))) {
+                    exists = true;
+                    break;
+                }
+            }
+            if(exists == false)
+                distinctMonitors.add(monitors.get(j));
+        }
+        return distinctMonitors;
+    }
 }

@@ -55,6 +55,9 @@
              <option>
                 OPERATING_SYSTEM
             </option>
+             <option>
+                MONITOR
+            </option>
         </select>
         </div>
        
@@ -160,7 +163,9 @@ export default {
            }else if(this.selected2=="GRAPHIC_CARD"){
               this.findCompatibleGraphicCards();
            } else if(this.selected2=="OPERATING_SYSTEM"){
-              this.findCompatibleOS();
+              this.findCompatibleOSs();
+           } else if(this.selected2=="MONITOR"){
+              this.findCompatibleMonitors();
            }
 
           
@@ -266,7 +271,7 @@ export default {
                   this.foundComponents=response.data
                })
 
-       }, findCompatibleOS: function(){
+       }, findCompatibleOSs: function(){
             this.foundComponents=[]
            if(this.selected3=="") {
                 this.$swal.fire({
@@ -280,6 +285,26 @@ export default {
            }
               axios
                .post("http://localhost:8081/recommendingComponents/findCompatibleOS/"+this.selected3)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
+       }, findCompatibleMonitors: function(){
+            this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleMonitors/"+this.selected)
                .then((response) => {
                    console.log("rez "+response.data)
 
