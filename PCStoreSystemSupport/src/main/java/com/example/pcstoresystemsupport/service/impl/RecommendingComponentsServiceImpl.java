@@ -390,7 +390,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
         if(!PS2MouseConnector.getColumn(0).isEmpty()){
             String PS2Mouse=PS2MouseConnector.getColumn(0).get(0).toString().substring(1);
-                System.out.println("VRATIOOO"+PS2Mouse);
             SQWRLResult foundPS2Mouses= queryEngine.runSQWRLQuery("q33", "Mouse(?x) ^"+PS2Mouse+"(?y)"+" mouseIsCompatibleWithPS/2MousePort(?x,?y) " +
                     "^dpi(?x,?z) ^numOfButtons(?x,?k) -> sqwrl:select(?x,?z,?k) ");
             for(int i=0 ; i< foundPS2Mouses.getColumn(0).size() ; i++) {
@@ -424,6 +423,40 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleKeyboards(String motherboard) throws SWRLParseException, SQWRLException {
-        return null;
+        List<String> keyboards=new ArrayList<>();
+
+        SQWRLResult PS2KeyboardConnector= queryEngine.runSQWRLQuery("q36", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsPS/2KeyboardPort(?x,?z) -> sqwrl:select(?z) ");
+
+        if(!PS2KeyboardConnector.getColumn(0).isEmpty()){
+            String PS2Keyboard=PS2KeyboardConnector.getColumn(0).get(0).toString().substring(1);
+            System.out.println("VRATIOOO"+PS2Keyboard);
+            SQWRLResult foundPS2Keyboard= queryEngine.runSQWRLQuery("q37", "Keyboard(?x) ^"+PS2Keyboard+"(?y)"+" keyboardIsCompatibleWithPS/2KeyboardPort(?x,?y) " +
+                    "^numOfButtons(?x,?k) -> sqwrl:select(?x,?k) ");
+            for(int i=0 ; i< foundPS2Keyboard.getColumn(0).size() ; i++) {
+                keyboards.add("Keyboard " + foundPS2Keyboard.getColumn(0).get(i).toString().substring(1)
+                        +" ["+"num of buttons: "+findDetailsFromQueryWithoutTypes(foundPS2Keyboard.getColumn(1).get(i),i) +" " + PS2Keyboard+
+
+                        "]");
+            }
+        }
+
+
+        SQWRLResult USBPort= queryEngine.runSQWRLQuery("q38", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsUSBPort(?x,?z) -> sqwrl:select(?z) ");
+        if(!USBPort.getColumn(0).isEmpty()){
+            String USB=USBPort.getColumn(0).get(0).toString().substring(1);
+
+            SQWRLResult foundUSBKeyboards= queryEngine.runSQWRLQuery("q39", "Keyboard(?x) ^"+USB+"(?y)"+" keyboardIsCompatibleWithUSBPort(?x,?y) " +
+                    "numOfButtons(?x,?k) -> sqwrl:select(?x,?k) ");
+            for(int i=0 ; i< foundUSBKeyboards.getColumn(0).size() ; i++) {
+                keyboards.add("Keyboard " + foundUSBKeyboards.getColumn(0).get(i).toString().substring(1)
+                        +" ["+"num of buttons: "+findDetailsFromQueryWithoutTypes(foundUSBKeyboards.getColumn(1).get(i),i) +" " + USB+
+
+                        "]");
+            }
+        }
+
+        return keyboards;
     }
 }

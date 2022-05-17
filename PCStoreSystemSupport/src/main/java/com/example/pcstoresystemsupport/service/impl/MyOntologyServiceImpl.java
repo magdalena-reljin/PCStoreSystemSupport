@@ -21,7 +21,7 @@ public class MyOntologyServiceImpl implements MyOntologyService {
     @Override
     public OWLOntology createOntology() {
         OWLOntology ontology=null;
-        Optional<String> owlFilename = Optional.of("C:/Users/dajan/OneDrive/Pictures/Desktop/inz/PCStoreSystemSupport/PCStoreSystemSupport/ontology.owl");
+        Optional<String> owlFilename = Optional.of(System.getProperty("user.dir")+"/ontology.owl");
         Optional<File> owlFile = (owlFilename != null && owlFilename.isPresent()) ? Optional.of(new File(owlFilename.get())) : Optional.<File>empty();
         System.out.println("ja sam ovde");
 
