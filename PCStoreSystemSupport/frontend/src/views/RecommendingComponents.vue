@@ -38,7 +38,7 @@
         </div>
   <br>
         <div class="form-group">
-          <label><b>I want to upgrade:</b></label>
+          <label><b>I want to find:</b></label>
           <select v-model="selected2" class="form-select">
             <option>
                 PROCESSOR
@@ -60,6 +60,9 @@
             </option>
             <option>
                 HEADPHONES
+            </option>
+            <option>
+                SPEAKERS
             </option>
             <option>
                 MICROPHONE

@@ -164,6 +164,18 @@
                                  rdfs:range :TypeOfRAMSlot .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#speakersAreCompatibleWithAudioConnector
+:speakersAreCompatibleWithAudioConnector rdf:type owl:ObjectProperty ;
+                                         rdfs:domain :Speakers ;
+                                         rdfs:range :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#speakersAreCompatibleWithUSBPort
+:speakersAreCompatibleWithUSBPort rdf:type owl:ObjectProperty ;
+                                  rdfs:domain :Speakers ;
+                                  rdfs:range :USB .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -251,6 +263,13 @@
              rdfs:comment "RPM" .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#maxSPL
+:maxSPL rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Microphone ;
+        rdfs:range xsd:string ;
+        rdfs:comment "dB" .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#maximumInternalMemory
 :maximumInternalMemory rdf:type owl:DatatypeProperty ;
                        rdfs:domain :Motherboard ;
@@ -279,6 +298,13 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#memoryVoltageSupportedByProcessor
 :memoryVoltageSupportedByProcessor rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#micFrequency
+:micFrequency rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Microphone ;
+              rdfs:range xsd:string ;
+              rdfs:comment "kHZ" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#minimumPSUForGraphicCard
@@ -397,6 +423,13 @@
 :ramType rdf:type owl:DatatypeProperty ;
          rdfs:domain :RAMSlot ;
          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#sampleRate
+:sampleRate rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Microphone ;
+            rdfs:range xsd:string ;
+            rdfs:comment "kHZ" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#socketType
@@ -992,11 +1025,11 @@
 :Speakers rdf:type owl:Class ;
           owl:equivalentClass [ rdf:type owl:Class ;
                                 owl:unionOf ( [ rdf:type owl:Restriction ;
-                                                owl:onProperty :headphonesAreCompatibleWithAudioPort ;
+                                                owl:onProperty :speakersAreCompatibleWithAudioConnector ;
                                                 owl:someValuesFrom :HeadphoneAndSpeakersConnector
                                               ]
                                               [ rdf:type owl:Restriction ;
-                                                owl:onProperty :headphonesAreCompatibleWithUSBPort ;
+                                                owl:onProperty :speakersAreCompatibleWithUSBPort ;
                                                 owl:someValuesFrom :USB
                                               ]
                                             )
@@ -1526,6 +1559,20 @@
              :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MICMICROPHONE
+:MICMICROPHONE rdf:type owl:NamedIndividual ,
+                        :Microphone ;
+               :microphoneIsCompatibleWithMicrophonePort :MicrophoneConnector ;
+               :maxSPL "110 dB" ;
+               :micFrequency "20 Hz - 20 kHz" ;
+               :sampleRate "44.1 kHz/48 Khz" .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MicrophoneConnector
+:MicrophoneConnector rdf:type owl:NamedIndividual ,
+                              :MicrophoneConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_32bit
 :OM_32bit rdf:type owl:NamedIndividual ,
                    :OM_32bit .
@@ -1576,6 +1623,20 @@
                            :Headphones ;
                   :headphonesAreCompatibleWithUSBPort :USB ;
                   :soundW 22 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SpeakersWithAudioPort
+:SpeakersWithAudioPort rdf:type owl:NamedIndividual ,
+                                :Speakers ;
+                       :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector ;
+                       :soundW 34 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SpeakersWithUSBConnn
+:SpeakersWithUSBConnn rdf:type owl:NamedIndividual ,
+                               :Speakers ;
+                      :speakersAreCompatibleWithUSBPort :USB ;
+                      :soundW 13 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#USB
@@ -1637,6 +1698,7 @@
                     :containsCombinedConnector :CombinedConnector ;
                     :containsGraphicCardSlots :PCIeSlot ;
                     :containsHeadphoneAndSpeakersConnector :HeadphoneAndSpeakersConnector ;
+                    :containsMicrophoneConnector :MicrophoneConnector ;
                     :containsRAMSlot :DIMM-DDR4 ;
                     :containsSocket :PGA946 ;
                     :containsUSBPort :USB ;
@@ -1669,6 +1731,15 @@
                :processorName "treciProcesor"^^xsd:string ;
                :processorProducer "Intel"^^xsd:string ;
                :processorTDP 60 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#usbMIC
+:usbMIC rdf:type owl:NamedIndividual ,
+                 :Microphone ;
+        :microphoneIsCompatibleWithUSBPort :USB ;
+        :maxSPL "110 dB" ;
+        :micFrequency "20 Hz - 20 kHz" ;
+        :sampleRate "44.1 kHz/48 Khz" .
 
 
 #################################################################
