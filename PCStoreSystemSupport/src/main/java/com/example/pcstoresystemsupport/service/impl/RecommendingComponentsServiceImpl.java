@@ -327,12 +327,12 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         }
 
 
-        SQWRLResult USBPort= queryEngine.runSQWRLQuery("q26", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+        SQWRLResult USBPort= queryEngine.runSQWRLQuery("q30", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsUSBPort(?x,?z) -> sqwrl:select(?z) ");
         if(!USBPort.getColumn(0).isEmpty()){
             String USB=USBPort.getColumn(0).get(0).toString().substring(1);
 
-            SQWRLResult foundUSBMic= queryEngine.runSQWRLQuery("q27", "Microphone(?x) ^"+USB+"(?y)"+" microphoneIsCompatibleWithUSBPort(?x,?y) " +
+            SQWRLResult foundUSBMic= queryEngine.runSQWRLQuery("q31", "Microphone(?x) ^"+USB+"(?y)"+" microphoneIsCompatibleWithUSBPort(?x,?y) " +
                     "^maxSPL(?x,?z) ^ micFrequency(?x,?w) ^ sampleRate(?x,?m) -> sqwrl:select(?x,?z,?w,?m)");
             for(int i=0 ; i< foundUSBMic.getColumn(0).size() ; i++) {
                 microphones.add("Microphone " + foundUSBMic.getColumn(0).get(i).toString().substring(1)
@@ -379,5 +379,51 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         }
 
         return speakers;
+    }
+
+    @Override
+    public List<String> findCompatibleMouses(String motherboard) throws SWRLParseException, SQWRLException {
+        List<String> mouses=new ArrayList<>();
+
+        SQWRLResult PS2MouseConnector= queryEngine.runSQWRLQuery("q32", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsPS/2MousePort(?x,?z) -> sqwrl:select(?z) ");
+
+        if(!PS2MouseConnector.getColumn(0).isEmpty()){
+            String PS2Mouse=PS2MouseConnector.getColumn(0).get(0).toString().substring(1);
+                System.out.println("VRATIOOO"+PS2Mouse);
+            SQWRLResult foundPS2Mouses= queryEngine.runSQWRLQuery("q33", "Mouse(?x) ^"+PS2Mouse+"(?y)"+" mouseIsCompatibleWithPS/2MousePort(?x,?y) " +
+                    "^dpi(?x,?z) ^numOfButtons(?x,?k) -> sqwrl:select(?x,?z,?k) ");
+            for(int i=0 ; i< foundPS2Mouses.getColumn(0).size() ; i++) {
+                mouses.add("Mouse " + foundPS2Mouses.getColumn(0).get(i).toString().substring(1)
+                        +" ["+findDetailsFromQueryWithoutTypes(foundPS2Mouses.getColumn(1).get(i),i) + "dpi, " + PS2Mouse+
+                                ", num of buttons: "+findDetailsFromQueryWithoutTypes(foundPS2Mouses.getColumn(2).get(i),i) +
+
+                        "]");
+            }
+        }
+
+
+        SQWRLResult USBPort= queryEngine.runSQWRLQuery("q34", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsUSBPort(?x,?z) -> sqwrl:select(?z) ");
+        if(!USBPort.getColumn(0).isEmpty()){
+            String USB=USBPort.getColumn(0).get(0).toString().substring(1);
+
+            SQWRLResult foundUSBMouses= queryEngine.runSQWRLQuery("q35", "Mouse(?x) ^"+USB+"(?y)"+" mouseIsCompatibleWithUSBPort(?x,?y) " +
+                    "^dpi(?x,?z) ^numOfButtons(?x,?k) -> sqwrl:select(?x,?z,?k) ");
+            for(int i=0 ; i< foundUSBMouses.getColumn(0).size() ; i++) {
+                mouses.add("Mouse " + foundUSBMouses.getColumn(0).get(i).toString().substring(1)
+                        +" ["+findDetailsFromQueryWithoutTypes(foundUSBMouses.getColumn(1).get(i),i) + "dpi, " + USB+
+                        ", num of buttons: "+findDetailsFromQueryWithoutTypes(foundUSBMouses.getColumn(2).get(i),i) +
+
+                        "]");
+            }
+        }
+
+        return mouses;
+    }
+
+    @Override
+    public List<String> findCompatibleKeyboards(String motherboard) throws SWRLParseException, SQWRLException {
+        return null;
     }
 }

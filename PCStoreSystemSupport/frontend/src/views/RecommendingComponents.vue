@@ -67,6 +67,12 @@
             <option>
                 MICROPHONE
             </option>
+               <option>
+                MOUSE
+            </option>
+               <option>
+                KEYBOARD
+            </option>
         </select>
         </div>
        
@@ -181,6 +187,10 @@ export default {
               this.findCompatibleMicrophones();
            }else if(this.selected2=="SPEAKERS"){
               this.findCompatibleSpeakers();
+           }else if(this.selected2=="MOUSE"){
+              this.findCompatibleMouses();
+           }else if(this.selected2=="KEYBOARD"){
+              this.findCompatibleKeyboards();
            }
 
           
@@ -390,6 +400,47 @@ export default {
                   this.foundComponents=response.data
                })
 
+
+       },
+       findCompatibleMouses: function(){
+            this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleMouses/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+       },
+       findCompatibleKeyboards: function(){
+            this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleKeyboards/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
 
        }
 

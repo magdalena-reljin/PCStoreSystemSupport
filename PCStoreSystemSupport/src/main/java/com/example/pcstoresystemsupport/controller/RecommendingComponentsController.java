@@ -72,4 +72,12 @@ public class RecommendingComponentsController {
     public ResponseEntity<List<String>> findCompatibleSpeakers(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
         return new ResponseEntity<>(recommendingComponentsService.findCompatibleSpeakers(motherboard), HttpStatus.OK);
     }
+    @PostMapping(value= "/findCompatibleMouses/{motherboard}")
+    public ResponseEntity<List<String>> findCompatibleMouses(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findCompatibleMouses(motherboard), HttpStatus.OK);
+    }
+    @PostMapping(value= "/findCompatibleKeyboards/{motherboard}")
+    public ResponseEntity<List<String>> findCompatibleKeyboards(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findCompatibleKeyboards(motherboard), HttpStatus.OK);
+    }
 }

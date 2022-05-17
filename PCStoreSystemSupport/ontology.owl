@@ -117,6 +117,12 @@
                                     rdfs:range :USB .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithUSBPort
+:keyboardIsCompatibleWithUSBPort rdf:type owl:ObjectProperty ;
+                                 rdfs:domain :Keyboard ;
+                                 rdfs:range :USB .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#microphoneIsCompatibleWithMicrophonePort
 :microphoneIsCompatibleWithMicrophonePort rdf:type owl:ObjectProperty ;
                                           rdfs:domain :Microphone ;
@@ -133,6 +139,11 @@
 :monitorIsCompatibleWithViewConnector rdf:type owl:ObjectProperty ;
                                       rdfs:domain :Monitor ;
                                       rdfs:range :ViewConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithUSBPort
+:mouseIsCompatibleWithUSBPort rdf:type owl:ObjectProperty ;
+                              rdfs:subPropertyOf owl:topObjectProperty .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#operatingSystemIsCompatibleWithOperatingMode
@@ -174,6 +185,36 @@
 :speakersAreCompatibleWithUSBPort rdf:type owl:ObjectProperty ;
                                   rdfs:domain :Speakers ;
                                   rdfs:range :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2KeyboardPort
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2KeyboardPort> rdf:type owl:ObjectProperty ;
+                                                                                                  rdfs:domain :Motherboard ;
+                                                                                                  rdfs:range :PS2Keyboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2MousePort
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2MousePort> rdf:type owl:ObjectProperty ;
+                                                                                               rdfs:domain :Motherboard ;
+                                                                                               rdfs:range :PS2Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort> rdf:type owl:ObjectProperty ;
+                                                                                                                  rdfs:domain :Keyboard ;
+                                                                                                                  rdfs:range :PS2Keyboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort
+<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> rdf:type owl:ObjectProperty ;
+                                                                                                            rdfs:subPropertyOf owl:topObjectProperty ;
+                                                                                                            rdfs:domain :Mouse ;
+                                                                                                            rdfs:range :PS2Mouse .
+
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+owl:topObjectProperty rdfs:domain :Mouse ;
+                      rdfs:range :USB .
 
 
 #################################################################
@@ -236,6 +277,12 @@
 :daLiSamUPravu rdf:type owl:DatatypeProperty ;
                rdfs:domain :Motherboard ;
                rdfs:range xsd:boolean .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#dpi
+:dpi rdf:type owl:DatatypeProperty ;
+     rdfs:domain :Mouse ;
+     rdfs:range xsd:integer .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#graphicCardName
@@ -343,6 +390,13 @@
             rdfs:domain :CpuCooler ;
             rdfs:range xsd:integer ;
             rdfs:comment "dB" .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#numOfButtons
+:numOfButtons rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Keyboard ,
+                          :Mouse ;
+              rdfs:range xsd:integer .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#numOfConnectors
@@ -754,6 +808,29 @@
           rdfs:subClassOf :Hardware .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Keyboard
+:Keyboard rdf:type owl:Class ;
+          rdfs:subClassOf :External .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KeyboardWithPS2Port
+:KeyboardWithPS2Port rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort> ;
+                                           owl:someValuesFrom :PS2Keyboard
+                                         ] ;
+                     rdfs:subClassOf :Keyboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KeyboardWithUSBPort
+:KeyboardWithUSBPort rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :keyboardIsCompatibleWithUSBPort ;
+                                           owl:someValuesFrom :USB
+                                         ] ;
+                     rdfs:subClassOf :Keyboard .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LAN
 :LAN rdf:type owl:Class ;
      rdfs:subClassOf :IntegratedPeripheralsConnector .
@@ -864,6 +941,29 @@
                      rdfs:subClassOf :ComponentElements .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Mouse
+:Mouse rdf:type owl:Class ;
+       rdfs:subClassOf :External .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MouseWithPS2Port
+:MouseWithPS2Port rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> ;
+                                        owl:someValuesFrom :PS2Mouse
+                                      ] ;
+                  rdfs:subClassOf :Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MouseWithUSBPort
+:MouseWithUSBPort rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                        owl:onProperty :mouseIsCompatibleWithUSBPort ;
+                                        owl:someValuesFrom :USB
+                                      ] ;
+                  rdfs:subClassOf :Mouse .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_32bit
 :OM_32bit rdf:type owl:Class ;
           owl:equivalentClass [ rdf:type owl:Class ;
@@ -965,6 +1065,17 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PGA946
 :PGA946 rdf:type owl:Class ;
         rdfs:subClassOf :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Keyboard
+:PS2Keyboard rdf:type owl:Class ;
+             rdfs:subClassOf <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> ;
+             owl:disjointWith :PS2Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Mouse
+:PS2Mouse rdf:type owl:Class ;
+          rdfs:subClassOf <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PowerSupply
@@ -1479,17 +1590,6 @@
                                                                               rdfs:subClassOf :IntegratedPeripheralsConnector .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Keyboard
-<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Keyboard> rdf:type owl:Class ;
-                                                                                      rdfs:subClassOf <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> ;
-                                                                                      owl:disjointWith <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Mouse> .
-
-
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Mouse
-<http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2Mouse> rdf:type owl:Class ;
-                                                                                   rdfs:subClassOf <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS/2> .
-
-
 #################################################################
 #    Individuals
 #################################################################
@@ -1547,6 +1647,13 @@
             :soundW 15 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KeyboardKey
+:KeyboardKey rdf:type owl:NamedIndividual ,
+                      :Keyboard ;
+             <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort> :PS2Keyboard ;
+             :numOfButtons 104 .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_32bit
 :Linux_32bit rdf:type owl:NamedIndividual ,
                       :Linux_32bit ;
@@ -1573,6 +1680,22 @@
                               :MicrophoneConnector .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MouseMouse
+:MouseMouse rdf:type owl:NamedIndividual ,
+                     :Mouse ;
+            <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> :PS2Mouse ;
+            :dpi 1000 ;
+            :numOfButtons 3 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Mouse_with_usb
+:Mouse_with_usb rdf:type owl:NamedIndividual ,
+                         :Mouse ;
+                :mouseIsCompatibleWithUSBPort :USB ;
+                :dpi 1200 ;
+                :numOfButtons 6 .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_32bit
 :OM_32bit rdf:type owl:NamedIndividual ,
                    :OM_32bit .
@@ -1591,6 +1714,16 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PGA946
 :PGA946 rdf:type owl:NamedIndividual ,
                  :PGA946 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Keyboard
+:PS2Keyboard rdf:type owl:NamedIndividual ,
+                      :PS2Keyboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Mouse
+:PS2Mouse rdf:type owl:NamedIndividual ,
+                   :PS2Mouse .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Radeon_R9390
@@ -1704,11 +1837,20 @@
                     :containsUSBPort :USB ;
                     :containsViewConnectors :DVI ,
                                             :HDMI ;
+                    <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2KeyboardPort> :PS2Keyboard ;
+                    <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2MousePort> :PS2Mouse ;
                     :PSU "850.0"^^xsd:double ;
                     :maximumInternalMemory 8 ;
                     :motherBoardProducer "GIGABYTE"^^xsd:string ;
                     :motherboardName "X570S_AORUS_MASTER"^^xsd:string ;
                     :numberOfMemorySlots 2 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboard_with_usb
+:keyboard_with_usb rdf:type owl:NamedIndividual ,
+                            :Keyboard ;
+                   :keyboardIsCompatibleWithUSBPort :USB ;
+                   :numOfButtons 111 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#probni
