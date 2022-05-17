@@ -31,7 +31,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         List<String> motherboards=new ArrayList<>();
         SQWRLResult result= queryEngine.runSQWRLQuery("q1", "Motherboard(?x) -> sqwrl:select(?x) ");
         if (result.next()){
-            System.out.println("********sve maticne********");
             System.out.println(result);
             System.out.println(result.getColumn(0));
             for(int i=0 ; i< result.getColumn(0).size() ; i++)
@@ -44,7 +43,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         List<String> processors=new ArrayList<>();
         SQWRLResult result= queryEngine.runSQWRLQuery("q2", "Generation(?x) -> sqwrl:select(?x) ");
         if (result.next()){
-            System.out.println("********svi procesori********");
             System.out.println(result);
             System.out.println(result.getColumn(0));
             for(int i=0 ; i< result.getColumn(0).size() ; i++)
@@ -108,7 +106,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Generation(?x) ^ processorName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+processor+"\") ^ processorFrequency(?x,?z) -> sqwrl:select(?z) ");
         String proccesorFreq= findDetailsFromQueryWithoutTypes(result1.getColumn(0).get(0),0);
-        System.out.println("FREKVENCIJAAA"+proccesorFreq);
 
 
         SQWRLResult result2= queryEngine.runSQWRLQuery("q8", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -252,5 +249,69 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                 distinctMonitors.add(monitors.get(j));
         }
         return distinctMonitors;
+    }
+
+    @Override
+    public List<String> findCompatibleHeadphones(String motherboard) throws SWRLParseException, SQWRLException {
+        List<String> headphones=new ArrayList<>();
+
+        SQWRLResult combinedConnector= queryEngine.runSQWRLQuery("q18", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsCombinedConnector(?x,?z) -> sqwrl:select(?z) ");
+
+        if(!combinedConnector.getColumn(0).isEmpty()){
+            String combined=combinedConnector.getColumn(0).get(0).toString().substring(1);
+
+            SQWRLResult foundHeadphones= queryEngine.runSQWRLQuery("q21", "Headphones(?x) ^"+combined+"(?y)"+" headphonesAreCompatibleWithCombinedPort(?x,?y) " +
+                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+            System.out.println("nasaoooo   "+foundHeadphones);
+            for(int i=0 ; i< foundHeadphones.getColumn(0).size() ; i++) {
+                headphones.add("Headphones " + foundHeadphones.getColumn(0).get(i).toString().substring(1)
+                +" ["+findDetailsFromQueryWithoutTypes(foundHeadphones.getColumn(1).get(i),i) + "W, " + combined+"]");
+            }
+
+        }
+
+
+        SQWRLResult headphonesAndSpeakersConnector= queryEngine.runSQWRLQuery("q19", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsHeadphoneAndSpeakersConnector(?x,?z) -> sqwrl:select(?z) ");
+
+        if(!headphonesAndSpeakersConnector.getColumn(0).isEmpty()){
+            String headphonesAndSpeakers=headphonesAndSpeakersConnector.getColumn(0).get(0).toString().substring(1);
+
+            SQWRLResult foundHeadphonesWithSpeakers= queryEngine.runSQWRLQuery("q22", "Headphones(?x) ^"+headphonesAndSpeakers+"(?y)"+" headphonesAreCompatibleWithAudioPort(?x,?y) " +
+                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+            System.out.println("nasaoooo   "+foundHeadphonesWithSpeakers);
+            for(int i=0 ; i< foundHeadphonesWithSpeakers.getColumn(0).size() ; i++) {
+                headphones.add("Headphones " + foundHeadphonesWithSpeakers.getColumn(0).get(i).toString().substring(1)
+                        +" ["+findDetailsFromQueryWithoutTypes(foundHeadphonesWithSpeakers.getColumn(1).get(i),i) + "W, " + headphonesAndSpeakers+"]");
+            }
+        }
+
+
+        SQWRLResult USBPort= queryEngine.runSQWRLQuery("q20", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsUSBPort(?x,?z) -> sqwrl:select(?z) ");
+        if(!USBPort.getColumn(0).isEmpty()){
+            String USB=USBPort.getColumn(0).get(0).toString().substring(1);
+
+            SQWRLResult foundHeadphonesWithUSB= queryEngine.runSQWRLQuery("q23", "Headphones(?x) ^"+USB+"(?y)"+" headphonesAreCompatibleWithUSBPort(?x,?y) " +
+                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+            System.out.println("nasaoooo   "+foundHeadphonesWithUSB);
+            for(int i=0 ; i< foundHeadphonesWithUSB.getColumn(0).size() ; i++) {
+                headphones.add("Headphones " + foundHeadphonesWithUSB.getColumn(0).get(i).toString().substring(1)
+                        +" ["+findDetailsFromQueryWithoutTypes(foundHeadphonesWithUSB.getColumn(1).get(i),i) + "W, " + USB+"]");
+            }
+        }
+
+        return headphones;
+    }
+
+    @Override
+    public List<String> findCompatibleMicrophones(String motherboard) throws SWRLParseException, SQWRLException {
+        return null;
+    }
+
+    @Override
+    public List<String> findCompatibleSpeakers(String motherboard) throws SWRLParseException, SQWRLException {
+        return null;
     }
 }

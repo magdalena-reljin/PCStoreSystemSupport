@@ -15,4 +15,8 @@ public interface RecommendingComponentsService {
     List<String> findCompatibleGraphicCards(String motherboard) throws SWRLParseException, SQWRLException;
     List<String> findCompatibleOS(String processor) throws SWRLParseException, SQWRLException;
     List<String> findCompatibleMonitors(String motherboard) throws SWRLParseException, SQWRLException;
+    List<String> findCompatibleHeadphones(String motherboard) throws SWRLParseException, SQWRLException;
+    List<String> findCompatibleMicrophones(String motherboard) throws SWRLParseException, SQWRLException;
+    List<String> findCompatibleSpeakers(String motherboard) throws SWRLParseException, SQWRLException;
+
 }

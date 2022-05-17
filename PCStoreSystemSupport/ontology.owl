@@ -19,10 +19,28 @@
                rdfs:range :CPUSocket .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsCombinedConnector
+:containsCombinedConnector rdf:type owl:ObjectProperty ;
+                           rdfs:domain :Motherboard ;
+                           rdfs:range :CombinedConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsGraphicCardSlots
 :containsGraphicCardSlots rdf:type owl:ObjectProperty ;
                           rdfs:domain :Motherboard ;
                           rdfs:range :GraphicCardSlot .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsHeadphoneAndSpeakersConnector
+:containsHeadphoneAndSpeakersConnector rdf:type owl:ObjectProperty ;
+                                       rdfs:domain :Motherboard ;
+                                       rdfs:range :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsMicrophoneConnector
+:containsMicrophoneConnector rdf:type owl:ObjectProperty ;
+                             rdfs:domain :Motherboard ;
+                             rdfs:range :MicrophoneConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsRAMSlot
@@ -37,6 +55,12 @@
                 rdfs:subPropertyOf owl:topObjectProperty ;
                 rdfs:domain :Motherboard ;
                 rdfs:range :CPUSocket .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsUSBPort
+:containsUSBPort rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Motherboard ;
+                 rdfs:range :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsViewConnectors
@@ -73,6 +97,36 @@
 :hasSoftware rdf:type owl:ObjectProperty ;
              rdfs:domain :PC ;
              rdfs:range :Software .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#headphonesAreCompatibleWithAudioPort
+:headphonesAreCompatibleWithAudioPort rdf:type owl:ObjectProperty ;
+                                      rdfs:domain :HeadphonesWithoutMicrophone ;
+                                      rdfs:range :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#headphonesAreCompatibleWithCombinedPort
+:headphonesAreCompatibleWithCombinedPort rdf:type owl:ObjectProperty ;
+                                         rdfs:domain :HeadphonesWithMicrophone ;
+                                         rdfs:range :CombinedConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#headphonesAreCompatibleWithUSBPort
+:headphonesAreCompatibleWithUSBPort rdf:type owl:ObjectProperty ;
+                                    rdfs:domain :Headphones ;
+                                    rdfs:range :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#microphoneIsCompatibleWithMicrophonePort
+:microphoneIsCompatibleWithMicrophonePort rdf:type owl:ObjectProperty ;
+                                          rdfs:domain :Microphone ;
+                                          rdfs:range :MicrophoneConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#microphoneIsCompatibleWithUSBPort
+:microphoneIsCompatibleWithUSBPort rdf:type owl:ObjectProperty ;
+                                   rdfs:domain :Microphone ;
+                                   rdfs:range :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#monitorIsCompatibleWithViewConnector
@@ -351,6 +405,13 @@
             rdfs:range xsd:string .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#soundW
+:soundW rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Headphones ,
+                    :Speakers ;
+        rdfs:range xsd:int .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#yearOfProduction
 :yearOfProduction rdf:type owl:DatatypeProperty ;
                   rdfs:domain :Motherboard ;
@@ -552,9 +613,46 @@
 :Hardware rdf:type owl:Class .
 
 
-###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneConnector
-:HeadphoneConnector rdf:type owl:Class ;
-                    rdfs:subClassOf :AudioConnector .
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneAndSpeakersConnector
+:HeadphoneAndSpeakersConnector rdf:type owl:Class ;
+                               rdfs:subClassOf :AudioConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Headphones
+:Headphones rdf:type owl:Class ;
+            rdfs:subClassOf :External .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphonesWithMicrophone
+:HeadphonesWithMicrophone rdf:type owl:Class ;
+                          owl:equivalentClass [ rdf:type owl:Class ;
+                                                owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :headphonesAreCompatibleWithCombinedPort ;
+                                                                owl:someValuesFrom :CombinedConnector
+                                                              ]
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :headphonesAreCompatibleWithUSBPort ;
+                                                                owl:someValuesFrom :USB
+                                                              ]
+                                                            )
+                                              ] ;
+                          rdfs:subClassOf :Headphones .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphonesWithoutMicrophone
+:HeadphonesWithoutMicrophone rdf:type owl:Class ;
+                             owl:equivalentClass [ rdf:type owl:Class ;
+                                                   owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :headphonesAreCompatibleWithAudioPort ;
+                                                                   owl:someValuesFrom :HeadphoneAndSpeakersConnector
+                                                                 ]
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :headphonesAreCompatibleWithUSBPort ;
+                                                                   owl:someValuesFrom :USB
+                                                                 ]
+                                                               )
+                                                 ] ;
+                             rdfs:subClassOf :Headphones .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IDEConnector
@@ -661,6 +759,29 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_64bit
 :Linux_64bit rdf:type owl:Class ;
              rdfs:subClassOf :OperatingSystem .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Microphone
+:Microphone rdf:type owl:Class ;
+            rdfs:subClassOf :External .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MicrophoneCompatibleWithMicrophoneConnector
+:MicrophoneCompatibleWithMicrophoneConnector rdf:type owl:Class ;
+                                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :microphoneIsCompatibleWithMicrophonePort ;
+                                                                   owl:someValuesFrom :MicrophoneConnector
+                                                                 ] ;
+                                             rdfs:subClassOf :Microphone .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MicrophoneCompatibleWithUSB
+:MicrophoneCompatibleWithUSB rdf:type owl:Class ;
+                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :microphoneIsCompatibleWithUSBPort ;
+                                                   owl:someValuesFrom :USB
+                                                 ] ;
+                             rdfs:subClassOf :Microphone .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MicrophoneConnector
@@ -865,6 +986,22 @@
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Software
 :Software rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Speakers
+:Speakers rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                owl:onProperty :headphonesAreCompatibleWithAudioPort ;
+                                                owl:someValuesFrom :HeadphoneAndSpeakersConnector
+                                              ]
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty :headphonesAreCompatibleWithUSBPort ;
+                                                owl:someValuesFrom :USB
+                                              ]
+                                            )
+                              ] ;
+          rdfs:subClassOf :External .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Type
@@ -1334,6 +1471,11 @@
                       :noiseLevel 33 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CombinedConnector
+:CombinedConnector rdf:type owl:NamedIndividual ,
+                            :CombinedConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DDR4
 :DDR4 rdf:type owl:NamedIndividual ,
                :RAM ;
@@ -1358,6 +1500,18 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HDMI
 :HDMI rdf:type owl:NamedIndividual ,
                :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneAndSpeakersConnector
+:HeadphoneAndSpeakersConnector rdf:type owl:NamedIndividual ,
+                                        :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Headphones
+:Headphones rdf:type owl:NamedIndividual ,
+                     :Headphones ;
+            :headphonesAreCompatibleWithCombinedPort :CombinedConnector ;
+            :soundW 15 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_32bit
@@ -1408,6 +1562,25 @@
                          :Monitor ;
                 :monitorIsCompatibleWithViewConnector :DVI ,
                                                       :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SlusaliceBezMikorofona
+:SlusaliceBezMikorofona rdf:type owl:NamedIndividual ,
+                                 :Headphones ;
+                        :headphonesAreCompatibleWithAudioPort :HeadphoneAndSpeakersConnector ;
+                        :soundW 18 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Slusalice_sa_Usb
+:Slusalice_sa_Usb rdf:type owl:NamedIndividual ,
+                           :Headphones ;
+                  :headphonesAreCompatibleWithUSBPort :USB ;
+                  :soundW 22 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#USB
+:USB rdf:type owl:NamedIndividual ,
+              :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_32bit
@@ -1461,9 +1634,12 @@
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#X570S_AORUS_MASTER
 :X570S_AORUS_MASTER rdf:type owl:NamedIndividual ,
                              :Motherboard ;
+                    :containsCombinedConnector :CombinedConnector ;
                     :containsGraphicCardSlots :PCIeSlot ;
+                    :containsHeadphoneAndSpeakersConnector :HeadphoneAndSpeakersConnector ;
                     :containsRAMSlot :DIMM-DDR4 ;
                     :containsSocket :PGA946 ;
+                    :containsUSBPort :USB ;
                     :containsViewConnectors :DVI ,
                                             :HDMI ;
                     :PSU "850.0"^^xsd:double ;
@@ -1524,7 +1700,7 @@ xsd:float rdfs:comment "GHz" .
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :CombinedConnector
-                :HeadphoneConnector
+                :HeadphoneAndSpeakersConnector
                 :MicrophoneConnector
               )
 ] .

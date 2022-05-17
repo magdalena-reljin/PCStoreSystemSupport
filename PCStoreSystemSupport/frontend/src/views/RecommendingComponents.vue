@@ -58,6 +58,12 @@
              <option>
                 MONITOR
             </option>
+            <option>
+                HEADPHONES
+            </option>
+            <option>
+                MICROPHONE
+            </option>
         </select>
         </div>
        
@@ -166,6 +172,12 @@ export default {
               this.findCompatibleOSs();
            } else if(this.selected2=="MONITOR"){
               this.findCompatibleMonitors();
+           }else if(this.selected2=="HEADPHONES"){
+              this.findCompatibleHeadphones();
+           }else if(this.selected2=="MICROPHONE"){
+              this.findCompatibleMicrophones();
+           }else if(this.selected2=="SPEAKERS"){
+              this.findCompatibleSpeakers();
            }
 
           
@@ -310,6 +322,71 @@ export default {
 
                   this.foundComponents=response.data
                })
+
+       },
+       findCompatibleHeadphones: function(){
+           this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleHeadphones/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
+       },
+       findCompatibleMicrophones: function(){
+           this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleMicrophones/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
+
+       },
+        findCompatibleSpeakers: function(){
+           this.foundComponents=[]
+           if(this.selected=="") {
+                this.$swal.fire({
+                 position: 'top-end',
+                  icon: 'error',
+                 title: 'Please choose motherboard',
+               showConfirmButton: false,
+               timer: 1500
+           })
+           return;
+           }
+              axios
+               .post("http://localhost:8081/recommendingComponents/findCompatibleSpeakers/"+this.selected)
+               .then((response) => {
+                   console.log("rez "+response.data)
+
+                  this.foundComponents=response.data
+               })
+
 
        }
 
