@@ -28,18 +28,22 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
     }
     @Override
     public List<String> getMotherboards() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> motherboards=new ArrayList<>();
-        SQWRLResult result= queryEngine.runSQWRLQuery("q1", "Motherboard(?x) -> sqwrl:select(?x) ");
+        SQWRLResult result= queryEngine.runSQWRLQuery("q1", "Motherboard(?x) ^ motherBoardProducer(?x,?y) " +
+                "-> sqwrl:select(?y, ?x) ");
         if (result.next()){
             System.out.println(result);
             System.out.println(result.getColumn(0));
             for(int i=0 ; i< result.getColumn(0).size() ; i++)
-                motherboards.add(result.getColumn(0).get(i).toString().substring(1));
+                motherboards.add(findDetailsFromQueryWithoutTypes(result.getColumn(0).get(i), i) + " " +
+                        result.getColumn(1).get(i).toString().substring(1));
         }
         return motherboards;
     }
     @Override
     public List<String> getProcessors() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> processors=new ArrayList<>();
         SQWRLResult result= queryEngine.runSQWRLQuery("q2", "Generation(?x) -> sqwrl:select(?x) ");
         if (result.next()){
@@ -53,12 +57,16 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findProcessors(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> processors=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
         String socket=result1.getColumn(0).get(0).toString().substring(1);
 
-        SQWRLResult result2= queryEngine.runSQWRLQuery("q4", "Generation(?x) ^ "+socket+
+        System.out.println("MOTHERBOARD" + motherboard);
+        System.out.println("SOCKET" + socket);
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q4", "Processor(?x) ^ "+socket+
                 "(?y) ^ processorIsCompatibleWithSocket(?x, ?y) ^ processorName(?x,?name) ^ processorFrequency(?x,?freq) " +
                 "^ processorTDP(?x,?tdp)-> sqwrl:select(?name,?freq,?tdp) ");
         System.out.println("vracam"+result2);
@@ -77,6 +85,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findRamByMotherBoard(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> rams=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q5", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
@@ -102,6 +111,8 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findRamByMotherBoardAndProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> rams=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Generation(?x) ^ processorName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+processor+"\") ^ processorFrequency(?x,?z) -> sqwrl:select(?z) ");
@@ -134,9 +145,11 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCoolerForProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> coolers=new ArrayList<>();
 
-        SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q43", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
         String socket=result1.getColumn(0).get(0).toString().substring(1);
 
@@ -169,6 +182,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleGraphicCards(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> graphicCards=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q12", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsGraphicCardSlots(?x,?z) ^ PSU(?x, ?PSUvalue)" +
@@ -203,6 +217,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleOS(String processor) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> operatingSystems = new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q14", "Processor(?x) ^ processorName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+processor+"\") ^ processorOperatingMode(?x,?z) -> sqwrl:select(?y, ?z) ");
@@ -221,6 +236,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleMonitors(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> monitors = new ArrayList<>();
         List<String> distinctMonitors = new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q16", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -253,6 +269,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleHeadphones(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> headphones=new ArrayList<>();
 
         SQWRLResult combinedConnector= queryEngine.runSQWRLQuery("q18", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -307,6 +324,8 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleMicrophones(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> microphones=new ArrayList<>();
 
         SQWRLResult microphoneConnector= queryEngine.runSQWRLQuery("q28", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -348,6 +367,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleSpeakers(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> speakers=new ArrayList<>();
 
         SQWRLResult headphonesAndSpeakersConnector= queryEngine.runSQWRLQuery("q24", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -383,6 +403,8 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleMouses(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> mouses=new ArrayList<>();
 
         SQWRLResult PS2MouseConnector= queryEngine.runSQWRLQuery("q32", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -423,6 +445,8 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleKeyboards(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> keyboards=new ArrayList<>();
 
         SQWRLResult PS2KeyboardConnector= queryEngine.runSQWRLQuery("q36", "Motherboard(?x) ^ motherboardName(?x,?y) " +
