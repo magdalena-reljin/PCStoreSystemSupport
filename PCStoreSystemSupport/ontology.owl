@@ -1696,6 +1696,12 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#A4_TECH_Microphone_MI-10
+:A4_TECH_Microphone_MI-10 rdf:type owl:NamedIndividual ,
+                                   :Microphone ;
+                          :microphoneIsCompatibleWithMicrophonePort :MicrophoneConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AD4S320016G22_SGN
 :AD4S320016G22_SGN rdf:type owl:NamedIndividual ,
                             :RAM ;
@@ -1731,6 +1737,12 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                        :memorySizeOfGraphicCard 4 ;
                        :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
                        :minimumPSUForGraphicCard "400.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AUDIO-TECHNICA_Headphones_ATH-M50x
+:AUDIO-TECHNICA_Headphones_ATH-M50x rdf:type owl:NamedIndividual ,
+                                             :Headphones ;
+                                    :headphonesAreCompatibleWithAudioPort :HeadphoneAndSpeakersConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#B008W0X8IG
@@ -1771,6 +1783,12 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA2270
 :BGA2270 rdf:type owl:NamedIndividual ,
                   :BGA2270 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BOYA_Microphone_BY-PM300_USB
+:BOYA_Microphone_BY-PM300_USB rdf:type owl:NamedIndividual ,
+                                       :Microphone ;
+                              :microphoneIsCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Beast_KF436C18BBA
@@ -1837,6 +1855,54 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     :ramMemoryCapacity 16 ;
                     :ramName "CMW16GX4M1Z3600C18"^^xsd:string ;
                     :ramProducer "CORSAIR_Vengeance"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Gaming_Headphones_CH321_Black_USB
+:COOLER_MASTER_Gaming_Headphones_CH321_Black_USB rdf:type owl:NamedIndividual ,
+                                                          :Headphones ;
+                                                 :headphonesAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Gaming_Keyboard_and_Mouse_Devastator_3_Plus_US_SGB-3001-KKMF1-US_USB
+:COOLER_MASTER_Gaming_Keyboard_and_Mouse_Devastator_3_Plus_US_SGB-3001-KKMF1-US_USB rdf:type owl:NamedIndividual ,
+                                                                                             :Keyboard ;
+                                                                                    :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Gaming_Mouse_MM711White_MM-711-WWOL1_USB
+:COOLER_MASTER_Gaming_Mouse_MM711White_MM-711-WWOL1_USB rdf:type owl:NamedIndividual ,
+                                                                 :Mouse ;
+                                                        :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Gaming_Mouse_MM711_MM-711-KKOL1_USB
+:COOLER_MASTER_Gaming_Mouse_MM711_MM-711-KKOL1_USB rdf:type owl:NamedIndividual ,
+                                                            :Mouse ;
+                                                   :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Gaming_keyboard_CK550_V2_Red_CK_550_GKTR1_US_USB
+:COOLER_MASTER_Gaming_keyboard_CK550_V2_Red_CK_550_GKTR1_US_USB rdf:type owl:NamedIndividual ,
+                                                                         :Keyboard ;
+                                                                :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Gaming_mouse_MM830_MM-830-GKOF1_USB
+:COOLER_MASTER_Gaming_mouse_MM830_MM-830-GKOF1_USB rdf:type owl:NamedIndividual ,
+                                                            :Mouse ;
+                                                   :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Keyboard_CK550_V2_Blue_CK_550_GKTL1_US_USB
+:COOLER_MASTER_Keyboard_CK550_V2_Blue_CK_550_GKTL1_US_USB rdf:type owl:NamedIndividual ,
+                                                                   :Keyboard ;
+                                                          :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLER_MASTER_Wired_Gaming_Mouse_DEVASTATOR_MM110_USB
+:COOLER_MASTER_Wired_Gaming_Mouse_DEVASTATOR_MM110_USB rdf:type owl:NamedIndividual ,
+                                                                :Mouse ;
+                                                       :mouseIsCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLING-IS-20i
@@ -1916,6 +1982,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                                     :Monitor ;
                            :monitorIsCompatibleWithViewConnector :HDMI ,
                                                                  :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#EDIFIER_Computer_Speakers_R1010BT
+:EDIFIER_Computer_Speakers_R1010BT rdf:type owl:NamedIndividual ,
+                                            :Speakers ;
+                                   :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#EPOS_Sennheiser_Adapt_135_USB_II_Wired_Headset
+:EPOS_Sennheiser_Adapt_135_USB_II_Wired_Headset rdf:type owl:NamedIndividual ,
+                                                         :Headphones ;
+                                                :headphonesAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#EPOS_Wired_Headphones_Sennheiser_Impact_SC_60_USB_ML
+:EPOS_Wired_Headphones_Sennheiser_Impact_SC_60_USB_ML rdf:type owl:NamedIndividual ,
+                                                               :Headphones ;
+                                                      :headphonesAreCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ExeGate-EE90-Cu
@@ -1998,6 +2082,54 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                    :ramMemoryCapacity 16 ;
                    :ramName "GAP416GB2666C19SC"^^xsd:string ,
                             "GEIL"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GEMBIRD_Computer_microphone_MIC-DU-01_USB
+:GEMBIRD_Computer_microphone_MIC-DU-01_USB rdf:type owl:NamedIndividual ,
+                                                    :Microphone ;
+                                           :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GEMBIRD_MIC-D-02_radio_microphone
+:GEMBIRD_MIC-D-02_radio_microphone rdf:type owl:NamedIndividual ,
+                                            :Microphone ;
+                                   :microphoneIsCompatibleWithMicrophonePort :MicrophoneConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GEMBIRD_Wireless_Keyboard_GMB-I8_PLUS_US_USB
+:GEMBIRD_Wireless_Keyboard_GMB-I8_PLUS_US_USB rdf:type owl:NamedIndividual ,
+                                                       :Keyboard ;
+                                              :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GENESIS_Microphone_Radium_600_NGM-1241_USB
+:GENESIS_Microphone_Radium_600_NGM-1241_USB rdf:type owl:NamedIndividual ,
+                                                     :Microphone ;
+                                            :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GENESIS_Mikrofon_Radium_100_USB
+:GENESIS_Mikrofon_Radium_100_USB rdf:type owl:NamedIndividual ,
+                                          :Microphone ;
+                                 :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GENIUS_Computer_Speakers_SP-HF180_USB
+:GENIUS_Computer_Speakers_SP-HF180_USB rdf:type owl:NamedIndividual ,
+                                                :Speakers ;
+                                       :speakersAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GENIUS_Computer_Speakers_SP-HF_2.1_1205_v2
+:GENIUS_Computer_Speakers_SP-HF_2.1_1205_v2 rdf:type owl:NamedIndividual ,
+                                                     :Speakers ;
+                                            :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GENIUS_Wired_Mouse_DX-110_PS2
+:GENIUS_Wired_Mouse_DX-110_PS2 rdf:type owl:NamedIndividual ,
+                                        :Mouse ;
+                               <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> :PS2Mouse .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GT730-4H-SL-2GD5
@@ -2117,6 +2249,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
      :numberOfMemorySlots 4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HAMA_Wired_Headphones_HS-P200
+:HAMA_Wired_Headphones_HS-P200 rdf:type owl:NamedIndividual ,
+                                        :Headphones ;
+                               :headphonesAreCompatibleWithCombinedPort :CombinedConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HAMA_Wired_Headphones_HS-USB300
+:HAMA_Wired_Headphones_HS-USB300 rdf:type owl:NamedIndividual ,
+                                          :Headphones ;
+                                 :headphonesAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HAMA_Wireless_Mouse_MW-500_USB
+:HAMA_Wireless_Mouse_MW-500_USB rdf:type owl:NamedIndividual ,
+                                         :Mouse ;
+                                :mouseIsCompatibleWithUSBPort :USB .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HDMI
 :HDMI rdf:type owl:NamedIndividual ,
                :HDMI .
@@ -2147,6 +2297,30 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 :HP_M27fq_QHD__2H4B5AA rdf:type owl:NamedIndividual ,
                                 :Monitor ;
                        :monitorIsCompatibleWithViewConnector :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HP_PS2_Windows_Keyboard_US_672646-003_724718-001
+:HP_PS2_Windows_Keyboard_US_672646-003_724718-001 rdf:type owl:NamedIndividual ,
+                                                           :Keyboard ;
+                                                  <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort> :PS2Keyboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HP_X1000_Computer_Speakers_USB
+:HP_X1000_Computer_Speakers_USB rdf:type owl:NamedIndividual ,
+                                         :Speakers ;
+                                :speakersAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HYPERX_Gaming_Headphones_CLOUD_ALPHA_S_USB
+:HYPERX_Gaming_Headphones_CLOUD_ALPHA_S_USB rdf:type owl:NamedIndividual ,
+                                                     :Headphones ;
+                                            :headphonesAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HYPERX_Gaming_Keyboard_ALLOY_CORE_RGB_US__HX-KB5ME2-US_USB
+:HYPERX_Gaming_Keyboard_ALLOY_CORE_RGB_US__HX-KB5ME2-US_USB rdf:type owl:NamedIndividual ,
+                                                                     :Keyboard ;
+                                                            :keyboardIsCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneAndSpeakersConnector
@@ -2365,6 +2539,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     :IntelZ370 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#JBL_GAMING_HEADPHONES_QUANTUM_400_USB
+:JBL_GAMING_HEADPHONES_QUANTUM_400_USB rdf:type owl:NamedIndividual ,
+                                                :Headphones ;
+                                       :headphonesAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#JLAB_Microphone_Talk_GO_USB_-_IEUMTALKGORBLK4
+:JLAB_Microphone_Talk_GO_USB_-_IEUMTALKGORBLK4 rdf:type owl:NamedIndividual ,
+                                                        :Microphone ;
+                                               :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#JLAB_Mikrofon_Talk_USB_-_IEUMTALKRBLK4
+:JLAB_Mikrofon_Talk_USB_-_IEUMTALKRBLK4 rdf:type owl:NamedIndividual ,
+                                                 :Microphone ;
+                                        :microphoneIsCompatibleWithUSBPort :USB .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#JM3200HLE
 :JM3200HLE rdf:type owl:NamedIndividual ,
                     :RAM ;
@@ -2386,7 +2578,8 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KF432S20IB
-:KF432S20IB rdf:type owl:NamedIndividual ;
+:KF432S20IB rdf:type owl:NamedIndividual ,
+                     :RAM ;
             :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
             :ramFrequency 3200 ;
             :ramMemoryCapacity 16 ;
@@ -2490,6 +2683,48 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                                   :monitorIsCompatibleWithViewConnector :HDMI .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Wired_Keyboard_K120_YU-SRB_-_920-002498_USB
+:LOGITECH_Wired_Keyboard_K120_YU-SRB_-_920-002498_USB rdf:type owl:NamedIndividual ,
+                                                               :Keyboard ;
+                                                      :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Wireless_Keyboard_K400_PLUS_US__920-007145_USB
+:LOGITECH_Wireless_Keyboard_K400_PLUS_US__920-007145_USB rdf:type owl:NamedIndividual ,
+                                                                  :Keyboard ;
+                                                         :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Wireless_Keyboard_and_Palm_Rest_MX_KEYS_PLUS_US_920-00941_USB
+:LOGITECH_Wireless_Keyboard_and_Palm_Rest_MX_KEYS_PLUS_US_920-00941_USB rdf:type owl:NamedIndividual ,
+                                                                                 :Keyboard ;
+                                                                        :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Wireless_MX_ANYWHERE_Mouse_910-005989_USB
+:LOGITECH_Wireless_MX_ANYWHERE_Mouse_910-005989_USB rdf:type owl:NamedIndividual ,
+                                                             :Mouse ;
+                                                    :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Wireless_Mouse_MX_ANYWHERE_3_USB
+:LOGITECH_Wireless_Mouse_MX_ANYWHERE_3_USB rdf:type owl:NamedIndividual ,
+                                                    :Mouse ;
+                                           :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Wireless_Mouse_PEBBLE_M350_USB
+:LOGITECH_Wireless_Mouse_PEBBLE_M350_USB rdf:type owl:NamedIndividual ,
+                                                  :Mouse ;
+                                         :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LOGITECH_Z313_21_speakers_-_980-000413
+:LOGITECH_Z313_21_speakers_-_980-000413 rdf:type owl:NamedIndividual ,
+                                                 :Speakers ;
+                                        :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_32bit
 :Linux_32bit rdf:type owl:NamedIndividual ,
                       :Linux_32bit ;
@@ -2500,6 +2735,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 :Linux_64bit rdf:type owl:NamedIndividual ,
                       :Linux_64bit ;
              :operatingSystemIsCompatibleWithOperatingMode :OM_64bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Logitech_G703_HERO_wireless__PS2_mouse
+:Logitech_G703_HERO_wireless__PS2_mouse rdf:type owl:NamedIndividual ,
+                                                 :Mouse ;
+                                        <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> :PS2Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Logitech_MK100_PS2_Keyboard_and_USB_Mouse_Combo
+:Logitech_MK100_PS2_Keyboard_and_USB_Mouse_Combo rdf:type owl:NamedIndividual ,
+                                                          :Keyboard ;
+                                                 <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort> :PS2Keyboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Logitech_MX_MASTER_2S_Wireless_Mouse_USB
+:Logitech_MX_MASTER_2S_Wireless_Mouse_USB rdf:type owl:NamedIndividual ,
+                                                   :Mouse ;
+                                          :mouseIsCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MACHINIST
@@ -2519,6 +2772,18 @@ owl:topObjectProperty rdfs:domain :Mouse ;
            :numberOfMemorySlots 4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MARVO_Gaming_Keyboard_SCORPION_KG916_US_USB
+:MARVO_Gaming_Keyboard_SCORPION_KG916_US_USB rdf:type owl:NamedIndividual ,
+                                                      :Keyboard ;
+                                             :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MCSaite_PS2_Wired_104_Keys_Computer_Keyboard_with_Stands-BlackWaterproof
+:MCSaite_PS2_Wired_104_Keys_Computer_Keyboard_with_Stands-BlackWaterproof rdf:type owl:NamedIndividual ,
+                                                                                   :Keyboard ;
+                                                                          <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#keyboardIsCompatibleWithPS/2KeyboardPort> :PS2Keyboard .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MD32GSD43200_TB
 :MD32GSD43200_TB rdf:type owl:NamedIndividual ,
                           :RAM ;
@@ -2527,6 +2792,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                  :ramMemoryCapacity 32 ;
                  :ramName "MD32GSD43200_TB"^^xsd:string ;
                  :ramProducer "PNY"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MICROLAB_2.0_speakers_B-56_USB
+:MICROLAB_2.0_speakers_B-56_USB rdf:type owl:NamedIndividual ,
+                                         :Speakers ;
+                                :speakersAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MICROLAB_speakers_FC_330
+:MICROLAB_speakers_FC_330 rdf:type owl:NamedIndividual ,
+                                   :Speakers ;
+                          :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MICROLAB_speakers_M109_2.1
+:MICROLAB_speakers_M109_2.1 rdf:type owl:NamedIndividual ,
+                                     :Speakers ;
+                            :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MS-98H7
@@ -2552,6 +2835,18 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                               :MicrophoneConnector .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NATEC_GENESIS_Computer_Speakers_HELIUM_600
+:NATEC_GENESIS_Computer_Speakers_HELIUM_600 rdf:type owl:NamedIndividual ,
+                                                     :Speakers ;
+                                            :speakersAreCompatibleWithAudioConnector :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NATEC_GENESIS_Gaming_Headphones_ARGON_570
+:NATEC_GENESIS_Gaming_Headphones_ARGON_570 rdf:type owl:NamedIndividual ,
+                                                    :Headphones ;
+                                           :headphonesAreCompatibleWithCombinedPort :CombinedConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NE5105T018G1-1070F
 :NE5105T018G1-1070F rdf:type owl:NamedIndividual ,
                              :GraphicsCard ;
@@ -2561,6 +2856,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     :memorySizeOfGraphicCard 4 ;
                     :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
                     :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NEUMANN_Wired_Headphones_NDH_20
+:NEUMANN_Wired_Headphones_NDH_20 rdf:type owl:NamedIndividual ,
+                                          :Headphones ;
+                                 :headphonesAreCompatibleWithAudioPort :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NZXT_AP-WUMIC-B1_Microphone_USB
+:NZXT_AP-WUMIC-B1_Microphone_USB rdf:type owl:NamedIndividual ,
+                                          :Microphone ;
+                                 :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NZXT_AP-WUMIC-W1_Microphone_USB
+:NZXT_AP-WUMIC-W1_Microphone_USB rdf:type owl:NamedIndividual ,
+                                          :Microphone ;
+                                 :microphoneIsCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Nvidia_GeForce_GT_730
@@ -2630,6 +2943,12 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                :minimumPSUForGraphicCard "300.0"^^xsd:double .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PRESONUS_Headphones_HD7
+:PRESONUS_Headphones_HD7 rdf:type owl:NamedIndividual ,
+                                  :Headphones ;
+                         :headphonesAreCompatibleWithCombinedPort :CombinedConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Keyboard
 :PS2Keyboard rdf:type owl:NamedIndividual ,
                       :PS2Keyboard .
@@ -2650,6 +2969,60 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                :ramProducer "Patriot_Viper"^^xsd:string .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Perixx_PERIMICE-209_P__Wired_PS2_Optical_Mouse_with_Scroll_Wheel
+:Perixx_PERIMICE-209_P__Wired_PS2_Optical_Mouse_with_Scroll_Wheel rdf:type owl:NamedIndividual ,
+                                                                           :Mouse ;
+                                                                  <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> :PS2Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Perixx_Perimice-209_Wired_PS2_Black
+:Perixx_Perimice-209_Wired_PS2_Black rdf:type owl:NamedIndividual ,
+                                              :Mouse ;
+                                     <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#mouseIsCompatibleWithPS/2MousePort> :PS2Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAMPAGE_Gaming_microphone_SNRMX2_Chatty
+:RAMPAGE_Gaming_microphone_SNRMX2_Chatty rdf:type owl:NamedIndividual ,
+                                                  :Microphone ;
+                                         :microphoneIsCompatibleWithMicrophonePort :MicrophoneConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAPOO_Wireless_Mouse_M200_PLUS_USB
+:RAPOO_Wireless_Mouse_M200_PLUS_USB rdf:type owl:NamedIndividual ,
+                                             :Mouse ;
+                                    :mouseIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#RAZER_Seiren_Elite_RZ19-02280100-R3M1_gaming_microphone_USB
+:RAZER_Seiren_Elite_RZ19-02280100-R3M1_gaming_microphone_USB rdf:type owl:NamedIndividual ,
+                                                                      :Microphone ;
+                                                             :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#REDRAGON_Computer_Speakers_GS550_ORPHEUS_USB
+:REDRAGON_Computer_Speakers_GS550_ORPHEUS_USB rdf:type owl:NamedIndividual ,
+                                                       :Speakers ;
+                                              :speakersAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#REDRAGON_Gaming_Headphones_with_LAMIA_2_H320_RGB_Holder
+:REDRAGON_Gaming_Headphones_with_LAMIA_2_H320_RGB_Holder rdf:type owl:NamedIndividual ,
+                                                                  :Headphones ;
+                                                         :headphonesAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#REDRAGON_Gaming_Set_3_in_1_Combo_S107_US_USB
+:REDRAGON_Gaming_Set_3_in_1_Combo_S107_US_USB rdf:type owl:NamedIndividual ,
+                                                       :Keyboard ;
+                                              :keyboardIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#REDRAGON_Wireless_gaming_keyboard_DRACONIC_RGB_US_USB
+:REDRAGON_Wireless_gaming_keyboard_DRACONIC_RGB_US_USB rdf:type owl:NamedIndividual ,
+                                                                :Keyboard ;
+                                                       :keyboardIsCompatibleWithUSBPort :USB .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ROG_STRIX
 :ROG_STRIX rdf:type owl:NamedIndividual ,
                     :Motherboard ;
@@ -2667,6 +3040,18 @@ owl:topObjectProperty rdfs:domain :Mouse ;
            :numberOfMemorySlots 4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SENNHEISER_Wired_Headphones_HD_25_LIGHT
+:SENNHEISER_Wired_Headphones_HD_25_LIGHT rdf:type owl:NamedIndividual ,
+                                                  :Headphones ;
+                                         :headphonesAreCompatibleWithAudioPort :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SENNHEISER_Wired_Headphones_HD_25_PLUS
+:SENNHEISER_Wired_Headphones_HD_25_PLUS rdf:type owl:NamedIndividual ,
+                                                 :Headphones ;
+                                        :headphonesAreCompatibleWithCombinedPort :CombinedConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SO-DIMM-DDR3
 :SO-DIMM-DDR3 rdf:type owl:NamedIndividual ,
                        :SO-DIMM-DDR3 .
@@ -2675,6 +3060,18 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SO-DIMM-DDR4
 :SO-DIMM-DDR4 rdf:type owl:NamedIndividual ,
                        :SO-DIMM-DDR4 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SONIC_GEAR_Computer_Speakers_EVO_9_BTMI_USB
+:SONIC_GEAR_Computer_Speakers_EVO_9_BTMI_USB rdf:type owl:NamedIndividual ,
+                                                      :Speakers ;
+                                             :speakersAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SONIC_GEAR_speakers_for_computer_MORRO_2200_2.2__USB
+:SONIC_GEAR_speakers_for_computer_MORRO_2200_2.2__USB rdf:type owl:NamedIndividual ,
+                                                               :Speakers ;
+                                                      :speakersAreCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SP016GBLFU266X02
@@ -2728,6 +3125,24 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                 :ramProducer "TEAMGROUP"^^xsd:string .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TRUST_Computer_Speakers_ZIVA_COMPACT_2.1_USB
+:TRUST_Computer_Speakers_ZIVA_COMPACT_2.1_USB rdf:type owl:NamedIndividual ,
+                                                       :Speakers ;
+                                              :speakersAreCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TRUST_GXT_239_Gaming_Microphone_NEPA_OUTLET_USB
+:TRUST_GXT_239_Gaming_Microphone_NEPA_OUTLET_USB rdf:type owl:NamedIndividual ,
+                                                          :Microphone ;
+                                                 :microphoneIsCompatibleWithUSBPort :USB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TRUST_microphone_PRIMO
+:TRUST_microphone_PRIMO rdf:type owl:NamedIndividual ,
+                                 :Microphone ;
+                        :microphoneIsCompatibleWithMicrophonePort :MicrophoneConnector .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TUF-GTX1650-O4GD6-P
 :TUF-GTX1650-O4GD6-P rdf:type owl:NamedIndividual ,
                               :GraphicsCard ;
@@ -2758,6 +3173,12 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                       :memorySizeOfGraphicCard 4 ;
                       :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
                       :minimumPSUForGraphicCard "400.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#UBIT_Computer_Speakers_WN-229_ZWEI_USB
+:UBIT_Computer_Speakers_WN-229_ZWEI_USB rdf:type owl:NamedIndividual ,
+                                                 :Speakers ;
+                                        :speakersAreCompatibleWithUSBPort :USB .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#USB
