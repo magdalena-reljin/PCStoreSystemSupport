@@ -458,7 +458,9 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramFrequency
 :ramFrequency rdf:type owl:DatatypeProperty ;
-              rdfs:comment "GHz" .
+              rdfs:domain :RAM ;
+              rdfs:range xsd:integer ;
+              rdfs:comment "MHz" .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ramMemoryCapacity
@@ -1694,9 +1696,51 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 #    Individuals
 #################################################################
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AD4S320016G22_SGN
+:AD4S320016G22_SGN rdf:type owl:NamedIndividual ,
+                            :RAM ;
+                   :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+                   :ramFrequency 3200 ;
+                   :ramMemoryCapacity 16 ;
+                   :ramName "AD4S320016G22_SGN"^^xsd:string ;
+                   :ramProducer "ADATA"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AFRX560-4096D5H4-V2
+:AFRX560-4096D5H4-V2 rdf:type owl:NamedIndividual ,
+                              :GraphicsCard ;
+                     :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                     :graphicCardProducer "AFOX"^^xsd:string ;
+                     :memorySizeOfGraphicCard 4 ;
+                     :memoryTypeOfGraphicCard "AFRX560-4096D5H4-V2"^^xsd:string ,
+                                              "GDDR5"^^xsd:string ;
+                     :minimumPSUForGraphicCard "350.0"^^xsd:double .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AGPSlot
 :AGPSlot rdf:type owl:NamedIndividual ,
                   :AGPSlot .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#AMD_Radeon_RX_6500_XT
+:AMD_Radeon_RX_6500_XT rdf:type owl:NamedIndividual ,
+                                :GraphicsCard ;
+                       :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                       :graphicCardName "AMD_Radeon_RX_6500_XT"^^xsd:string ;
+                       :graphicCardProducer "POWERCOLOR"^^xsd:string ;
+                       :memorySizeOfGraphicCard 4 ;
+                       :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
+                       :minimumPSUForGraphicCard "400.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#B008W0X8IG
+:B008W0X8IG rdf:type owl:NamedIndividual ,
+                     :RAM ;
+            :ramTypeIsCompatibleWithSlotType :DIMM-DDR3 ;
+            :ramFrequency 1600 ;
+            :ramMemoryCapacity 32 ;
+            :ramName "B008W0X8IG"^^xsd:string ;
+            :ramProducer "GLOBAL_MEMORY"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#BGA1356
@@ -1729,6 +1773,16 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                   :BGA2270 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Beast_KF436C18BBA
+:Beast_KF436C18BBA rdf:type owl:NamedIndividual ,
+                            :RAM ;
+                   :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                   :ramFrequency 3600 ;
+                   :ramMemoryCapacity 32 ;
+                   :ramName "Beast_KF436C18BBA"^^xsd:string ;
+                   :ramProducer "KINGSTON"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#C612
 :C612 rdf:type owl:NamedIndividual ,
                :Motherboard ;
@@ -1737,12 +1791,87 @@ owl:topObjectProperty rdfs:domain :Mouse ;
       :containsSocket :BGA1356 ;
       :containsUSBPort :USB ;
       :containsViewConnectors :HDMI ;
-      :PSU "700.0"^^xsd:double ;
+      :PSU "900.0"^^xsd:double ;
       :RamSlotCapacity 16 ;
       :maximumInternalMemory 32 ;
       :motherBoardProducer "Intel"^^xsd:string ;
       :motherboardName "C612"^^xsd:string ;
       :numberOfMemorySlots 2 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CL_17
+:CL_17 rdf:type owl:NamedIndividual ,
+                :RAM ;
+       :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+       :ramFrequency 2400 ;
+       :ramMemoryCapacity 16 ;
+       :ramName "CL_17"^^xsd:string ;
+       :ramProducer "SAMSUNG"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMV16GX4M1A2400C16
+:CMV16GX4M1A2400C16 rdf:type owl:NamedIndividual ,
+                             :RAM ;
+                    :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                    :ramFrequency 2400 ;
+                    :ramMemoryCapacity 16 ;
+                    :ramName "CMV16GX4M1A2400C16"^^xsd:string ,
+                             "CORSAIR"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMV4GX4M1A2400C16
+:CMV4GX4M1A2400C16 rdf:type owl:NamedIndividual ,
+                            :RAM ;
+                   :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                   :ramFrequency 2400 ;
+                   :ramMemoryCapacity 4 ;
+                   :ramName "CMV4GX4M1A2400C16"^^xsd:string ;
+                   :ramProducer "CORSAIR"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CMW16GX4M1Z3600C18
+:CMW16GX4M1Z3600C18 rdf:type owl:NamedIndividual ,
+                             :RAM ;
+                    :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                    :ramFrequency 3600 ;
+                    :ramMemoryCapacity 16 ;
+                    :ramName "CMW16GX4M1Z3600C18"^^xsd:string ;
+                    :ramProducer "CORSAIR_Vengeance"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#COOLING-IS-20i
+:COOLING-IS-20i rdf:type owl:NamedIndividual ,
+                         :CpuCooler ;
+                :coolerIsCompatibleWithSocket :LGA1150_H3 ,
+                                              :LGA1151_H4 ,
+                                              :LGA1200_H5 ;
+                :coolerName "COOLING-IS-20i"^^xsd:string ;
+                :coolerTDP 45 ;
+                :maxFanSpeed 2700 ;
+                :noiseLevel 23 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CR-1000GT
+:CR-1000GT rdf:type owl:NamedIndividual ,
+                    :CpuCooler ;
+           :coolerIsCompatibleWithSocket :LGA1150_H3 ,
+                                         :LGA1151_H4 ,
+                                         :LGA1200_H5 ,
+                                         :LGA1356_B2 ;
+           :coolerName "CR-1000GT"^^xsd:string ;
+           :coolerTDP 120 ;
+           :maxFanSpeed 3000 ;
+           :noiseLevel 30 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CT4G4DFS8266
+:CT4G4DFS8266 rdf:type owl:NamedIndividual ,
+                       :RAM ;
+              :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+              :ramFrequency 2666 ;
+              :ramMemoryCapacity 4 ;
+              :ramName "CT4G4DFS8266"^^xsd:string ;
+              :ramProducer "CRUCIAL"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#CombinedConnector
@@ -1760,9 +1889,65 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     :DIMM-DDR4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DUAL-GTX1660S-6G-EVO
+:DUAL-GTX1660S-6G-EVO rdf:type owl:NamedIndividual ,
+                               :GraphicsCard ;
+                      :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                      :graphicCardName "DUAL-GTX1660S-6G-EVO"^^xsd:string ;
+                      :graphicCardProducer "ASUS"^^xsd:string ;
+                      :memorySizeOfGraphicCard 6 ;
+                      :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
+                      :minimumPSUForGraphicCard "450.0"^^xsd:double .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#DVI
 :DVI rdf:type owl:NamedIndividual ,
               :DVI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Dell_-_S2721NX_27_IPS_LED_FHD_-_AMD_FreeSync_-_VESA__-_Black
+:Dell_-_S2721NX_27_IPS_LED_FHD_-_AMD_FreeSync_-_VESA__-_Black rdf:type owl:NamedIndividual ,
+                                                                       :Monitor ;
+                                                              :monitorIsCompatibleWithViewConnector :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Dell_UltraSharp_24_U2422H
+:Dell_UltraSharp_24_U2422H rdf:type owl:NamedIndividual ,
+                                    :Monitor ;
+                           :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                 :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ExeGate-EE90-Cu
+:ExeGate-EE90-Cu rdf:type owl:NamedIndividual ,
+                          :CpuCooler ;
+                 :coolerIsCompatibleWithSocket :LGA1150_H3 ,
+                                               :LGA1151_H4 ,
+                                               :LGA1200_H5 ;
+                 :coolerName "ExeGate-EE90-Cu"^^xsd:string ;
+                 :coolerTDP 85 ;
+                 :maxFanSpeed 2200 ;
+                 :noiseLevel 22 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#F4_3000C16S_16GISB
+:F4_3000C16S_16GISB rdf:type owl:NamedIndividual ,
+                             :RAM ;
+                    :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                    :ramFrequency 3000 ;
+                    :ramMemoryCapacity 16 ;
+                    :ramName "F4_3000C16S_16GISB"^^xsd:string ;
+                    :ramProducer "GSKILL"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#F4_3200C16S_16GIS
+:F4_3200C16S_16GIS rdf:type owl:NamedIndividual ,
+                            :RAM ;
+                   :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                   :ramFrequency 3200 ;
+                   :ramMemoryCapacity 16 ;
+                   :ramName "F4_3200C16S_16GIS"^^xsd:string ;
+                   :ramProducer "GSKILL"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#FCBGA1440
@@ -1773,6 +1958,101 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#FCBGA1528
 :FCBGA1528 rdf:type owl:NamedIndividual ,
                     :FCBGA1528 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Fury_Beast_KF426C16BB
+:Fury_Beast_KF426C16BB rdf:type owl:NamedIndividual ,
+                                :RAM ;
+                       :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                       :ramFrequency 2666 ;
+                       :ramMemoryCapacity 4 ;
+                       :ramName "Fury_Beast_KF426C16BB"^^xsd:string ;
+                       :ramProducer "KINGSTON"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GALS416GB3000C16ASC
+:GALS416GB3000C16ASC rdf:type owl:NamedIndividual ,
+                              :RAM ;
+                     :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                     :ramFrequency 3000 ;
+                     :ramMemoryCapacity 16 ;
+                     :ramName "GALS416GB3000C16ASC"^^xsd:string ;
+                     :ramProducer "GEIL"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GAOSR432GB3600C18BDC
+:GAOSR432GB3600C18BDC rdf:type owl:NamedIndividual ,
+                               :RAM ;
+                      :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                      :ramFrequency 3600 ;
+                      :ramMemoryCapacity 32 ;
+                      :ramName "GAOSR432GB3600C18BDC"^^xsd:string ;
+                      :ramProducer "GEIL_ORION_RYZEN"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GAP416GB2666C19SC
+:GAP416GB2666C19SC rdf:type owl:NamedIndividual ,
+                            :RAM ;
+                   :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                   :ramFrequency 2666 ;
+                   :ramMemoryCapacity 16 ;
+                   :ramName "GAP416GB2666C19SC"^^xsd:string ,
+                            "GEIL"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GT730-4H-SL-2GD5
+:GT730-4H-SL-2GD5 rdf:type owl:NamedIndividual ,
+                           :GraphicsCard ;
+                  :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                  :graphicCardName "GT730-4H-SL-2GD5"^^xsd:string ;
+                  :graphicCardProducer "ASUS_GeForce"^^xsd:string ;
+                  :memorySizeOfGraphicCard 2 ;
+                  :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
+                  :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GT730-SL-2GD5-BRK
+:GT730-SL-2GD5-BRK rdf:type owl:NamedIndividual ,
+                            :GraphicsCard ;
+                   :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                   :graphicCardName "GT730-SL-2GD5-BRK"^^xsd:string ;
+                   :graphicCardProducer "ASUS"^^xsd:string ;
+                   :memorySizeOfGraphicCard 2 ;
+                   :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
+                   :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GT_1030_2GHD4_LP_OC
+:GT_1030_2GHD4_LP_OC rdf:type owl:NamedIndividual ,
+                              :GraphicsCard ;
+                     :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                     :graphicCardName "GT_1030_2GHD4_LP_OC"^^xsd:string ;
+                     :graphicCardProducer "MSI"^^xsd:string ;
+                     :memorySizeOfGraphicCard 2 ;
+                     :memoryTypeOfGraphicCard "GDDR4"^^xsd:string ;
+                     :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GV-N105TD5-4GD
+:GV-N105TD5-4GD rdf:type owl:NamedIndividual ,
+                         :GraphicsCard ;
+                :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                :graphicCardName "GIGABYTE"^^xsd:string ,
+                                 "GV-N105TD5-4GD"^^xsd:string ;
+                :memorySizeOfGraphicCard 4 ;
+                :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
+                :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#GV-N1650OC-4GD
+:GV-N1650OC-4GD rdf:type owl:NamedIndividual ,
+                         :GraphicsCard ;
+                :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                :graphicCardName "GV-N1650OC-4GD"^^xsd:string ;
+                :graphicCardProducer "GIGABYTE"^^xsd:string ;
+                :memorySizeOfGraphicCard 4 ;
+                :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
+                :minimumPSUForGraphicCard "300.0"^^xsd:double .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#H310M
@@ -1787,7 +2067,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
        :containsViewConnectors :VGA ;
        <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2KeyboardPort> :PS2Keyboard ;
        <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2MousePort> :PS2Mouse ;
-       :PSU "700.0"^^xsd:double ;
+       :PSU "900.0"^^xsd:double ;
        :RamSlotCapacity 16 ;
        :maximumInternalMemory 32 ;
        :motherboardName "GIGABYTE"^^xsd:string ,
@@ -1799,6 +2079,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 :H410MH rdf:type owl:NamedIndividual ,
                  :Motherboard ;
         :containsChipset :IntelH410 ;
+        :containsGraphicCardSlots :PCIeSlot ;
         :containsRAMSlot :DIMM-DDR4 ;
         :containsSocket :LGA1200_H5 ;
         :containsUSBPort :USB ;
@@ -1841,9 +2122,68 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                :HDMI .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HP_-_21.5IPS_LED_Full_HD_FreeSync-_Silver_and_Black
+:HP_-_21.5IPS_LED_Full_HD_FreeSync-_Silver_and_Black rdf:type owl:NamedIndividual ,
+                                                              :Monitor ;
+                                                     :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                                           :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HP_-_24IPS_LED_FHD_FreeSync_-_Silver_and_Black
+:HP_-_24IPS_LED_FHD_FreeSync_-_Silver_and_Black rdf:type owl:NamedIndividual ,
+                                                         :Monitor ;
+                                                :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                                      :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HP_-_27IPS_LED_FHD_FreeSync_with_Integrated_Speakers_-_Ceramic_White
+:HP_-_27IPS_LED_FHD_FreeSync_with_Integrated_Speakers_-_Ceramic_White rdf:type owl:NamedIndividual ,
+                                                                               :Monitor ;
+                                                                      :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                                                            :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HP_M27fq_QHD__2H4B5AA
+:HP_M27fq_QHD__2H4B5AA rdf:type owl:NamedIndividual ,
+                                :Monitor ;
+                       :monitorIsCompatibleWithViewConnector :HDMI .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#HeadphoneAndSpeakersConnector
 :HeadphoneAndSpeakersConnector rdf:type owl:NamedIndividual ,
                                         :HeadphoneAndSpeakersConnector .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Hynix_IC
+:Hynix_IC rdf:type owl:NamedIndividual ,
+                   :RAM ;
+          :ramTypeIsCompatibleWithSlotType :DIMM-DDR3 ;
+          :ramFrequency 1866 ;
+          :ramMemoryCapacity 16 ;
+          :ramName "Hynix_IC"^^xsd:string ;
+          :ramProducer "v-Color"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ID-COOLING-DK-01S
+:ID-COOLING-DK-01S rdf:type owl:NamedIndividual ,
+                            :CpuCooler ;
+                   :coolerIsCompatibleWithSocket :LGA1151_H4 ,
+                                                 :LGA1200_H5 ;
+                   :coolerName "ID-COOLING-DK-01S"^^xsd:string ;
+                   :coolerTDP 85 ;
+                   :maxFanSpeed 2200 ;
+                   :noiseLevel 24 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ID-COOLING-DK-01T
+:ID-COOLING-DK-01T rdf:type owl:NamedIndividual ,
+                            :CpuCooler ;
+                   :coolerIsCompatibleWithSocket :LGA1151_H4 ,
+                                                 :LGA1200_H5 ;
+                   :coolerName "ID-COOLING-DK-01T"^^xsd:string ;
+                   :coolerTDP 95 ;
+                   :maxFanSpeed 2200 ;
+                   :noiseLevel 25 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#IntelC236
@@ -1899,7 +2239,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                    :processorIsCompatibleWithSocket :PGA946 ;
                    :processorOperatingMode :OM_64bit ;
                    :numberOfCores 2 ;
-                   :processorFrequency 3200 ;
+                   :processorFrequency 3400 ;
                    :processorName "IntelCorei5-4210M"^^xsd:string ;
                    :processorProducer "Intel"^^xsd:string ;
                    :processorTDP 37 .
@@ -1935,7 +2275,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                    :processorIsCompatibleWithSocket :LGA1200_H5 ;
                    :processorOperatingMode :OM_64bit ;
                    :numberOfCores 8 ;
-                   :processorFrequency 2900 ;
+                   :processorFrequency 3800 ;
                    :processorName "IntelCorei7-10700"^^xsd:string ;
                    :processorProducer "Intel"^^xsd:string ;
                    :processorTDP 65 .
@@ -1973,7 +2313,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     :processorIsCompatibleWithSocket :BGA1440 ;
                     :numberOfCores 6 ;
                     :processorFrequency 2900 ;
-                    :processorName "IntelCorei9-8950HK"^^xsd:NMTOKEN ;
+                    :processorName "IntelCorei9-8950HK"^^xsd:string ;
                     :processorProducer "Intel"^^xsd:string ;
                     :processorTDP 45 .
 
@@ -2025,6 +2365,75 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     :IntelZ370 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#JM3200HLE
+:JM3200HLE rdf:type owl:NamedIndividual ,
+                    :RAM ;
+           :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+           :ramFrequency 3200 ;
+           :ramMemoryCapacity 32 ;
+           :ramName "JM3200HLE"^^xsd:string ;
+           :ramProducer "TRANSCEND"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#JM3200HSE
+:JM3200HSE rdf:type owl:NamedIndividual ,
+                    :RAM ;
+           :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+           :ramFrequency 3200 ;
+           :ramMemoryCapacity 16 ;
+           :ramName "JM3200HSE"^^xsd:string ,
+                    "TRANSCEND"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KF432S20IB
+:KF432S20IB rdf:type owl:NamedIndividual ;
+            :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+            :ramFrequency 3200 ;
+            :ramMemoryCapacity 16 ;
+            :ramName "KF432S20IB"^^xsd:string ;
+            :ramProducer "KINGSTON"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KTH_PL313LV
+:KTH_PL313LV rdf:type owl:NamedIndividual ,
+                      :RAM ;
+             :ramTypeIsCompatibleWithSlotType :DIMM-DDR3 ;
+             :ramFrequency 1333 ;
+             :ramMemoryCapacity 16 ;
+             :ramName "KINGSTON"^^xsd:string ,
+                      "KTH_PL313LV"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KVR26S19S8
+:KVR26S19S8 rdf:type owl:NamedIndividual ,
+                     :RAM ;
+            :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+            :ramFrequency 2666 ;
+            :ramMemoryCapacity 16 ;
+            :ramName "KVR26S19S8"^^xsd:string ;
+            :ramProducer "KINGSTON"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KVR32N22S6
+:KVR32N22S6 rdf:type owl:NamedIndividual ,
+                     :RAM ;
+            :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+            :ramFrequency 2900 ;
+            :ramMemoryCapacity 4 ;
+            :ramName "KVR32N22S6"^^xsd:string ;
+            :ramProducer "KINGSTON"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#KVR32S22S8
+:KVR32S22S8 rdf:type owl:NamedIndividual ,
+                     :RAM ;
+            :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+            :ramFrequency 3200 ;
+            :ramMemoryCapacity 16 ;
+            :ramName "KINGSTON"^^xsd:string ,
+                     "KVR32S22S8"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LGA1150_H3
 :LGA1150_H3 rdf:type owl:NamedIndividual ,
                      :LGA1150_H3 .
@@ -2048,6 +2457,37 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LGA2011
 :LGA2011 rdf:type owl:NamedIndividual ,
                   :LGA2011 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LG_-_24_IPS_LED_FHD_FreeSyncBlack
+:LG_-_24_IPS_LED_FHD_FreeSyncBlack rdf:type owl:NamedIndividual ,
+                                            :Monitor ;
+                                   :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                         :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LG_-_27_UltraGear_QHD_Nano_IPS_1ms_165Hz_HDR_with_G-SYNC_Compatibility_-_Black
+:LG_-_27_UltraGear_QHD_Nano_IPS_1ms_165Hz_HDR_with_G-SYNC_Compatibility_-_Black rdf:type owl:NamedIndividual ,
+                                                                                         :Monitor ;
+                                                                                :monitorIsCompatibleWithViewConnector :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LG_34_UltraWide_Full_HD_HDR__with_FreeSync
+:LG_34_UltraWide_Full_HD_HDR__with_FreeSync rdf:type owl:NamedIndividual ,
+                                                     :Monitor ;
+                                            :monitorIsCompatibleWithViewConnector :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LG_LED_27MK430H-B
+:LG_LED_27MK430H-B rdf:type owl:NamedIndividual ,
+                            :Monitor ;
+                   :monitorIsCompatibleWithViewConnector :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#LG_Monitor_27UltraFine_27MD5KL-B
+:LG_Monitor_27UltraFine_27MD5KL-B rdf:type owl:NamedIndividual ,
+                                           :Monitor ;
+                                  :monitorIsCompatibleWithViewConnector :HDMI .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Linux_32bit
@@ -2079,6 +2519,16 @@ owl:topObjectProperty rdfs:domain :Mouse ;
            :numberOfMemorySlots 4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MD32GSD43200_TB
+:MD32GSD43200_TB rdf:type owl:NamedIndividual ,
+                          :RAM ;
+                 :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                 :ramFrequency 3200 ;
+                 :ramMemoryCapacity 32 ;
+                 :ramName "MD32GSD43200_TB"^^xsd:string ;
+                 :ramProducer "PNY"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#MS-98H7
 :MS-98H7 rdf:type owl:NamedIndividual ,
                   :Motherboard ;
@@ -2102,6 +2552,28 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                               :MicrophoneConnector .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#NE5105T018G1-1070F
+:NE5105T018G1-1070F rdf:type owl:NamedIndividual ,
+                             :GraphicsCard ;
+                    :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                    :graphicCardName "NE5105T018G1-1070F"^^xsd:string ,
+                                     "PALIT"^^xsd:string ;
+                    :memorySizeOfGraphicCard 4 ;
+                    :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
+                    :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Nvidia_GeForce_GT_730
+:Nvidia_GeForce_GT_730 rdf:type owl:NamedIndividual ,
+                                :GraphicsCard ;
+                       :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                       :graphicCardName "Nvidia_GeForce_GT_730"^^xsd:string ;
+                       :graphicCardProducer "MSI"^^xsd:string ;
+                       :memorySizeOfGraphicCard 2 ;
+                       :memoryTypeOfGraphicCard "GDDR3"^^xsd:string ;
+                       :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_32bit
 :OM_32bit rdf:type owl:NamedIndividual ,
                    :OM_32bit .
@@ -2110,6 +2582,26 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#OM_64bit
 :OM_64bit rdf:type owl:NamedIndividual ,
                    :OM_64bit .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PC3_14900R
+:PC3_14900R rdf:type owl:NamedIndividual ,
+                     :RAM ;
+            :ramTypeIsCompatibleWithSlotType :DIMM-DDR3 ;
+            :ramFrequency 1866 ;
+            :ramMemoryCapacity 16 ;
+            :ramName "PC3_14900R"^^xsd:string ;
+            :ramProducer "HP"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PC4-21300
+:PC4-21300 rdf:type owl:NamedIndividual ,
+                    :RAM ;
+           :ramTypeIsCompatibleWithSlotType :DIMM-DDR3 ;
+           :ramFrequency 2666 ;
+           :ramMemoryCapacity 16 ;
+           :ramName "PC4-21300"^^xsd:string ;
+           :ramProducer "A-TECH"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PCISlot
@@ -2127,6 +2619,17 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                  :PGA946 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PH-GT1030-O2G
+:PH-GT1030-O2G rdf:type owl:NamedIndividual ,
+                        :GraphicsCard ;
+               :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+               :graphicCardName "PH-GT1030-O2G"^^xsd:string ;
+               :graphicCardProducer "ASUS"^^xsd:string ;
+               :memorySizeOfGraphicCard 2 ;
+               :memoryTypeOfGraphicCard "GDDR5"^^xsd:string ;
+               :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Keyboard
 :PS2Keyboard rdf:type owl:NamedIndividual ,
                       :PS2Keyboard .
@@ -2135,6 +2638,16 @@ owl:topObjectProperty rdfs:domain :Mouse ;
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PS2Mouse
 :PS2Mouse rdf:type owl:NamedIndividual ,
                    :PS2Mouse .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#PVSR432G360C0
+:PVSR432G360C0 rdf:type owl:NamedIndividual ,
+                        :RAM ;
+               :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+               :ramFrequency 3600 ;
+               :ramMemoryCapacity 32 ;
+               :ramName "PVSR432G360C0"^^xsd:string ;
+               :ramProducer "Patriot_Viper"^^xsd:string .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ROG_STRIX
@@ -2146,6 +2659,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
            :containsSocket :LGA1151_H4 ;
            :containsViewConnectors :DVI ,
                                    :HDMI ;
+           :PSU "950.0"^^xsd:double ;
            :RamSlotCapacity 16 ;
            :maximumInternalMemory 64 ;
            :motherBoardProducer "ASUS"^^xsd:string ;
@@ -2163,9 +2677,87 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                        :SO-DIMM-DDR4 .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SP016GBLFU266X02
+:SP016GBLFU266X02 rdf:type owl:NamedIndividual ,
+                           :RAM ;
+                  :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+                  :ramFrequency 2666 ;
+                  :ramMemoryCapacity 16 ;
+                  :ramName "SP016GBLFU266X02"^^xsd:string ;
+                  :ramProducer "SILICON_POWER"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Samsung_-_390_Series_24LED_Curved_FHD_FreeSync_-_High_glossy_black
+:Samsung_-_390_Series_24LED_Curved_FHD_FreeSync_-_High_glossy_black rdf:type owl:NamedIndividual ,
+                                                                             :Monitor ;
+                                                                    :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                                                          :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Samsung_-_390_Series_24_LED_Curved_FHD_FreeSync_-_High_glossy_black
+:Samsung_-_390_Series_24_LED_Curved_FHD_FreeSync_-_High_glossy_black rdf:type owl:NamedIndividual ,
+                                                                              :Monitor ;
+                                                                     :monitorIsCompatibleWithViewConnector :HDMI ,
+                                                                                                           :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Samsung_-_A700_Series_32_LED_4K_UHD_Monitor_with_HDR_-_Black
+:Samsung_-_A700_Series_32_LED_4K_UHD_Monitor_with_HDR_-_Black rdf:type owl:NamedIndividual ,
+                                                                       :Monitor ;
+                                                              :monitorIsCompatibleWithViewConnector :HDMI .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Samsung_-_T350_Series_27_IPS_LED_FHD_FreeSync_4ms_-_Dark_Blue_Gray
+:Samsung_-_T350_Series_27_IPS_LED_FHD_FreeSync_4ms_-_Dark_Blue_Gray rdf:type owl:NamedIndividual ,
+                                                                             :Monitor ;
+                                                                    :monitorIsCompatibleWithViewConnector :HDMI .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Socket478
 :Socket478 rdf:type owl:NamedIndividual ,
                     :Socket478 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TED416G2400C16
+:TED416G2400C16 rdf:type owl:NamedIndividual ,
+                         :RAM ;
+                :ramTypeIsCompatibleWithSlotType :SO-DIMM-DDR4 ;
+                :ramFrequency 2400 ;
+                :ramMemoryCapacity 16 ;
+                :ramName "TED416G2400C16"^^xsd:string ;
+                :ramProducer "TEAMGROUP"^^xsd:string .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TUF-GTX1650-O4GD6-P
+:TUF-GTX1650-O4GD6-P rdf:type owl:NamedIndividual ,
+                              :GraphicsCard ;
+                     :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                     :graphicCardName "TUF-GTX1650-O4GD6-P"^^xsd:string ;
+                     :graphicCardProducer "ASUS"^^xsd:string ;
+                     :memorySizeOfGraphicCard 4 ;
+                     :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
+                     :minimumPSUForGraphicCard "300.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TUF-GTX1660TI-T6G
+:TUF-GTX1660TI-T6G rdf:type owl:NamedIndividual ,
+                            :GraphicsCard ;
+                   :graphicCardIsCompatibleWithGraphicCardSlot :PCIeSlot ;
+                   :graphicCardName "TUF-GTX1660TI-T6G"^^xsd:string ;
+                   :graphicCardProducer "ASUS"^^xsd:string ;
+                   :memorySizeOfGraphicCard 6 ;
+                   :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
+                   :minimumPSUForGraphicCard "450.0"^^xsd:double .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#TUF-RX6500XT-O4G-GAM
+:TUF-RX6500XT-O4G-GAM rdf:type owl:NamedIndividual ,
+                               :GraphicsCard ;
+                      :graphicCardName "TUF-RX6500XT-O4G-GAM"^^xsd:string ;
+                      :graphicCardProducer "ASUS"^^xsd:string ;
+                      :memorySizeOfGraphicCard 4 ;
+                      :memoryTypeOfGraphicCard "GDDR6"^^xsd:string ;
+                      :minimumPSUForGraphicCard "400.0"^^xsd:double .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#USB
@@ -2173,9 +2765,34 @@ owl:topObjectProperty rdfs:domain :Mouse ;
               :USB .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#VENGEANCE_LPX
+:VENGEANCE_LPX rdf:type owl:NamedIndividual ,
+                        :RAM ;
+               :ramTypeIsCompatibleWithSlotType :DIMM-DDR4 ;
+               :ramFrequency 3000 ;
+               :ramMemoryCapacity 4 ;
+               :ramName "VENGEANCE_LPX"^^xsd:string ;
+               :ramProducer "CORSAIR"^^xsd:string .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#VGA
 :VGA rdf:type owl:NamedIndividual ,
               :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ViewSonic_-_21.5LED_FHD_Touch-Screen-_Black
+:ViewSonic_-_21.5LED_FHD_Touch-Screen-_Black rdf:type owl:NamedIndividual ,
+                                                      :Monitor ;
+                                             :monitorIsCompatibleWithViewConnector :DVI ,
+                                                                                   :VGA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#ViewSonic_-_23.6LED_HD_-_Black
+:ViewSonic_-_23.6LED_HD_-_Black rdf:type owl:NamedIndividual ,
+                                         :Monitor ;
+                                :monitorIsCompatibleWithViewConnector :DVI ,
+                                                                      :HDMI ,
+                                                                      :VGA .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Windows10_32bit
@@ -2238,7 +2855,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                        :PSU "800.0"^^xsd:double ;
                        :RamSlotCapacity 16 ;
                        :maximumInternalMemory 64 ;
-                       :motherBoardProducer "Intel SuperMicro"^^xsd:string ;
+                       :motherBoardProducer "Intel_SuperMicro"^^xsd:string ;
                        :motherboardName "X11SSH-GF-1585_Server"^^xsd:string ;
                        :numberOfMemorySlots 4 .
 
@@ -2258,6 +2875,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
                     <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2KeyboardPort> :PS2Keyboard ;
                     <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2MousePort> :PS2Mouse ;
                     :PSU "850.0"^^xsd:double ;
+                    :RamSlotCapacity 4 ;
                     :maximumInternalMemory 8 ;
                     :motherBoardProducer "GIGABYTE"^^xsd:string ;
                     :motherboardName "X570S_AORUS_MASTER"^^xsd:string ;
@@ -2302,12 +2920,12 @@ owl:topObjectProperty rdfs:domain :Mouse ;
      :containsSocket :LGA1150_H3 ;
      :containsUSBPort :USB ;
      :containsViewConnectors :HDMI ;
-     :PSU "700.0"^^xsd:double ;
+     :PSU "950.0"^^xsd:double ;
+     :RamSlotCapacity 16 ;
      :maximumInternalMemory 32 ;
      :motherBoardProducer "EVGA"^^xsd:string ;
      :motherboardName "Z97"^^xsd:string ;
-     :numberOfMemorySlots 2 ;
-     :ramMemoryCapacity 16 .
+     :numberOfMemorySlots 2 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Z9NA-D6
@@ -2320,7 +2938,7 @@ owl:topObjectProperty rdfs:domain :Mouse ;
          :containsViewConnectors :VGA ;
          <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2KeyboardPort> :PS2Keyboard ;
          <http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#containsPS/2MousePort> :PS2Mouse ;
-         :PSU "900.0"^^xsd:double ;
+         :PSU "1200.0"^^xsd:double ;
          :RamSlotCapacity 32 ;
          :maximumInternalMemory 192 ;
          :motherBoardProducer "ASUS"^^xsd:string ;

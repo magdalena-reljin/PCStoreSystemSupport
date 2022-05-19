@@ -62,6 +62,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         List<String> processors=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
+        System.out.println("ovo jeeeeeeeeeeeeeeeeeeeeeeee " + result1.getColumn(0).get(0).toString().substring(1));
         String socket=result1.getColumn(0).get(0).toString().substring(1);
 
         System.out.println("MOTHERBOARD" + motherboard);
@@ -88,20 +89,22 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> rams=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q5", "Motherboard(?x) ^ motherboardName(?x,?y) " +
-                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) ^ RamSlotCapacity(?x,?cap)-> sqwrl:select(?z,?cap) ");
         String ramSlot=result1.getColumn(0).get(0).toString().substring(1);
+        String ramCapacity=findDetailsFromQueryWithoutTypes(result1.getColumn(1).get(0),0);
+
 
         SQWRLResult result2= queryEngine.runSQWRLQuery("q6", "RAM(?x) ^ "+ramSlot+"(?y)"+
                 "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
-                " ramMemoryCapacity(?x,?capacity) ^ memoryClockSpeed(?x,?mcs) ->" +
+                " ramMemoryCapacity(?x,?capacity) ^swrlb:equal(?capacity,"+ramCapacity+") ^ ramFrequency(?x,?mcs) ->" +
                 " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
-        System.out.println("vracam"+result2);
+
         for(int i=0 ; i< result2.getColumn(0).size() ; i++){
 
             rams.add("RAM "+findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i) +" "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+
                     " ["+
-                    result2.getColumn(0).get(i).toString().substring(1)+", "+
+                    ramSlot+", "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)+"GBx1, "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(i),i)+"MHz"
                     +"]");
@@ -114,19 +117,21 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
 
         List<String> rams=new ArrayList<>();
-        SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Generation(?x) ^ processorName(?x,?y) " +
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Processor(?x) ^ processorName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+processor+"\") ^ processorFrequency(?x,?z) -> sqwrl:select(?z) ");
         String proccesorFreq= findDetailsFromQueryWithoutTypes(result1.getColumn(0).get(0),0);
 
 
         SQWRLResult result2= queryEngine.runSQWRLQuery("q8", "Motherboard(?x) ^ motherboardName(?x,?y) " +
-                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) ^ RamSlotCapacity(?x,?cap) -> sqwrl:select(?z,?cap) ");
         String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
+        String ramCapacity=findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(0),0);
         System.out.println("vracam  ram slooot"+ramSlot);
-
+        System.out.println("vracam proc freqqq"+proccesorFreq);
+        System.out.println("vracam proc freqqq"+ramCapacity);
         SQWRLResult result3= queryEngine.runSQWRLQuery("q9", "RAM(?x) ^ "+ramSlot+"(?y)"+
                 "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
-                " ramMemoryCapacity(?x,?capacity) ^ memoryClockSpeed(?x,?mcs) ^swrlb:lessThan(?mcs,"+proccesorFreq+") ->" +
+                " ramMemoryCapacity(?x,?capacity) ^swrlb:equal(?capacity,"+ramCapacity+") ^ ramFrequency(?x,?mcs) ^swrlb:lessThan(?mcs,"+proccesorFreq+") ->" +
                 " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
         System.out.println("vracam kompatibiln ram"+result3);
 
@@ -135,7 +140,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             rams.add("RAM "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i) +" "+
                     findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+
                     " ["+
-                    result3.getColumn(0).get(i).toString().substring(1)+", "+
+                    ramSlot+", "+
                     findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)+"GBx1, "+
                     findDetailsFromQueryWithoutTypes(result3.getColumn(4).get(i),i)+"MHz"
                     +"]");
@@ -164,9 +169,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                 "coolerTDP(?x,?cooler)" +
                 "^ swrlb:greaterThan(?cooler,"+proccesorTDP+") ^ maxFanSpeed(?x,?speed) ^ noiseLevel(?x,?level) -> sqwrl:select(?x,?cooler,?speed,?level) ");
         //String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
-        System.out.println("vracam  ram slooot"+result3);
-
-
 
         for(int i=0 ; i< result3.getColumn(0).size() ; i++){
 
@@ -174,7 +176,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                     " ["+
                     "TDP "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i)+"W, "+
                      "Max fan speed "+findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+"RMP, "+
-                     "Noise level: up to "+findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+"dB"+
+                     "Noise level: up to "+findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)+"dB"+
                     "]");
         }
         return coolers;

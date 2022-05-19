@@ -168,7 +168,7 @@ export default {
            if(this.selected2=="PROCESSOR"){
                this.findProcessors()
            }else if(this.selected2=="RAM"){
-             if(this.selected != "" && this.selecte3 != ""){
+             if(this.selected != "" && this.selected3 != ""){
                this.findRamByMotherboardAndProcessor()
              }else if(this.selected != "") {
               this.findRamByMotherboard()
