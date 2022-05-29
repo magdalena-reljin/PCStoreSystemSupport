@@ -1,4 +1,3 @@
-
 # PCStoreSystemSupport
 ## Description
 
@@ -11,7 +10,7 @@ Full stack academic project made for course Knowledge Engineering at Faculty of 
 
 ## Built with
 - Backend: java + Spring Boot [JDK 1.8, SDK 14.0.2], Protege + OWL2, OWLApi and SQWRLQueryEngine
-- Frontend: Vue x3, Bootstrap
+- Frontend: Vue js x3, Bootstrap
 
 ## Installation
 

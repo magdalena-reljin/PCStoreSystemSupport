@@ -168,7 +168,7 @@ export default {
            if(this.selected2=="PROCESSOR"){
                this.findProcessors()
            }else if(this.selected2=="RAM"){
-             if(this.selected != "" && this.selecte3 != ""){
+             if(this.selected != "" && this.selected3 != ""){
                this.findRamByMotherboardAndProcessor()
              }else if(this.selected != "") {
               this.findRamByMotherboard()
@@ -208,7 +208,7 @@ export default {
            }
            console.log("izabran je "+this.selected)
               axios
-               .post("http://localhost:8081/recommendingComponents/findProcessors/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findProcessors/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
                    this.foundComponents=response.data
@@ -228,7 +228,7 @@ export default {
            }
            
              axios
-               .post("http://localhost:8081/recommendingComponents/findRamByMotherboard/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findRamByMotherboard/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -249,7 +249,8 @@ export default {
            }
            
              axios
-               .post("http://localhost:8081/recommendingComponents/findRamByMotherboardAndProcessor/"+this.selected+"/"+this.selected3)
+               .post("http://localhost:8081/recommendingComponents/findRamByMotherboardAndProcessor/"+this.selected.split(" ")[1]
+               +"/"+this.selected3)
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -269,7 +270,8 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCoolerForProcessor/"+this.selected+"/"+this.selected3)
+               .post("http://localhost:8081/recommendingComponents/findCoolerForProcessor/"+this.selected.split(" ")[1]
+               +"/"+this.selected3)
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -289,7 +291,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleGraphicCards/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleGraphicCards/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -329,7 +331,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleMonitors/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleMonitors/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -350,7 +352,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleHeadphones/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleHeadphones/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -371,7 +373,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleMicrophones/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleMicrophones/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -393,7 +395,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleSpeakers/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleSpeakers/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -415,7 +417,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleMouses/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleMouses/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 
@@ -435,7 +437,7 @@ export default {
            return;
            }
               axios
-               .post("http://localhost:8081/recommendingComponents/findCompatibleKeyboards/"+this.selected)
+               .post("http://localhost:8081/recommendingComponents/findCompatibleKeyboards/"+this.selected.split(" ")[1])
                .then((response) => {
                    console.log("rez "+response.data)
 

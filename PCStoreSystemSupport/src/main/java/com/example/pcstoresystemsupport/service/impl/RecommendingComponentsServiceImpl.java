@@ -28,18 +28,22 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
     }
     @Override
     public List<String> getMotherboards() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> motherboards=new ArrayList<>();
-        SQWRLResult result= queryEngine.runSQWRLQuery("q1", "Motherboard(?x) -> sqwrl:select(?x) ");
+        SQWRLResult result= queryEngine.runSQWRLQuery("q1", "Motherboard(?x) ^ motherBoardProducer(?x,?y) " +
+                "-> sqwrl:select(?y, ?x) ");
         if (result.next()){
             System.out.println(result);
             System.out.println(result.getColumn(0));
             for(int i=0 ; i< result.getColumn(0).size() ; i++)
-                motherboards.add(result.getColumn(0).get(i).toString().substring(1));
+                motherboards.add(findDetailsFromQueryWithoutTypes(result.getColumn(0).get(i), i) + " " +
+                        result.getColumn(1).get(i).toString().substring(1));
         }
         return motherboards;
     }
     @Override
     public List<String> getProcessors() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> processors=new ArrayList<>();
         SQWRLResult result= queryEngine.runSQWRLQuery("q2", "Generation(?x) -> sqwrl:select(?x) ");
         if (result.next()){
@@ -53,12 +57,17 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findProcessors(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> processors=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
+        System.out.println("ovo jeeeeeeeeeeeeeeeeeeeeeeee " + result1.getColumn(0).get(0).toString().substring(1));
         String socket=result1.getColumn(0).get(0).toString().substring(1);
 
-        SQWRLResult result2= queryEngine.runSQWRLQuery("q4", "Generation(?x) ^ "+socket+
+        System.out.println("MOTHERBOARD" + motherboard);
+        System.out.println("SOCKET" + socket);
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q4", "Processor(?x) ^ "+socket+
                 "(?y) ^ processorIsCompatibleWithSocket(?x, ?y) ^ processorName(?x,?name) ^ processorFrequency(?x,?freq) " +
                 "^ processorTDP(?x,?tdp)-> sqwrl:select(?name,?freq,?tdp) ");
         System.out.println("vracam"+result2);
@@ -77,22 +86,25 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findRamByMotherBoard(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> rams=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q5", "Motherboard(?x) ^ motherboardName(?x,?y) " +
-                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) ^ RamSlotCapacity(?x,?cap)-> sqwrl:select(?z,?cap) ");
         String ramSlot=result1.getColumn(0).get(0).toString().substring(1);
+        String ramCapacity=findDetailsFromQueryWithoutTypes(result1.getColumn(1).get(0),0);
+
 
         SQWRLResult result2= queryEngine.runSQWRLQuery("q6", "RAM(?x) ^ "+ramSlot+"(?y)"+
                 "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
-                " ramMemoryCapacity(?x,?capacity) ^ memoryClockSpeed(?x,?mcs) ->" +
+                " ramMemoryCapacity(?x,?capacity) ^swrlb:equal(?capacity,"+ramCapacity+") ^ ramFrequency(?x,?mcs) ->" +
                 " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
-        System.out.println("vracam"+result2);
+
         for(int i=0 ; i< result2.getColumn(0).size() ; i++){
 
             rams.add("RAM "+findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i) +" "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+
                     " ["+
-                    result2.getColumn(0).get(i).toString().substring(1)+", "+
+                    ramSlot+", "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)+"GBx1, "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(i),i)+"MHz"
                     +"]");
@@ -102,20 +114,24 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findRamByMotherBoardAndProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> rams=new ArrayList<>();
-        SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Generation(?x) ^ processorName(?x,?y) " +
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q7", "Processor(?x) ^ processorName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+processor+"\") ^ processorFrequency(?x,?z) -> sqwrl:select(?z) ");
         String proccesorFreq= findDetailsFromQueryWithoutTypes(result1.getColumn(0).get(0),0);
 
 
         SQWRLResult result2= queryEngine.runSQWRLQuery("q8", "Motherboard(?x) ^ motherboardName(?x,?y) " +
-                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) -> sqwrl:select(?z) ");
+                "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) ^ RamSlotCapacity(?x,?cap) -> sqwrl:select(?z,?cap) ");
         String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
+        String ramCapacity=findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(0),0);
         System.out.println("vracam  ram slooot"+ramSlot);
-
+        System.out.println("vracam proc freqqq"+proccesorFreq);
+        System.out.println("vracam proc freqqq"+ramCapacity);
         SQWRLResult result3= queryEngine.runSQWRLQuery("q9", "RAM(?x) ^ "+ramSlot+"(?y)"+
                 "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
-                " ramMemoryCapacity(?x,?capacity) ^ memoryClockSpeed(?x,?mcs) ^swrlb:lessThan(?mcs,"+proccesorFreq+") ->" +
+                " ramMemoryCapacity(?x,?capacity) ^swrlb:equal(?capacity,"+ramCapacity+") ^ ramFrequency(?x,?mcs) ^swrlb:lessThan(?mcs,"+proccesorFreq+") ->" +
                 " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
         System.out.println("vracam kompatibiln ram"+result3);
 
@@ -124,7 +140,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             rams.add("RAM "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i) +" "+
                     findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+
                     " ["+
-                    result3.getColumn(0).get(i).toString().substring(1)+", "+
+                    ramSlot+", "+
                     findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)+"GBx1, "+
                     findDetailsFromQueryWithoutTypes(result3.getColumn(4).get(i),i)+"MHz"
                     +"]");
@@ -134,9 +150,11 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCoolerForProcessor(String motherboard,String processor) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> coolers=new ArrayList<>();
 
-        SQWRLResult result1= queryEngine.runSQWRLQuery("q3", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q43", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?z) -> sqwrl:select(?z) ");
         String socket=result1.getColumn(0).get(0).toString().substring(1);
 
@@ -151,9 +169,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                 "coolerTDP(?x,?cooler)" +
                 "^ swrlb:greaterThan(?cooler,"+proccesorTDP+") ^ maxFanSpeed(?x,?speed) ^ noiseLevel(?x,?level) -> sqwrl:select(?x,?cooler,?speed,?level) ");
         //String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
-        System.out.println("vracam  ram slooot"+result3);
-
-
 
         for(int i=0 ; i< result3.getColumn(0).size() ; i++){
 
@@ -161,7 +176,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                     " ["+
                     "TDP "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i)+"W, "+
                      "Max fan speed "+findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+"RMP, "+
-                     "Noise level: up to "+findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+"dB"+
+                     "Noise level: up to "+findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)+"dB"+
                     "]");
         }
         return coolers;
@@ -169,6 +184,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleGraphicCards(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> graphicCards=new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q12", "Motherboard(?x) ^ motherboardName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsGraphicCardSlots(?x,?z) ^ PSU(?x, ?PSUvalue)" +
@@ -203,6 +219,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleOS(String processor) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> operatingSystems = new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q14", "Processor(?x) ^ processorName(?x,?y) " +
                 "^ swrlb:equal(?y,\""+processor+"\") ^ processorOperatingMode(?x,?z) -> sqwrl:select(?y, ?z) ");
@@ -221,6 +238,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleMonitors(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> monitors = new ArrayList<>();
         List<String> distinctMonitors = new ArrayList<>();
         SQWRLResult result1= queryEngine.runSQWRLQuery("q16", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -253,6 +271,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleHeadphones(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> headphones=new ArrayList<>();
 
         SQWRLResult combinedConnector= queryEngine.runSQWRLQuery("q18", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -262,11 +281,10 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String combined=combinedConnector.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundHeadphones= queryEngine.runSQWRLQuery("q21", "Headphones(?x) ^"+combined+"(?y)"+" headphonesAreCompatibleWithCombinedPort(?x,?y) " +
-                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+                    "-> sqwrl:select(?x) ");
             System.out.println("nasaoooo   "+foundHeadphones);
             for(int i=0 ; i< foundHeadphones.getColumn(0).size() ; i++) {
-                headphones.add("Headphones " + foundHeadphones.getColumn(0).get(i).toString().substring(1)
-                +" ["+findDetailsFromQueryWithoutTypes(foundHeadphones.getColumn(1).get(i),i) + "W, " + combined+"]");
+                headphones.add("Headphones " + foundHeadphones.getColumn(0).get(i).toString().substring(1));
             }
 
         }
@@ -279,11 +297,10 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String headphonesAndSpeakers=headphonesAndSpeakersConnector.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundHeadphonesWithSpeakers= queryEngine.runSQWRLQuery("q22", "Headphones(?x) ^"+headphonesAndSpeakers+"(?y)"+" headphonesAreCompatibleWithAudioPort(?x,?y) " +
-                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+                    " -> sqwrl:select(?x) ");
             System.out.println("nasaoooo   "+foundHeadphonesWithSpeakers);
             for(int i=0 ; i< foundHeadphonesWithSpeakers.getColumn(0).size() ; i++) {
-                headphones.add("Headphones " + foundHeadphonesWithSpeakers.getColumn(0).get(i).toString().substring(1)
-                        +" ["+findDetailsFromQueryWithoutTypes(foundHeadphonesWithSpeakers.getColumn(1).get(i),i) + "W, " + headphonesAndSpeakers+"]");
+                headphones.add("Headphones " + foundHeadphonesWithSpeakers.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -294,11 +311,10 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String USB=USBPort.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundHeadphonesWithUSB= queryEngine.runSQWRLQuery("q23", "Headphones(?x) ^"+USB+"(?y)"+" headphonesAreCompatibleWithUSBPort(?x,?y) " +
-                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+                    " -> sqwrl:select(?x) ");
             System.out.println("nasaoooo   "+foundHeadphonesWithUSB);
             for(int i=0 ; i< foundHeadphonesWithUSB.getColumn(0).size() ; i++) {
-                headphones.add("Headphones " + foundHeadphonesWithUSB.getColumn(0).get(i).toString().substring(1)
-                        +" ["+findDetailsFromQueryWithoutTypes(foundHeadphonesWithUSB.getColumn(1).get(i),i) + "W, " + USB+"]");
+                headphones.add("Headphones " + foundHeadphonesWithUSB.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -307,6 +323,8 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleMicrophones(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> microphones=new ArrayList<>();
 
         SQWRLResult microphoneConnector= queryEngine.runSQWRLQuery("q28", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -316,13 +334,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String microphone=microphoneConnector.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundMicrophones= queryEngine.runSQWRLQuery("q29", "Microphone(?x) ^"+microphone+"(?y)"+" microphoneIsCompatibleWithMicrophonePort(?x,?y) " +
-                    "^maxSPL(?x,?z) ^ micFrequency(?x,?w) ^ sampleRate(?x,?m) -> sqwrl:select(?x,?z,?w,?m)");
+                    "-> sqwrl:select(?x)");
             for(int i=0 ; i< foundMicrophones.getColumn(0).size() ; i++) {
-                microphones.add("Microphone " + foundMicrophones.getColumn(0).get(i).toString().substring(1)
-                        +" [ maxSPL: "+findDetailsFromQueryWithoutTypes(foundMicrophones.getColumn(1).get(i),i) + ", " +
-                        "frequency: "+findDetailsFromQueryWithoutTypes(foundMicrophones.getColumn(1).get(i),i) + ", " +
-                        "sample rate: "+findDetailsFromQueryWithoutTypes(foundMicrophones.getColumn(1).get(i),i)  +
-                        "]");
+                microphones.add(foundMicrophones.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -333,13 +347,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String USB=USBPort.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundUSBMic= queryEngine.runSQWRLQuery("q31", "Microphone(?x) ^"+USB+"(?y)"+" microphoneIsCompatibleWithUSBPort(?x,?y) " +
-                    "^maxSPL(?x,?z) ^ micFrequency(?x,?w) ^ sampleRate(?x,?m) -> sqwrl:select(?x,?z,?w,?m)");
+                    "-> sqwrl:select(?x)");
             for(int i=0 ; i< foundUSBMic.getColumn(0).size() ; i++) {
-                microphones.add("Microphone " + foundUSBMic.getColumn(0).get(i).toString().substring(1)
-                        +" [ maxSPL: "+findDetailsFromQueryWithoutTypes(foundUSBMic.getColumn(1).get(i),i) + ", " +
-                        "frequency: "+findDetailsFromQueryWithoutTypes(foundUSBMic.getColumn(1).get(i),i) + ", " +
-                        "sample rate: "+findDetailsFromQueryWithoutTypes(foundUSBMic.getColumn(1).get(i),i)  +
-                        "]");
+                microphones.add(foundUSBMic.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -348,6 +358,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleSpeakers(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
         List<String> speakers=new ArrayList<>();
 
         SQWRLResult headphonesAndSpeakersConnector= queryEngine.runSQWRLQuery("q24", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -357,10 +368,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String headphonesAndSpeakers=headphonesAndSpeakersConnector.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundHeadphonesWithSpeakers= queryEngine.runSQWRLQuery("q25", "Speakers(?x) ^"+headphonesAndSpeakers+"(?y)"+" speakersAreCompatibleWithAudioConnector(?x,?y) " +
-                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+                    " -> sqwrl:select(?x) ");
             for(int i=0 ; i< foundHeadphonesWithSpeakers.getColumn(0).size() ; i++) {
-                speakers.add("Speakers " + foundHeadphonesWithSpeakers.getColumn(0).get(i).toString().substring(1)
-                        +" ["+findDetailsFromQueryWithoutTypes(foundHeadphonesWithSpeakers.getColumn(1).get(i),i) + "W, " + headphonesAndSpeakers+"]");
+                speakers.add(foundHeadphonesWithSpeakers.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -371,10 +381,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String USB=USBPort.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundHeadphonesWithUSB= queryEngine.runSQWRLQuery("q27", "Speakers(?x) ^"+USB+"(?y)"+" speakersAreCompatibleWithUSBPort(?x,?y) " +
-                    "^soundW(?x,?z) -> sqwrl:select(?x,?z) ");
+                    "-> sqwrl:select(?x) ");
             for(int i=0 ; i< foundHeadphonesWithUSB.getColumn(0).size() ; i++) {
-                speakers.add("Speakers " + foundHeadphonesWithUSB.getColumn(0).get(i).toString().substring(1)
-                        +" ["+findDetailsFromQueryWithoutTypes(foundHeadphonesWithUSB.getColumn(1).get(i),i) + "W, " + USB+"]");
+                speakers.add(foundHeadphonesWithUSB.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -383,6 +392,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
     @Override
     public List<String> findCompatibleMouses(String motherboard) throws SWRLParseException, SQWRLException {
+
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> mouses=new ArrayList<>();
 
         SQWRLResult PS2MouseConnector= queryEngine.runSQWRLQuery("q32", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -391,13 +403,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         if(!PS2MouseConnector.getColumn(0).isEmpty()){
             String PS2Mouse=PS2MouseConnector.getColumn(0).get(0).toString().substring(1);
             SQWRLResult foundPS2Mouses= queryEngine.runSQWRLQuery("q33", "Mouse(?x) ^"+PS2Mouse+"(?y)"+" mouseIsCompatibleWithPS/2MousePort(?x,?y) " +
-                    "^dpi(?x,?z) ^numOfButtons(?x,?k) -> sqwrl:select(?x,?z,?k) ");
+                    "-> sqwrl:select(?x) ");
             for(int i=0 ; i< foundPS2Mouses.getColumn(0).size() ; i++) {
-                mouses.add("Mouse " + foundPS2Mouses.getColumn(0).get(i).toString().substring(1)
-                        +" ["+findDetailsFromQueryWithoutTypes(foundPS2Mouses.getColumn(1).get(i),i) + "dpi, " + PS2Mouse+
-                                ", num of buttons: "+findDetailsFromQueryWithoutTypes(foundPS2Mouses.getColumn(2).get(i),i) +
-
-                        "]");
+                mouses.add(foundPS2Mouses.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -408,21 +416,19 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String USB=USBPort.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundUSBMouses= queryEngine.runSQWRLQuery("q35", "Mouse(?x) ^"+USB+"(?y)"+" mouseIsCompatibleWithUSBPort(?x,?y) " +
-                    "^dpi(?x,?z) ^numOfButtons(?x,?k) -> sqwrl:select(?x,?z,?k) ");
+                    " -> sqwrl:select(?x) ");
             for(int i=0 ; i< foundUSBMouses.getColumn(0).size() ; i++) {
-                mouses.add("Mouse " + foundUSBMouses.getColumn(0).get(i).toString().substring(1)
-                        +" ["+findDetailsFromQueryWithoutTypes(foundUSBMouses.getColumn(1).get(i),i) + "dpi, " + USB+
-                        ", num of buttons: "+findDetailsFromQueryWithoutTypes(foundUSBMouses.getColumn(2).get(i),i) +
-
-                        "]");
+                mouses.add(foundUSBMouses.getColumn(0).get(i).toString().substring(1));
             }
         }
-
+        System.out.println("szfsdffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         return mouses;
     }
 
     @Override
     public List<String> findCompatibleKeyboards(String motherboard) throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
         List<String> keyboards=new ArrayList<>();
 
         SQWRLResult PS2KeyboardConnector= queryEngine.runSQWRLQuery("q36", "Motherboard(?x) ^ motherboardName(?x,?y) " +
@@ -432,12 +438,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String PS2Keyboard=PS2KeyboardConnector.getColumn(0).get(0).toString().substring(1);
             System.out.println("VRATIOOO"+PS2Keyboard);
             SQWRLResult foundPS2Keyboard= queryEngine.runSQWRLQuery("q37", "Keyboard(?x) ^"+PS2Keyboard+"(?y)"+" keyboardIsCompatibleWithPS/2KeyboardPort(?x,?y) " +
-                    "^numOfButtons(?x,?k) -> sqwrl:select(?x,?k) ");
+                    " -> sqwrl:select(?x) ");
             for(int i=0 ; i< foundPS2Keyboard.getColumn(0).size() ; i++) {
-                keyboards.add("Keyboard " + foundPS2Keyboard.getColumn(0).get(i).toString().substring(1)
-                        +" ["+"num of buttons: "+findDetailsFromQueryWithoutTypes(foundPS2Keyboard.getColumn(1).get(i),i) +" " + PS2Keyboard+
-
-                        "]");
+                keyboards.add(foundPS2Keyboard.getColumn(0).get(i).toString().substring(1));
             }
         }
 
@@ -448,12 +451,9 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
             String USB=USBPort.getColumn(0).get(0).toString().substring(1);
 
             SQWRLResult foundUSBKeyboards= queryEngine.runSQWRLQuery("q39", "Keyboard(?x) ^"+USB+"(?y)"+" keyboardIsCompatibleWithUSBPort(?x,?y) " +
-                    "numOfButtons(?x,?k) -> sqwrl:select(?x,?k) ");
+                    "-> sqwrl:select(?x) ");
             for(int i=0 ; i< foundUSBKeyboards.getColumn(0).size() ; i++) {
-                keyboards.add("Keyboard " + foundUSBKeyboards.getColumn(0).get(i).toString().substring(1)
-                        +" ["+"num of buttons: "+findDetailsFromQueryWithoutTypes(foundUSBKeyboards.getColumn(1).get(i),i) +" " + USB+
-
-                        "]");
+                keyboards.add(foundUSBKeyboards.getColumn(0).get(i).toString().substring(1));
             }
         }
 
