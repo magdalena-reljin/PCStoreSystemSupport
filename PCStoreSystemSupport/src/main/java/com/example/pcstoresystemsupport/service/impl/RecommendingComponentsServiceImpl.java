@@ -1,9 +1,8 @@
 package com.example.pcstoresystemsupport.service.impl;
 
+import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
 import com.example.pcstoresystemsupport.service.MyOntologyService;
 import com.example.pcstoresystemsupport.service.RecommendingComponentsService;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.semanticweb.owlapi.model.OWLOntology;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.swrlapi.factory.SWRLAPIFactory;
@@ -14,7 +13,9 @@ import org.swrlapi.sqwrl.exceptions.SQWRLException;
 import org.swrlapi.sqwrl.values.SQWRLResultValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RecommendingComponentsServiceImpl implements RecommendingComponentsService {
@@ -126,14 +127,12 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                 "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsRAMSlot(?x,?z) ^ RamSlotCapacity(?x,?cap) -> sqwrl:select(?z,?cap) ");
         String ramSlot=result2.getColumn(0).get(0).toString().substring(1);
         String ramCapacity=findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(0),0);
-        System.out.println("vracam  ram slooot"+ramSlot);
-        System.out.println("vracam proc freqqq"+proccesorFreq);
-        System.out.println("vracam proc freqqq"+ramCapacity);
+
         SQWRLResult result3= queryEngine.runSQWRLQuery("q9", "RAM(?x) ^ "+ramSlot+"(?y)"+
                 "ramTypeIsCompatibleWithSlotType(?x, ?y) ^ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
                 " ramMemoryCapacity(?x,?capacity) ^swrlb:equal(?capacity,"+ramCapacity+") ^ ramFrequency(?x,?mcs) ^swrlb:lessThan(?mcs,"+proccesorFreq+") ->" +
                 " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
-        System.out.println("vracam kompatibiln ram"+result3);
+
 
         for(int i=0 ; i< result3.getColumn(0).size() ; i++){
 
@@ -421,7 +420,6 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                 mouses.add(foundUSBMouses.getColumn(0).get(i).toString().substring(1));
             }
         }
-        System.out.println("szfsdffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         return mouses;
     }
 
@@ -459,4 +457,91 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
 
         return keyboards;
     }
+
+    @Override
+    public List<ComponentEstimationDTO> getGraphicCards() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+        List<ComponentEstimationDTO> graphicCards= new ArrayList<>();
+        SQWRLResult result2= queryEngine.runSQWRLQuery(
+                "q40", "GraphicsCard(?x) " +
+                        "^graphicCardName(?x, ?name)" +
+                        "^graphicCardProducer(?x, ?producer)"+
+                        "^minimumPSUForGraphicCard(?x, ?minimumPSU)" +
+                        "^memoryTypeOfGraphicCard(?x, ?memoryType)" +
+                        "^memorySizeOfGraphicCard(?x, ?memorySize)" +
+                        " -> sqwrl:select(?x, ?name, ?producer, ?minimumPSU, ?memoryType, ?memorySize)");
+
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++) {
+            graphicCards.add(new ComponentEstimationDTO(
+                    "GraphicCard " +
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i) + " " +
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i) + " ["+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i) + "W, " +
+                            findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(i),i)+" "+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(5).get(i),i) + "GB "
+                    +"]",findDetailsFromQueryWithoutTypes(result2.getColumn(5).get(i),i)));
+        }
+        return graphicCards;
+    }
+
+    @Override
+    public List<ComponentEstimationDTO> getRams() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+        List<ComponentEstimationDTO> rams= new ArrayList<>();
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        SQWRLResult result3= queryEngine.runSQWRLQuery("q41", "RAM(?x) ^ "+
+                " ramProducer(?x,?producer) ^ ramName(?x, ?name) ^" +
+                " ramMemoryCapacity(?x,?capacity) ^ ramFrequency(?x,?mcs) ->" +
+                " sqwrl:select(?x,?producer,?name,?capacity,?mcs) ");
+
+
+        for(int i=0 ; i< result3.getColumn(0).size() ; i++){
+            rams.add(new ComponentEstimationDTO("RAM "+findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i) +" "+
+                    findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)+
+                    " ["+
+                    findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)+"GBx1, "+
+                    findDetailsFromQueryWithoutTypes(result3.getColumn(4).get(i),i)+"MHz"
+                    +"]",findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)));
+        }
+
+        return rams;
+    }
+    @Override
+    public List<ComponentEstimationDTO> findMotherboardsForEstimation() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+        List<ComponentEstimationDTO> motherboards= new ArrayList<>();
+        SQWRLResult result= queryEngine.runSQWRLQuery("q42", "Motherboard(?x) ^ motherBoardProducer(?x,?y) ^ PSU(?x,?usp) " +
+                "-> sqwrl:select(?y, ?x, ?usp) ");
+        if (result.next()){
+            System.out.println(result);
+            System.out.println(result.getColumn(0));
+            for(int i=0 ; i< result.getColumn(0).size() ; i++)
+                motherboards.add(new ComponentEstimationDTO(
+                        findDetailsFromQueryWithoutTypes(result.getColumn(0).get(i), i) + " " +
+                        result.getColumn(1).get(i).toString().substring(1),findDetailsFromQueryWithoutTypes(result.getColumn(2).get(i), i)));
+        }
+        return motherboards;
+    }
+    @Override
+    public List<ComponentEstimationDTO> findProcessorsForEstimation() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        List<ComponentEstimationDTO> processors= new ArrayList<>();
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q43", "Processor(?x)"+
+                "^ processorName(?x,?name) ^ processorFrequency(?x,?freq) " +
+                "^ processorTDP(?x,?tdp) ^ numberOfCores(?x,?noc)-> sqwrl:select(?name,?freq,?tdp,?noc) ");
+        System.out.println("vracam"+result2);
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++){
+            processors.add(new ComponentEstimationDTO(findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i) +" ["+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i)+"MHz,"+
+                    "TDP "+findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+"W"
+                    +"]",findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)));
+        }
+        return processors;
+    }
+
+
+
 }

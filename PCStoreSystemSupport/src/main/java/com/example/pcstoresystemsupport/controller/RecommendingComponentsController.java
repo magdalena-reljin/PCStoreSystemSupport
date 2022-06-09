@@ -1,5 +1,6 @@
 package com.example.pcstoresystemsupport.controller;
 
+import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
 import com.example.pcstoresystemsupport.service.RecommendingComponentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.swrlapi.sqwrl.exceptions.SQWRLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -26,6 +28,22 @@ public class RecommendingComponentsController {
     @GetMapping(value= "/processors")
     public ResponseEntity<List<String>> getProcessors() throws SWRLParseException, SQWRLException {
         return new ResponseEntity<>(recommendingComponentsService.getProcessors(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/graphicCards")
+    public ResponseEntity<List<ComponentEstimationDTO>> getGraphicCards() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.getGraphicCards(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/motherboardsForEstimation")
+    public ResponseEntity<List<ComponentEstimationDTO>> getMotherboardsForEstimation() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findMotherboardsForEstimation(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/processorsForEstimation")
+    public ResponseEntity<List<ComponentEstimationDTO>> getProcessorsForEstimation() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findProcessorsForEstimation(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/rams")
+    public ResponseEntity<List<ComponentEstimationDTO>> getRams() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.getRams(), HttpStatus.OK);
     }
     @PostMapping(value= "/findProcessors/{motherboard}")
     public ResponseEntity<List<String>> findProcessors(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {

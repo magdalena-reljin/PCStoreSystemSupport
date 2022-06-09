@@ -19,10 +19,10 @@
          <button class="btn" @click="recommending()" style=" background-color: black; color: white; font-size: 200%">RECOMMENDING COMPONENTS</button>
        </div>
        <div class="row" style="height: 20%; padding-bottom: 5%;">
-         <button class="btn" @click="recommending()" style=" background-color: black; color: white; font-size: 200%">COMPONENT FAULT PROBABILITY</button>
+         <button class="btn" @click="estimateValue()" style=" background-color: black; color: white; font-size: 200%">COMPONENT VALUE ESTIMATION FOR PURPOSE</button>
        </div>
        <div class="row" style="height: 20%; padding-bottom: 5%;">
-         <button class="btn" @click="recommending()" style=" background-color: black; color: white; font-size: 200%">COMPONENT VALUE ESTIMATION FOR PURPOSE</button>
+         <button class="btn" @click="recommending()" style=" background-color: black; color: white; font-size: 200%">COMPONENT FAULT PROBABILITY</button>
        </div>
        <div class="row" style="height: 20%; padding-bottom: 5%;">
         <button class="btn" @click="recommending()" style=" background-color: black; color: white; font-size: 200%">SIMILAR PC's</button>
@@ -79,6 +79,9 @@ export default {
   methods: {
        recommending: function(){
          this.$router.push("/recommendingComponents")
+       },
+       estimateValue: function(){
+         this.$router.push("/estimatingValue")
        }
 
     }

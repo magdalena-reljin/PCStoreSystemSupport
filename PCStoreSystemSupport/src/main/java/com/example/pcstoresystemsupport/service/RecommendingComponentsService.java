@@ -1,9 +1,11 @@
 package com.example.pcstoresystemsupport.service;
 
+import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
 import org.swrlapi.parser.SWRLParseException;
 import org.swrlapi.sqwrl.exceptions.SQWRLException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RecommendingComponentsService {
     List<String> getMotherboards() throws SWRLParseException, SQWRLException;
@@ -20,4 +22,9 @@ public interface RecommendingComponentsService {
     List<String> findCompatibleSpeakers(String motherboard) throws SWRLParseException, SQWRLException;
     List<String> findCompatibleMouses(String motherboard)throws SWRLParseException, SQWRLException;
     List<String> findCompatibleKeyboards(String motherboard)throws SWRLParseException, SQWRLException;
+
+    List<ComponentEstimationDTO> getGraphicCards() throws SWRLParseException, SQWRLException;
+    List<ComponentEstimationDTO> getRams() throws SWRLParseException, SQWRLException;
+    List<ComponentEstimationDTO>  findProcessorsForEstimation() throws SWRLParseException, SQWRLException;
+    List<ComponentEstimationDTO>  findMotherboardsForEstimation() throws SWRLParseException, SQWRLException;
 }
