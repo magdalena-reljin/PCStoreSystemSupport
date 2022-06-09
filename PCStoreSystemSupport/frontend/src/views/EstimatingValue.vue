@@ -12,14 +12,14 @@
    <div class="col-md-6" style=" padding-top: 5%; padding-bottom: 5%;">
    <div class="card card-outline-secondary">
    <div class="card-header" style="background-color: white; color: black;">
-               <h3 style="text-align:left;" class="mb-0">My computer components</h3>
+               <h3 style="text-align:left;" class="mb-0">My computer components for estimation</h3>
    </div>
    <div  class="card-body"  style="text-align: left;">
     <form  @submit="sendRequest" method='post' >
         <div class="form-group">
             <label><b>Motherboard:</b></label>
-            <select v-model="selectedMotherboard" class="form-select">
-            <option v-for="(motherboard, key) in motherboards" :key="key" :value='motherboard.paramForEstimation'>
+            <select v-model="selectedMotherboard"  class="form-select">
+            <option v-for="(motherboard, key) in motherboards" :key="key" :value="key">
                     {{motherboard.componentName}} 
             </option>
         </select>
@@ -30,7 +30,7 @@
         <div class="form-group">
           <label><b>Processor:</b></label>
           <select v-model="selectedProcessor" class="form-select">
-            <option  v-for="(processor,key) in processors" :key="key" :value='processor.paramForEstimation'>
+            <option  v-for="(processor,key) in processors" :key="key" :value="key" >
                     {{processor.componentName}}
             </option>
         </select>
@@ -40,8 +40,8 @@
 
          <div class="form-group">
           <label><b>Graphic card:</b></label>
-          <select v-model="selectedGPU" class="form-select">
-            <option v-for="(gpu,key) in gpus" :key="key" :value='gpu.paramForEstimation'>
+          <select v-model="selectedGPU" class="form-select" >
+            <option v-for="(gpu,key) in gpus" :key="key" :value="key">
                     {{gpu.componentName}}
             </option>
         </select>
@@ -51,8 +51,8 @@
 
          <div class="form-group">
           <label><b>RAM:</b></label>
-          <select v-model="selectedRAM" class="form-select">
-            <option v-for="(ram,key) in rams" :key="key" :value='ram.paramForEstimation'>
+          <select v-model="selectedRAM" class="form-select" >
+            <option v-for="(ram,key) in rams" :key="key" :value="key">
                     {{ram.componentName}}
             </option>
         </select>
@@ -116,6 +116,10 @@ export default {
        selectedProcessor: '',
        selectedGPU: '',
        selectedRAM: '',
+       mPar: '',
+       pPar: '',
+       gPar: '',
+       rPar: '',
        motherboards: [],
        processors: [],
        gpus: [],
@@ -155,25 +159,18 @@ export default {
        },
        sendRequest: function(event){
            event.preventDefault()
-           if(this.selectedMotherboard=="" || this.selectedProcessor=="" || this.selectedGPU=="" || this.selectedRAM==""){
-                this.$swal.fire({
-                 position: 'top-end',
-                  icon: 'error',
-                 title: 'Please choose components',
-               showConfirmButton: false,
-               timer: 2500
-           })
-           return;
-           }
-
+          
+           this.mPar=this.motherboards[this.selectedMotherboard].paramForEstimation
+           this.pPar=this.processors[this.selectedMotherboard].paramForEstimation
+           this.gPar=this.gpus[this.selectedMotherboard].paramForEstimation
+           this.rPar=this.rams[this.selectedMotherboard].paramForEstimation
 
            axios
-           .post("http://localhost:8081/componentValueEstimationController/estimateValue/"+this.selectedMotherboard+"/"+this.selectedProcessor+"/"+this.selectedGPU+"/"+this.selectedRAM)
+           .post("http://localhost:8081/componentValueEstimationController/estimateValue/"+this.mPar+"/"+this.pPar+"/"+this.gPar+"/"+this.rPar)
            .then((response) => {
             this.results=response.data
             })
 
-          
        },
 
     }

@@ -29,7 +29,6 @@ public class ComponentValueEstimationController {
         System.out.println("numOfCores "+numOfCores);
         System.out.println("memorySizeOfGraphicCard "+memorySizeOfGraphicCard);
         System.out.println("ramCapacity "+ramCapacity);
-        //fuzzyService.fuzzy(psu,numOfCores,memorySizeOfGraphicCard,ramCapacity)
-        return new ResponseEntity<>(Arrays.asList("a","b"), HttpStatus.OK);
+        return new ResponseEntity<>(fuzzyService.fuzzy(psu,numOfCores,memorySizeOfGraphicCard,ramCapacity), HttpStatus.OK);
     }
 }
