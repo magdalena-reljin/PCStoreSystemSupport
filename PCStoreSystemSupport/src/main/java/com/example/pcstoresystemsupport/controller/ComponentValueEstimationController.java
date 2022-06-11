@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/componentValueEstimationController", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/componentValueEstimation", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ComponentValueEstimationController {
     @Autowired
     private FuzzyService fuzzyService;
@@ -24,11 +24,6 @@ public class ComponentValueEstimationController {
     @PostMapping(value= "/estimateValue/{psu}/{numOfCores}/{memorySizeOfGraphicCard}/{ramCapacity}")
     public ResponseEntity<List<String>> estimateValue(@PathVariable("psu") String psu,@PathVariable("numOfCores") String numOfCores,
                                                       @PathVariable("memorySizeOfGraphicCard") String memorySizeOfGraphicCard, @PathVariable("ramCapacity") String ramCapacity) {
-
-        System.out.println("psu "+psu);
-        System.out.println("numOfCores "+numOfCores);
-        System.out.println("memorySizeOfGraphicCard "+memorySizeOfGraphicCard);
-        System.out.println("ramCapacity "+ramCapacity);
         return new ResponseEntity<>(fuzzyService.fuzzy(psu,numOfCores,memorySizeOfGraphicCard,ramCapacity), HttpStatus.OK);
     }
 }

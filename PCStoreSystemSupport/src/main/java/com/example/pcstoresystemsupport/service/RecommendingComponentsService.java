@@ -22,7 +22,6 @@ public interface RecommendingComponentsService {
     List<String> findCompatibleSpeakers(String motherboard) throws SWRLParseException, SQWRLException;
     List<String> findCompatibleMouses(String motherboard)throws SWRLParseException, SQWRLException;
     List<String> findCompatibleKeyboards(String motherboard)throws SWRLParseException, SQWRLException;
-
     List<ComponentEstimationDTO> getGraphicCards() throws SWRLParseException, SQWRLException;
     List<ComponentEstimationDTO> getRams() throws SWRLParseException, SQWRLException;
     List<ComponentEstimationDTO>  findProcessorsForEstimation() throws SWRLParseException, SQWRLException;

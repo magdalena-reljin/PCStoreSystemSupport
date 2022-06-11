@@ -64,7 +64,7 @@
         <div class="row">
              <div class="col">
              <div class="form-group" style="text-align: right;">
-             <button  type="submit" class="btn" style="background-color: #b0638e; color: white">Find components</button>
+             <button  type="submit" class="btn" style="background-color: #b0638e; color: white">Estimate components purpose</button>
              </div>
              </div>
             
@@ -166,7 +166,7 @@ export default {
            this.rPar=this.rams[this.selectedMotherboard].paramForEstimation
 
            axios
-           .post("http://localhost:8081/componentValueEstimationController/estimateValue/"+this.mPar+"/"+this.pPar+"/"+this.gPar+"/"+this.rPar)
+           .post("http://localhost:8081/componentValueEstimation/estimateValue/"+this.mPar+"/"+this.pPar+"/"+this.gPar+"/"+this.rPar)
            .then((response) => {
             this.results=response.data
             })

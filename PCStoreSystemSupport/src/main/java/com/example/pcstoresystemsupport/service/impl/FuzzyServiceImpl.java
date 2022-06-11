@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class FuzzyServiceImpl implements FuzzyService {
-    private static final String fileName = System.getProperty("user.dir")+"/analiza.fcl";
+    private static final String fileName = System.getProperty("user.dir")+"/data/analiza.fcl";
 
     @Override
     public List<String> fuzzy(String psu, String numOfCores, String memorySizeOfGraphicCard, String ramCapacity) {
