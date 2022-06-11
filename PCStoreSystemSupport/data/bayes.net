@@ -1,0 +1,340 @@
+net
+{
+     node_size = (0 0);
+     name = "New BN";
+     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C12,C13,C14,C15,C16,C17,C18,C19,C20)";
+     UnBBayes_Color_Probabilistic_Description = "-256";
+     UnBBayes_Color_Probabilistic_Explanation = "-16711936";
+}
+
+node plugged_in_during_thunderstorm
+{
+     label = "C1";
+     position = (683 229);
+     states = ("yes" "no");
+}
+
+node high_surge_voltages
+{
+     label = "C2";
+     position = (804 135);
+     states = ("yes" "no");
+}
+
+node pc_wont_turn_on
+{
+     label = "C3";
+     position = (514 178);
+     states = ("yes" "no");
+}
+
+node power_supply_damage
+{
+     label = "C4";
+     position = (620 60);
+     states = ("yes" "no");
+}
+
+node array_of_short_sound_signals
+{
+     label = "C5";
+     position = (277 211);
+     states = ("yes" "no");
+}
+
+node cooler_damage
+{
+     label = "C6";
+     position = (248 60);
+     states = ("yes" "no");
+}
+
+node high_temperature_of_device
+{
+     label = "C7";
+     position = (41 214);
+     states = ("yes" "no");
+}
+
+node slow_computer
+{
+     label = "C8";
+     position = (1161 228);
+     states = ("yes" "no");
+}
+
+node not_enough_RAM_damage
+{
+     label = "C9";
+     position = (997 59);
+     states = ("yes" "no");
+}
+
+node freeze
+{
+     label = "C10";
+     position = (1016 196);
+     states = ("yes" "no");
+}
+
+node virus_damage
+{
+     label = "C11";
+     position = (1349 60);
+     states = ("yes" "no");
+}
+
+node blue_screen
+{
+     label = "C12";
+     position = (1348 313);
+     states = ("yes" "no");
+}
+
+node lost_data
+{
+     label = "C13";
+     position = (1506 247);
+     states = ("yes" "no");
+}
+
+node slow_internet
+{
+     label = "C14";
+     position = (1879 421);
+     states = ("yes" "no");
+}
+
+node antivirus_failure
+{
+     label = "C15";
+     position = (1727 177);
+     states = ("yes" "no");
+}
+
+node periodically_restarting
+{
+     label = "C16";
+     position = (1692 20);
+     states = ("yes" "no");
+}
+
+node no_sound
+{
+     label = "C17";
+     position = (1708 586);
+     states = ("yes" "no");
+}
+
+node no_recognize_storage_device
+{
+     label = "C18";
+     position = (1377 622);
+     states = ("yes" "no");
+}
+
+node motherboard_damage
+{
+     label = "C19";
+     position = (1418 438);
+     states = ("yes" "no");
+}
+
+node cant_connect_to_internet
+{
+     label = "C20";
+     position = (279 448);
+     states = ("yes" "no");
+}
+
+
+
+potential (plugged_in_during_thunderstorm)
+{
+ data = ( 0.7 0.3 );
+}
+
+potential (high_surge_voltages | plugged_in_during_thunderstorm)
+{
+ data = (( 0.6 0.4 )
+( 0.0 1.0 ));
+}
+
+potential (pc_wont_turn_on)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (power_supply_damage | high_surge_voltages pc_wont_turn_on)
+{
+ data = ((( 0.9 0.1 )
+( 0.0 1.0 ))
+(( 0.2 0.8 )
+( 0.0 1.0 )));
+}
+
+potential (array_of_short_sound_signals)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (cooler_damage | high_temperature_of_device pc_wont_turn_on array_of_short_sound_signals)
+{
+ data = (((( 0.95 0.05 )
+( 0.7 0.3 ))
+(( 0.75 0.25 )
+( 0.4 0.6 )))
+((( 0.87 0.13 )
+( 0.2 0.8 ))
+(( 0.19 0.81 )
+( 0.0 1.0 ))));
+}
+
+potential (high_temperature_of_device)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (slow_computer)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (not_enough_RAM_damage | slow_computer freeze)
+{
+ data = ((( 0.97 0.03 )
+( 0.4 0.6 ))
+(( 0.3 0.7 )
+( 0.0 1.0 )));
+}
+
+potential (freeze)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (virus_damage | periodically_restarting slow_internet antivirus_failure lost_data blue_screen slow_computer)
+{
+ data = ((((((( 1.0 0.0 )
+( 0.9 0.1 ))
+(( 0.9 0.1 )
+( 0.8 0.2 )))
+((( 0.8 0.2 )
+( 0.8 0.2 ))
+(( 0.8 0.2 )
+( 0.5 0.5 ))))
+(((( 0.9 0.1 )
+( 0.8 0.2 ))
+(( 0.8 0.2 )
+( 0.5 0.5 )))
+((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.2 0.8 )))))
+((((( 0.9 0.1 )
+( 0.8 0.2 ))
+(( 0.8 0.2 )
+( 0.5 0.5 )))
+((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.2 0.8 ))))
+(((( 0.5 0.5 )
+( 0.2 0.8 ))
+(( 0.8 0.2 )
+( 0.5 0.5 )))
+((( 0.5 0.5 )
+( 0.2 0.8 ))
+(( 0.2 0.8 )
+( 0.1 0.9 ))))))
+(((((( 0.9 0.1 )
+( 0.8 0.2 ))
+(( 0.8 0.2 )
+( 0.5 0.5 )))
+((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.2 0.8 ))))
+(((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.2 0.8 )))
+((( 0.5 0.5 )
+( 0.2 0.8 ))
+(( 0.5 0.5 )
+( 0.2 0.8 )))))
+((((( 0.8 0.2 )
+( 0.5 0.5 ))
+(( 0.5 0.5 )
+( 0.2 0.8 )))
+((( 0.5 0.5 )
+( 0.2 0.8 ))
+(( 0.2 0.8 )
+( 0.1 0.9 ))))
+(((( 0.5 0.5 )
+( 0.2 0.8 ))
+(( 0.2 0.8 )
+( 0.1 0.9 )))
+((( 0.2 0.8 )
+( 0.1 0.9 ))
+(( 0.1 0.9 )
+( 0.0 1.0 )))))));
+}
+
+potential (blue_screen)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (lost_data)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (slow_internet)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (antivirus_failure)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (periodically_restarting)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (no_sound)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (no_recognize_storage_device)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (motherboard_damage | slow_internet no_sound no_recognize_storage_device)
+{
+ data = (((( 0.9 0.1 )
+( 0.4 0.6 ))
+(( 0.6 0.4 )
+( 0.1 0.9 )))
+((( 0.8 0.2 )
+( 0.1 0.9 ))
+(( 0.3 0.7 )
+( 0.0 1.0 ))));
+}
+
+potential (cant_connect_to_internet)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (network_card_damage | cant_connect_to_internet)
+{
+ data = (( 0.815 0.185 )
+( 0.0 1.0 ));
+}
