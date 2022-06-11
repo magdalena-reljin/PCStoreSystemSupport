@@ -287,7 +287,40 @@ node it_takes_long_time_to_save_files
      states = ("yes" "no");
 }
 
+node SSD_damage
+{
+     label = "C41";
+     position = (91 865);
+     states = ("yes" "no");
+}
 
+node network_driver_damage
+{
+     label = "C42";
+     position = (13 318);
+     states = ("yes" "no");
+}
+
+node output_devices_damage
+{
+     label = "C43";
+     position = (1052 914);
+     states = ("yes" "no");
+}
+
+node output_driver_damage
+{
+     label = "C44";
+     position = (740 903);
+     states = ("yes" "no");
+}
+
+node output_devices_are_not_working
+{
+     label = "C45";
+     position = (890 858);
+     states = ("yes" "no");
+}
 
 potential (plugged_in_during_thunderstorm)
 {
@@ -630,4 +663,20 @@ potential (network_driver_damage | cant_connect_to_internet)
 ( 0.0 1.0 ));
 }
 
+potential (output_devices_damage | output_devices_are_not_working)
+{
+ data = (( 0.6 0.4 )
+( 0.0 1.0 ));
+}
+
+potential (output_driver_damage | output_devices_are_not_working)
+{
+ data = (( 0.5 0.5 )
+( 0.0 1.0 ));
+}
+
+potential (output_devices_are_not_working)
+{
+ data = ( 0.01 0.99 );
+}
 
