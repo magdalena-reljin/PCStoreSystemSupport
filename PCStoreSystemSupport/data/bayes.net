@@ -2,7 +2,7 @@ net
 {
      node_size = (0 0);
      name = "New BN";
-     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C12,C13,C14,C15,C16,C17,C18,C19,C20)";
+     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37)";
      UnBBayes_Color_Probabilistic_Description = "-256";
      UnBBayes_Color_Probabilistic_Explanation = "-16711936";
 }
@@ -144,6 +144,146 @@ node cant_connect_to_internet
 {
      label = "C20";
      position = (279 448);
+     states = ("yes" "no");
+}
+
+node network_card_damage
+{
+     label = "C21";
+     position = (638 313);
+     states = ("yes" "no");
+}
+
+node foreign_artifacts
+{
+     label = "C22";
+     position = (898 724);
+     states = ("yes" "no");
+}
+
+node dropped_computer
+{
+     label = "C23";
+     position = (597 695);
+     states = ("yes" "no");
+}
+
+node graphic_card_damage
+{
+     label = "C24";
+     position = (622 511);
+     states = ("yes" "no");
+}
+
+node video_driver_damage
+{
+     label = "C25";
+     position = (870 508);
+     states = ("yes" "no");
+}
+
+node lost_contact_with_motherboard_damage
+{
+     label = "C26";
+     position = (1120 519);
+     states = ("yes" "no");
+}
+
+node input_devices_are_not_working
+{
+     label = "C27";
+     position = (1103 737);
+     states = ("yes" "no");
+}
+
+node black_display
+{
+     label = "C28";
+     position = (1587 787);
+     states = ("yes" "no");
+}
+
+node display_driver_damage
+{
+     label = "C29";
+     position = (1398 732);
+     states = ("yes" "no");
+}
+
+node display_damage
+{
+     label = "C30";
+     position = (1714 681);
+     states = ("yes" "no");
+}
+
+node input_drivers_damage
+{
+     label = "C31";
+     position = (598 784);
+     states = ("yes" "no");
+}
+
+node input_devices_damage
+{
+     label = "C32";
+     position = (862 791);
+     states = ("yes" "no");
+}
+
+node dropped_input_devices
+{
+     label = "C33";
+     position = (1304 860);
+     states = ("yes" "no");
+}
+
+node ram_damage
+{
+     label = "C34";
+     position = (80 410);
+     states = ("yes" "no");
+}
+
+node processor_damage
+{
+     label = "C35";
+     position = (316 523);
+     states = ("yes" "no");
+}
+
+node os_damage
+{
+     label = "C36";
+     position = (291 653);
+     states = ("yes" "no");
+}
+
+node out_of_date_or_corrupt_hardware_drivers_damage
+{
+     label = "C37";
+     position = (307 768);
+     states = ("yes" "no");
+}
+
+node os_loading
+{
+     label = "C38";
+     position = (29 534);
+     states = ("yes" "no");
+}
+
+node corrupt_system_files_damage
+{
+     label = "C39";
+     position = (80 644);
+     states = ("yes" "no");
+}
+
+node it_takes_long_time_to_save_files
+{
+     label = "C40";
+     position = (80 723);
      states = ("yes" "no");
 }
 
@@ -338,3 +478,156 @@ potential (network_card_damage | cant_connect_to_internet)
  data = (( 0.815 0.185 )
 ( 0.0 1.0 ));
 }
+
+potential (foreign_artifacts)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (dropped_computer)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (graphic_card_damage | foreign_artifacts dropped_computer)
+{
+ data = ((( 0.98 0.02 )
+( 0.9 0.1 ))
+(( 0.2 0.8 )
+( 0.0 1.0 )));
+}
+
+potential (video_driver_damage | foreign_artifacts dropped_computer)
+{
+ data = ((( 0.7 0.3 )
+( 0.8 0.2 ))
+(( 0.1 0.9 )
+( 0.0 1.0 )));
+}
+
+potential (lost_contact_with_motherboard_damage | input_devices_are_not_working foreign_artifacts dropped_computer)
+{
+ data = (((( 0.95 0.05 )
+( 0.8 0.2 ))
+(( 0.6 0.4 )
+( 0.3 0.7 )))
+((( 0.3 0.7 )
+( 0.2 0.8 ))
+(( 0.01 0.99 )
+( 0.0 1.0 ))));
+}
+
+potential (input_devices_are_not_working)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (black_display)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (display_driver_damage | black_display)
+{
+ data = (( 0.5 0.5 )
+( 0.0 1.0 ));
+}
+
+potential (display_damage | dropped_computer black_display)
+{
+ data = ((( 0.95 0.05 )
+( 0.4 0.6 ))
+(( 0.5 0.5 )
+( 0.0 1.0 )));
+}
+
+potential (input_drivers_damage | input_devices_are_not_working)
+{
+ data = (( 0.4 0.6 )
+( 0.0 1.0 ));
+}
+
+potential (input_devices_damage | dropped_input_devices input_devices_are_not_working)
+{
+ data = ((( 0.8 0.2 )
+( 0.1 0.9 ))
+(( 0.3 0.7 )
+( 0.0 1.0 )));
+}
+
+potential (dropped_input_devices)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (ram_damage | periodically_restarting blue_screen freeze)
+{
+ data = (((( 1.0 0.0 )
+( 0.75 0.25 ))
+(( 0.5 0.5 )
+( 0.3 0.7 )))
+((( 0.4 0.6 )
+( 0.2 0.8 ))
+(( 0.2 0.8 )
+( 0.0 1.0 ))));
+}
+
+potential (processor_damage | periodically_restarting freeze blue_screen)
+{
+ data = (((( 1.0 0.0 )
+( 0.3 0.7 ))
+(( 0.5 0.5 )
+( 0.1 0.9 )))
+((( 0.6 0.4 )
+( 0.1 0.9 ))
+(( 0.3 0.7 )
+( 0.0 1.0 ))));
+}
+
+potential (os_damage | pc_wont_turn_on blue_screen)
+{
+ data = ((( 1.0 0.0 )
+( 0.3 0.7 ))
+(( 0.3 0.7 )
+( 0.0 1.0 )));
+}
+
+potential (out_of_date_or_corrupt_hardware_drivers_damage | blue_screen pc_wont_turn_on)
+{
+ data = ((( 1.0 0.0 )
+( 0.4 0.6 ))
+(( 0.2 0.8 )
+( 0.0 1.0 )));
+}
+
+potential (os_loading)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (corrupt_system_files_damage | os_loading)
+{
+ data = (( 0.8 0.2 )
+( 0.0 1.0 ));
+}
+
+potential (it_takes_long_time_to_save_files)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (SSD_damage | blue_screen it_takes_long_time_to_save_files)
+{
+ data = ((( 1.0 0.0 )
+( 0.2 0.8 ))
+(( 0.8 0.2 )
+( 0.0 1.0 )));
+}
+
+potential (network_driver_damage | cant_connect_to_internet)
+{
+ data = (( 0.4 0.6 )
+( 0.0 1.0 ));
+}
+
+
