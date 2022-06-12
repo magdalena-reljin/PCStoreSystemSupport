@@ -535,6 +535,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         System.out.println("vracam"+result2);
         for(int i=0 ; i< result2.getColumn(0).size() ; i++){
             processors.add(new ComponentEstimationDTO(findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i) +" ["+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)+ " cores, "+
                     findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i)+"MHz,"+
                     "TDP "+findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+"W"
                     +"]",findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)));

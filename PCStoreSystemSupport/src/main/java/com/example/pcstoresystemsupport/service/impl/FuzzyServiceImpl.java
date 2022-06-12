@@ -6,6 +6,7 @@ import net.sourceforge.jFuzzyLogic.FunctionBlock;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,17 +41,17 @@ public class FuzzyServiceImpl implements FuzzyService {
             Variable modelling3D = block.getVariable("modeling3D");
             Variable graphicEditing = block.getVariable("graphic_editing");
             Variable musicComposing  = block.getVariable("music_composing");
-
-            results.add("HOME USE:          "+home.getValue());
-            results.add("ADVANCED HOME USE: "+homeAdvanced.getValue());
-            results.add("WORK USE:          "+work.getValue());
-            results.add("STUDENT USE:       "+students.getValue());
-            results.add("GAMING:            "+gaming.getValue());
-            results.add("DATA MINING:       "+mining.getValue());
-            results.add("PROGRAMMING:       "+programming.getValue());
-            results.add("3D MODELLING:      "+modelling3D.getValue());
-            results.add("GRAPHIC EDITING:   "+graphicEditing.getValue());
-            results.add("COMPOSING MUSIC:   "+musicComposing.getValue());
+            DecimalFormat df=new DecimalFormat("####0.0");
+            results.add("HOME USE:          "+df.format(home.getValue()));
+            results.add("ADVANCED HOME USE: "+df.format(homeAdvanced.getValue()));
+            results.add("WORK USE:          "+df.format(work.getValue()));
+            results.add("STUDENT USE:       "+df.format(students.getValue()));
+            results.add("GAMING:            "+df.format(gaming.getValue()));
+            results.add("DATA MINING:       "+df.format(mining.getValue()));
+            results.add("PROGRAMMING:       "+df.format(programming.getValue()));
+            results.add("3D MODELLING:      "+df.format(modelling3D.getValue()));
+            results.add("GRAPHIC EDITING:   "+df.format(graphicEditing.getValue()));
+            results.add("COMPOSING MUSIC:   "+df.format(musicComposing.getValue()));
 
             return results;
         } catch (Exception e) {
