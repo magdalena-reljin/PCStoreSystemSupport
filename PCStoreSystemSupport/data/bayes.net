@@ -2,7 +2,7 @@ net
 {
      node_size = (0 0);
      name = "New BN";
-     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37)";
+     tree = "(C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C12,C13,C14,C15,C16,C17,C18,C19,C20,C21,C22,C23,C24,C25,C26,C27,C28,C29,C30,C31,C32,C33,C34,C35,C36,C37,C11,C38,C39,C40,C41,C42,C43,C44,C45)";
      UnBBayes_Color_Probabilistic_Description = "-256";
      UnBBayes_Color_Probabilistic_Explanation = "-16711936";
 }
@@ -24,7 +24,7 @@ node high_surge_voltages
 node pc_wont_turn_on
 {
      label = "C3";
-     position = (514 178);
+     position = (514 196);
      states = ("yes" "no");
 }
 
@@ -77,7 +77,7 @@ node freeze
      states = ("yes" "no");
 }
 
-node virus_damage
+node security_damage
 {
      label = "C11";
      position = (1349 60);
@@ -386,7 +386,7 @@ potential (freeze)
  data = ( 0.01 0.99 );
 }
 
-potential (virus_damage | periodically_restarting slow_internet antivirus_failure lost_data blue_screen slow_computer)
+potential (security_damage | periodically_restarting slow_internet antivirus_failure lost_data blue_screen slow_computer)
 {
  data = ((((((( 1.0 0.0 )
 ( 0.9 0.1 ))
@@ -407,11 +407,11 @@ potential (virus_damage | periodically_restarting slow_internet antivirus_failur
 ((((( 0.9 0.1 )
 ( 0.8 0.2 ))
 (( 0.8 0.2 )
-( 0.5 0.5 )))
+( 0.7 0.3 )))
 ((( 0.8 0.2 )
-( 0.5 0.5 ))
-(( 0.5 0.5 )
-( 0.2 0.8 ))))
+( 0.7 0.3 ))
+(( 0.6 0.4 )
+( 0.5 0.5 ))))
 (((( 0.5 0.5 )
 ( 0.2 0.8 ))
 (( 0.8 0.2 )
@@ -423,11 +423,11 @@ potential (virus_damage | periodically_restarting slow_internet antivirus_failur
 (((((( 0.9 0.1 )
 ( 0.8 0.2 ))
 (( 0.8 0.2 )
-( 0.5 0.5 )))
+( 0.7 0.3 )))
 ((( 0.8 0.2 )
-( 0.5 0.5 ))
+( 0.6 0.4 ))
 (( 0.5 0.5 )
-( 0.2 0.8 ))))
+( 0.5 0.5 ))))
 (((( 0.8 0.2 )
 ( 0.5 0.5 ))
 (( 0.5 0.5 )
@@ -437,13 +437,13 @@ potential (virus_damage | periodically_restarting slow_internet antivirus_failur
 (( 0.5 0.5 )
 ( 0.2 0.8 )))))
 ((((( 0.8 0.2 )
-( 0.5 0.5 ))
-(( 0.5 0.5 )
-( 0.2 0.8 )))
+( 0.6 0.4 ))
+(( 0.7 0.3 )
+( 0.5 0.5 )))
 ((( 0.5 0.5 )
-( 0.2 0.8 ))
-(( 0.2 0.8 )
-( 0.1 0.9 ))))
+( 0.5 0.5 ))
+(( 0.7 0.3 )
+( 0.5 0.5 ))))
 (((( 0.5 0.5 )
 ( 0.2 0.8 ))
 (( 0.2 0.8 )
@@ -619,7 +619,7 @@ potential (processor_damage | periodically_restarting freeze blue_screen)
 
 potential (os_damage | pc_wont_turn_on blue_screen)
 {
- data = ((( 1.0 0.0 )
+ data = ((( 0.7 0.3 )
 ( 0.3 0.7 ))
 (( 0.3 0.7 )
 ( 0.0 1.0 )));
@@ -627,7 +627,7 @@ potential (os_damage | pc_wont_turn_on blue_screen)
 
 potential (out_of_date_or_corrupt_hardware_drivers_damage | blue_screen pc_wont_turn_on)
 {
- data = ((( 1.0 0.0 )
+ data = ((( 0.65 0.35 )
 ( 0.4 0.6 ))
 (( 0.2 0.8 )
 ( 0.0 1.0 )));
