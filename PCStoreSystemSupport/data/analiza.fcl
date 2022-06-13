@@ -169,6 +169,79 @@ RULEBLOCK No1
               AND memorySizeOfGraphicCard IS low
               AND powerSupply IS low
               THEN gaming IS low;
+RULE 19 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN gaming IS low;
+    RULE 20 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN gaming IS low;
+    RULE 21 : IF numberOfCores IS medium AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS high
+              THEN dataMining IS high;
+    RULE 22 : IF numberOfCores IS medium AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN dataMining IS high;
+    RULE 23 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS high
+              THEN dataMining IS high WITH 0.6;
+    RULE 24 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN dataMining IS high WITH 0.6;
+    RULE 25 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN dataMining IS medium WITH 0.8;
+    RULE 26 : IF numberOfCores IS medium AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN dataMining IS medium WITH 0.7;
+    RULE 27 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN dataMining IS low WITH 0.5;
+    RULE 28 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN dataMining IS low;
+    RULE 29 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN dataMining IS low;
+
+    RULE 30 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN graphicEditingOr3Dmodeling IS low;
+    RULE 31 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS low;
+    RULE 32 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS low WITH 0.5;
+    RULE 33 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS low
+              THEN graphicEditingOr3Dmodeling IS low WITH 0.5;
+    RULE 34 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS high
+              THEN graphicEditingOr3Dmodeling IS high;
+    RULE 35 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS high;
+    RULE 36 : IF numberOfCores IS medium AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS high WITH 0.7;
 
 END_RULEBLOCK
 
