@@ -242,6 +242,87 @@ RULE 19 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
               AND memorySizeOfGraphicCard IS high
               AND powerSupply IS medium
               THEN graphicEditingOr3Dmodeling IS high WITH 0.7;
+    RULE 37 : IF numberOfCores IS high AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS high WITH 0.4;
+    RULE 38 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS low;
+    RULE 39 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN graphicEditingOr3Dmodeling IS medium WITH 0.7;
+
+    RULE 40 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN programming IS low;
+    RULE 41 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN programming IS low;
+    RULE 42 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN programming IS high WITH 0.9;
+    RULE 43 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN programming IS high WITH 0.8;
+    RULE 44 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN programming IS medium;
+    RULE 45 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS high
+              THEN programming IS high WITH 0.5;
+    RULE 46 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS high
+              THEN programming IS high WITH 0.4;
+    RULE 47 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS high
+              THEN programming IS high WITH 0.3;
+    RULE 48 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN programming IS high WITH 0.3;
+    RULE 49 : IF numberOfCores IS medium AND ramMemoryCapacity IS high
+             AND memorySizeOfGraphicCard IS high
+             AND powerSupply IS medium
+             THEN home IS low;
+    RULE 50 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN programming IS medium;
+    RULE 51 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN dataMining IS low WITH 0.7 ;
+    RULE 52 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN graphicEditingOr3Dmodeling IS low WITH 0.4 ;
+    RULE 53 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN dataMining IS low;
+    RULE 54 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN gaming IS medium WITH 0.6;
+    RULE 55 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN home IS low;
+    RULE 56 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS medium
+              THEN working IS high WITH 0.1;
 
 END_RULEBLOCK
 
