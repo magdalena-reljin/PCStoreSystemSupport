@@ -32,26 +32,19 @@ public class FuzzyServiceImpl implements FuzzyService {
             filePath.evaluate();
 
             Variable home = block.getVariable("home");
-            Variable homeAdvanced = block.getVariable("home_advanced");
             Variable work = block.getVariable("working");
-            Variable students = block.getVariable("students");
             Variable gaming = block.getVariable("gaming");
-            Variable mining = block.getVariable("mining");
+            Variable mining = block.getVariable("dataMining");
             Variable programming = block.getVariable("programming");
-            Variable modelling3D = block.getVariable("modeling3D");
-            Variable graphicEditing = block.getVariable("graphic_editing");
-            Variable musicComposing  = block.getVariable("music_composing");
+            Variable modelling3D = block.getVariable("graphicEditingOr3Dmodeling");
+
             DecimalFormat df=new DecimalFormat("####0.0");
             results.add("HOME USE:          "+df.format(home.getValue()));
-            results.add("ADVANCED HOME USE: "+df.format(homeAdvanced.getValue()));
             results.add("WORK USE:          "+df.format(work.getValue()));
-            results.add("STUDENT USE:       "+df.format(students.getValue()));
             results.add("GAMING:            "+df.format(gaming.getValue()));
             results.add("DATA MINING:       "+df.format(mining.getValue()));
             results.add("PROGRAMMING:       "+df.format(programming.getValue()));
-            results.add("3D MODELLING:      "+df.format(modelling3D.getValue()));
-            results.add("GRAPHIC EDITING:   "+df.format(graphicEditing.getValue()));
-            results.add("COMPOSING MUSIC:   "+df.format(musicComposing.getValue()));
+            results.add("GRAPHIC EDITING OR 3D MODELLING:      "+df.format(modelling3D.getValue()));
 
             return results;
         } catch (Exception e) {

@@ -125,6 +125,7 @@ export default {
   methods: {
        sendRequest: function(event){
            event.preventDefault()
+           this.requestDtos=[]
            if(this.value != null){
                     for(let i=0; i < this.value.length ; i++){
                           console.log(this.value[i])

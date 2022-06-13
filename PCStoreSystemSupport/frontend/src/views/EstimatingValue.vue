@@ -161,10 +161,10 @@ export default {
            event.preventDefault()
           
            this.mPar=this.motherboards[this.selectedMotherboard].paramForEstimation
-           this.pPar=this.processors[this.selectedMotherboard].paramForEstimation
-           this.gPar=this.gpus[this.selectedMotherboard].paramForEstimation
-           this.rPar=this.rams[this.selectedMotherboard].paramForEstimation
-
+           this.pPar=this.processors[this.selectedProcessor].paramForEstimation
+           this.gPar=this.gpus[this.selectedGPU].paramForEstimation
+           this.rPar=this.rams[this.selectedRAM].paramForEstimation
+           
            axios
            .post("http://localhost:8081/componentValueEstimation/estimateValue/"+this.mPar+"/"+this.pPar+"/"+this.gPar+"/"+this.rPar)
            .then((response) => {

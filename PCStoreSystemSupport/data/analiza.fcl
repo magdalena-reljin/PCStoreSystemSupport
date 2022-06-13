@@ -1,0 +1,175 @@
+FUNCTION_BLOCK component_value_estimation	// Block definition (there may be more than one block per file)
+
+VAR_INPUT				// Define input variables
+	numberOfCores : REAL;
+	ramMemoryCapacity : REAL;
+	memorySizeOfGraphicCard : REAL;
+	powerSupply : REAL;
+END_VAR
+
+VAR_OUTPUT				// Define output variable
+	home : REAL;
+	working : REAL;
+	gaming : REAL;
+	dataMining : REAL;
+	programming : REAL;
+	graphicEditingOr3Dmodeling : REAL;
+END_VAR
+
+FUZZIFY numberOfCores
+	TERM  low:= (1,0) (2,1) (3, 0) ;
+	TERM  medium:= (3, 0) (4,1) (7,0);
+	TERM  high:= (7,0) (8, 1) (12,0);
+END_FUZZIFY
+
+FUZZIFY ramMemoryCapacity
+	TERM low := (1, 0) (4, 1) (10,0) ;
+	TERM medium := (10, 0) (16, 1) (24, 0);
+	TERM  high:= (24, 0) (32, 1) (64 ,0);
+END_FUZZIFY
+
+FUZZIFY memorySizeOfGraphicCard
+	TERM low := (0, 0) (2, 1) (3,0) ;
+	TERM medium := (3,0) (4, 1) (5, 0);
+	TERM  high:= (5,0) (6, 1) (8 ,0);
+END_FUZZIFY
+
+FUZZIFY powerSupply
+	TERM low := (0, 0) (600, 1) (700,0) ;
+	TERM medium := (700, 0) (850, 1) (890, 0);
+	TERM  high:= (890, 0) (950, 1) (1500 ,0);
+END_FUZZIFY
+
+DEFUZZIFY home
+	TERM low := (0,1) (30,1) (50,0);
+	TERM medium := (30,0) (50,1) (70,0);
+	TERM high := (50,0) (70,1) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+DEFUZZIFY working
+	TERM low := (0,1) (30,1) (50,0);
+	TERM medium := (30,0) (50,1) (70,0);
+	TERM high := (50,0) (70,1) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+
+DEFUZZIFY gaming
+	TERM low := (0,1) (30,1) (50,0);
+	TERM medium := (30,0) (50,1) (70,0);
+	TERM high := (50,0) (70,1) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+
+DEFUZZIFY dataMining
+	TERM low := (0,1) (30,1) (50,0);
+	TERM medium := (30,0) (50,1) (70,0);
+	TERM high := (50,0) (70,1) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+
+DEFUZZIFY programming
+	TERM low := (0,1) (30,1) (50,0);
+	TERM medium := (30,0) (50,1) (70,0);
+	TERM high := (50,0) (70,1) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+
+DEFUZZIFY graphicEditingOr3Dmodeling
+	TERM low := (0,1) (30,1) (50,0);
+	TERM medium := (30,0) (50,1) (70,0);
+	TERM high := (50,0) (70,1) (100,1);
+	METHOD : COG;		// Use 'Center Of Gravity' defuzzification method
+	DEFAULT := 0;		// Default value is 0 (if no rule activates defuzzifier)
+END_DEFUZZIFY
+
+
+
+RULEBLOCK No1
+	AND : MIN;			// Use 'min' for 'and' (also implicit use 'max' for 'or' to fulfill DeMorgan's Law)
+	ACT : MIN;			// Use 'min' activation method
+	ACCU : MAX;			// Use 'max' accumulation method
+
+	RULE 1 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS low
+                 THEN home IS high;
+    RULE 2 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+                 AND memorySizeOfGraphicCard IS high
+                 AND powerSupply IS high
+                 THEN home IS low;
+
+    RULE 3 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS low
+                 THEN home IS medium;
+    RULE 4 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS medium
+                 THEN home IS medium;
+
+    RULE 5 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS low
+                 THEN working IS high;
+    RULE 6 : IF numberOfCores IS medium AND ramMemoryCapacity IS medium
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS medium
+                 THEN working IS high;
+    RULE 7 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS low
+                 THEN working IS medium;
+    RULE 8 : IF numberOfCores IS medium AND ramMemoryCapacity IS low
+                 AND memorySizeOfGraphicCard IS low
+                 AND powerSupply IS medium
+                 THEN working IS medium;
+    RULE 9 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+                 AND memorySizeOfGraphicCard IS high
+                 AND powerSupply IS high
+                 THEN working IS low WITH 0.7;
+    RULE 10 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+                 AND memorySizeOfGraphicCard IS high
+                 AND powerSupply IS medium
+                 THEN working IS low WITH 0.7;
+    RULE 11 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+                 AND memorySizeOfGraphicCard IS high
+                 AND powerSupply IS medium
+                 THEN home IS low;
+    RULE 12 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS high
+              THEN gaming IS high;
+    RULE 13 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS high
+              AND powerSupply IS medium
+              THEN gaming IS high;
+    RULE 14 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN gaming IS medium;
+    RULE 15 : IF numberOfCores IS high AND ramMemoryCapacity IS high
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS high
+              THEN gaming IS medium;
+    RULE 16 : IF numberOfCores IS high AND ramMemoryCapacity IS medium
+              AND memorySizeOfGraphicCard IS medium
+              AND powerSupply IS medium
+              THEN gaming IS medium;
+    RULE 17 : IF numberOfCores IS low AND ramMemoryCapacity IS low
+              AND memorySizeOfGraphicCard IS low
+              AND powerSupply IS low
+              THEN gaming IS low;
+
+END_RULEBLOCK
+
+END_FUNCTION_BLOCK
