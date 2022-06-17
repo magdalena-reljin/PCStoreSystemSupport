@@ -88,16 +88,47 @@
                                             rdfs:range :GraphicCardSlot .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasCooler
+:hasCooler rdf:type owl:ObjectProperty ;
+           rdfs:domain :PC ;
+           rdfs:range :Cooler .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasCoolerSlot
 :hasCoolerSlot rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf owl:topObjectProperty ;
                rdfs:domain :Motherboard .
 
 
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasGpu
+:hasGpu rdf:type owl:ObjectProperty ;
+        rdfs:domain :PC ;
+        rdfs:range :GraphicsCard .
+
+
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasHardware
 :hasHardware rdf:type owl:ObjectProperty ;
              rdfs:domain :PC ;
              rdfs:range :Hardware .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasMotherboard
+:hasMotherboard rdf:type owl:ObjectProperty ;
+                rdfs:domain :PC ;
+                rdfs:range :Motherboard .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasProcessor
+:hasProcessor rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :PC ;
+              rdfs:range :Processor .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasRAM
+:hasRAM rdf:type owl:ObjectProperty ;
+        rdfs:domain :PC ;
+        rdfs:range :RAM .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#hasSoftware
@@ -2202,8 +2233,8 @@ owl:topObjectProperty rdfs:domain :Mouse ;
        :PSU "900.0"^^xsd:double ;
        :RamSlotCapacity 16 ;
        :maximumInternalMemory 32 ;
-       :motherboardName "GIGABYTE"^^xsd:string ,
-                        "H310M"^^xsd:string ;
+       :motherBoardProducer "GIGABYTE"^^xsd:string ;
+       :motherboardName "H310M"^^xsd:string ;
        :numberOfMemorySlots 2 .
 
 
@@ -3038,6 +3069,126 @@ owl:topObjectProperty rdfs:domain :Mouse ;
            :motherBoardProducer "ASUS"^^xsd:string ;
            :motherboardName "ROG_STRIX"^^xsd:string ;
            :numberOfMemorySlots 4 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar1
+:Racunar1 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :CR-1000GT ;
+          :hasGpu :TUF-GTX1650-O4GD6-P ;
+          :hasMotherboard :Z97 ;
+          :hasProcessor :IntelCorei5-4460 ;
+          :hasRAM :PC4-21300 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar10
+:Racunar10 rdf:type owl:NamedIndividual ,
+                    :PC ;
+           :hasCooler :CR-1000GT ;
+           :hasGpu :TUF-GTX1650-O4GD6-P ;
+           :hasMotherboard :X11SSH-GF-1585_Server ;
+           :hasProcessor :XeonE3-1585V5 ;
+           :hasRAM :AD4S320016G22_SGN .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar11
+:Racunar11 rdf:type owl:NamedIndividual ,
+                    :PC ;
+           :hasCooler :CR-1000GT ;
+           :hasGpu :GV-N1650OC-4GD ;
+           :hasMotherboard :X11SSH-GF-1585_Server ;
+           :hasProcessor :IntelCorei7-9850H ;
+           :hasRAM :CL_17 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar12
+:Racunar12 rdf:type owl:NamedIndividual ,
+                    :PC ;
+           :hasCooler :CR-1000GT ;
+           :hasGpu :TUF-GTX1660TI-T6G ;
+           :hasMotherboard :Z9NA-D6 ;
+           :hasProcessor :IntelXeonE5-4610 ;
+           :hasRAM :B008W0X8IG .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar2
+:Racunar2 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :CR-1000GT ;
+          :hasGpu :TUF-GTX1650-O4GD6-P ;
+          :hasMotherboard :X570S_AORUS_MASTER ;
+          :hasProcessor :IntelCorei5-4210M ;
+          :hasRAM :Fury_Beast_KF426C16BB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar3
+:Racunar3 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :ExeGate-EE90-Cu ;
+          :hasGpu :Nvidia_GeForce_GT_730 ;
+          :hasMotherboard :H410MH ;
+          :hasProcessor :IntelCorei7-10700 ;
+          :hasRAM :Beast_KF436C18BBA .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar4
+:Racunar4 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :CR-1000GT ;
+          :hasGpu :TUF-GTX1650-O4GD6-P ;
+          :hasMotherboard :H97 ;
+          :hasProcessor :IntelCorei5-4460 ;
+          :hasRAM :Hynix_IC .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar5
+:Racunar5 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :CR-1000GT ;
+          :hasGpu :TUF-RX6500XT-O4G-GAM ;
+          :hasMotherboard :MS-98H7 ;
+          :hasProcessor :IntelCorei7-9850H ;
+          :hasRAM :TED416G2400C16 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar6
+:Racunar6 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :ID-COOLING-DK-01S ;
+          :hasGpu :PH-GT1030-O2G ;
+          :hasMotherboard :Z490A ;
+          :hasProcessor :IntelCorei7-10700 ;
+          :hasRAM :PVSR432G360C0 .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar7
+:Racunar7 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :ID-COOLING-DK-01T ;
+          :hasGpu :GT_1030_2GHD4_LP_OC ;
+          :hasMotherboard :ROG_STRIX ;
+          :hasProcessor :IntelCorei3-6100 ;
+          :hasRAM :GALS416GB3000C16ASC .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar8
+:Racunar8 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :ExeGate-EE90-Cu ;
+          :hasGpu :GV-N1650OC-4GD ;
+          :hasMotherboard :ROG_STRIX ;
+          :hasProcessor :IntelCorei7-6700 ;
+          :hasRAM :F4_3000C16S_16GISB .
+
+
+###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#Racunar9
+:Racunar9 rdf:type owl:NamedIndividual ,
+                   :PC ;
+          :hasCooler :CR-1000GT ;
+          :hasGpu :GT730-4H-SL-2GD5 ;
+          :hasMotherboard :ROG_STRIX ;
+          :hasProcessor :IntelCorei5-8400 ;
+          :hasRAM :SP016GBLFU266X02 .
 
 
 ###  http://www.semanticweb.org/dajan/ontologies/2022/3/untitled-ontology-2#SENNHEISER_Wired_Headphones_HD_25_LIGHT

@@ -25,7 +25,7 @@
          <button class="btn" @click="faultProbability()" style=" background-color: black; color: white; font-size: 200%">COMPONENT FAULT PROBABILITY</button>
        </div>
        <div class="row" style="height: 20%; padding-bottom: 5%;">
-        <button class="btn"  style=" background-color: black; color: white; font-size: 200%">SIMILAR PC's</button>
+        <button class="btn" @click="similarPc()" style=" background-color: black; color: white; font-size: 200%">SIMILAR PC's</button>
        </div>
 
     </div>
@@ -62,7 +62,7 @@
 
 <script>
    
-  
+  import axios from 'axios'
 export default {
  
 
@@ -85,6 +85,13 @@ export default {
        },
        faultProbability: function(){
          this.$router.push("/faultProbability")
+       },
+       similarPc: function () {
+            axios
+           .get("http://localhost:8081/cbr/proba")
+           .then((response) => {
+            this.results=response.data
+            })
        }
 
     }

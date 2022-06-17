@@ -1,6 +1,7 @@
 package com.example.pcstoresystemsupport.service.impl;
 
 import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
+import com.example.pcstoresystemsupport.model.*;
 import com.example.pcstoresystemsupport.service.MyOntologyService;
 import com.example.pcstoresystemsupport.service.RecommendingComponentsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -542,6 +543,97 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
         }
         return processors;
     }
+    @Override
+    public List<PC> findPcs() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        List<PC>  pcs= new ArrayList<>();
+
+        SQWRLResult result1= queryEngine.runSQWRLQuery("q44", "PC(?x) ^ hasMotherboard(?x,?y) " +
+                "^ hasProcessor(?x,?z) ^ hasRAM(?x,?r) ^ hasCooler(?x,?c) ^ hasGpu(?x,?g) -> sqwrl:select(?y,?z,?r,?c,?g) ");
+        for(int i=0 ; i< result1.getColumn(0).size() ; i++){
+            String motherboard=result1.getColumn(0).get(i).toString().substring(1);
+            System.out.println("Motherboard"+i+" "+motherboard);
+            String processor= result1.getColumn(1).get(i).toString().substring(1);
+            String ram= result1.getColumn(2).get(i).toString().substring(1);
+            String cooler= result1.getColumn(3).get(i).toString().substring(1);
+            String gpu= result1.getColumn(4).get(i).toString().substring(1);
+
+
+            SQWRLResult result2= queryEngine.runSQWRLQuery("q100"+i, "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                    "^ swrlb:equal(?y,\""+motherboard+"\") ^ containsSocket(?x,?s) ^ motherBoardProducer(?x,?p) ^ RamSlotCapacity(?x,?r) ^maximumInternalMemory(?x,?m) ^numberOfMemorySlots(?x,?num) ^containsRAMSlot(?x,?ramSlot) ^containsGraphicCardSlots(?x,?gpu) -> sqwrl:select(?y,?s,?p,?r,?m,?num,?ramSlot,?gpu)  ");
+
+
+            Motherboard mod = new Motherboard(findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(0),0),findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(0),2)
+                    ,Integer.parseInt(findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(0),3)),Integer.parseInt(findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(0),4)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result2.getColumn(5).get(0),5)),
+                    result2.getColumn(6).get(0).toString().substring(1)
+                    ,result2.getColumn(1).get(0).toString().substring(1),result2.getColumn(7).get(0).toString().substring(1));
+
+            SQWRLResult result3= queryEngine.runSQWRLQuery("q200"+i, "Processor(?x)"+
+                    "^ processorName(?x,?name)^ swrlb:equal(?name,\""+processor+"\") ^ processorFrequency(?x,?freq) " +
+                    "^ processorTDP(?x,?tdp) ^ numberOfCores(?x,?noc) ^ processorIsCompatibleWithSocket(?x,?s) ^processorOperatingMode(?x,?op)-> sqwrl:select(?name,?freq,?tdp,?noc,?s,?op) ");
+
+            Processor pro = new Processor(findDetailsFromQueryWithoutTypes(result3.getColumn(0).get(0),0),result3.getColumn(4).get(0).toString().substring(1),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(0),1)),Integer.parseInt(findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(0),2)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(0),3)),result3.getColumn(5).get(0).toString().substring(1));
+
+            SQWRLResult result4= queryEngine.runSQWRLQuery("q300"+i, "RAM(?x) ^ "+
+                    " ramProducer(?x,?producer) ^ ramName(?x, ?name)^ swrlb:equal(?name,\""+ram+"\") ^" +
+                    " ramMemoryCapacity(?x,?capacity) ^ramTypeIsCompatibleWithSlotType(?x,?type) ^ ramFrequency(?x,?mcs) ->" +
+                    " sqwrl:select(?producer,?name,?capacity,?mcs,?type)  ");
+            Ram ra = new Ram(findDetailsFromQueryWithoutTypes(result4.getColumn(1).get(0),1),findDetailsFromQueryWithoutTypes(result4.getColumn(0).get(0),0),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result4.getColumn(2).get(0),2)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result4.getColumn(3).get(0),3)),
+                    result4.getColumn(4).get(0).toString().substring(1));
+
+
+            SQWRLResult result5= queryEngine.runSQWRLQuery(
+                    "q400"+i, "GraphicsCard(?x) " +
+                            "^graphicCardName(?x, ?name) ^ swrlb:equal(?name,\""+gpu+"\")" +
+                            "^minimumPSUForGraphicCard(?x, ?minimumPSU)" +
+                            "^memoryTypeOfGraphicCard(?x, ?memoryType)" +
+                            "^memorySizeOfGraphicCard(?x, ?memorySize)" +
+                            " -> sqwrl:select(?name, ?minimumPSU, ?memoryType, ?memorySize)");
+
+            Gpu g = new Gpu(findDetailsFromQueryWithoutTypes(result5.getColumn(0).get(0),0),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result5.getColumn(3).get(0),3)),
+                    findDetailsFromQueryWithoutTypes(result5.getColumn(2).get(0),2),
+                    Double.parseDouble(findDetailsFromQueryWithoutTypes(result5.getColumn(1).get(0),1)));
+
+
+            SQWRLResult result6= queryEngine.runSQWRLQuery("q500"+i, "CpuCooler(?x) ^" +
+                    "coolerTDP(?x,?cooler) ^coolerName(?x,?name) ^ swrlb:equal(?name,\""+cooler+"\")" +
+                    "^ maxFanSpeed(?x,?speed) ^ noiseLevel(?x,?level) -> sqwrl:select(?name,?cooler,?speed,?level) ");
+            CpuCooler cool = new CpuCooler(findDetailsFromQueryWithoutTypes(result6.getColumn(0).get(0),0),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(1).get(0),1)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(2).get(0),2)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(3).get(0),3)));
+
+            System.out.println("pcccc"+new PC(mod,pro,g,cool,ra));
+            pcs.add(new PC(mod,pro,g,cool,ra));
+
+
+        }
+
+
+
+
+
+
+
+        /*String socket=result1.getColumn(0).get(0).toString().substring(1);
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++){
+            processors.add(new ComponentEstimationDTO(findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i) +" ["+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)+ " cores, "+
+                    findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i)+"MHz,"+
+                    "TDP "+findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+"W"
+                    +"]",findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)));
+        }*/
+        return pcs;
+    }
+
+
 
 
 

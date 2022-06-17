@@ -7,330 +7,324 @@ net
      UnBBayes_Color_Probabilistic_Explanation = "-16711936";
 }
 
-node plugged_in_during_thunderstorm
-{
-     label = "C1";
-     position = (683 229);
-     states = ("yes" "no");
-}
-
 node high_surge_voltages
 {
-     label = "C2";
-     position = (804 135);
+     label = "C1";
+     position = (788 181);
      states = ("yes" "no");
 }
 
 node pc_wont_turn_on
 {
-     label = "C3";
-     position = (514 178);
+     label = "C2";
+     position = (514 196);
      states = ("yes" "no");
 }
 
 node power_supply_damage
 {
-     label = "C4";
+     label = "C3";
      position = (620 60);
      states = ("yes" "no");
 }
 
 node array_of_short_sound_signals
 {
-     label = "C5";
+     label = "C4";
      position = (277 211);
      states = ("yes" "no");
 }
 
 node cooler_damage
 {
-     label = "C6";
+     label = "C5";
      position = (248 60);
      states = ("yes" "no");
 }
 
 node high_temperature_of_device
 {
-     label = "C7";
+     label = "C6";
      position = (41 214);
      states = ("yes" "no");
 }
 
 node slow_computer
 {
-     label = "C8";
+     label = "C7";
      position = (1161 228);
      states = ("yes" "no");
 }
 
 node not_enough_RAM_damage
 {
-     label = "C9";
+     label = "C8";
      position = (997 59);
      states = ("yes" "no");
 }
 
 node freeze
 {
-     label = "C10";
+     label = "C9";
      position = (1016 196);
      states = ("yes" "no");
 }
 
-node virus_damage
+node security_damage
 {
-     label = "C11";
+     label = "C10";
      position = (1349 60);
      states = ("yes" "no");
 }
 
 node blue_screen
 {
-     label = "C12";
+     label = "C11";
      position = (1348 313);
      states = ("yes" "no");
 }
 
 node lost_data
 {
-     label = "C13";
+     label = "C12";
      position = (1506 247);
      states = ("yes" "no");
 }
 
 node slow_internet
 {
-     label = "C14";
+     label = "C13";
      position = (1879 421);
      states = ("yes" "no");
 }
 
 node antivirus_failure
 {
-     label = "C15";
+     label = "C14";
      position = (1727 177);
      states = ("yes" "no");
 }
 
 node periodically_restarting
 {
-     label = "C16";
+     label = "C15";
      position = (1692 20);
      states = ("yes" "no");
 }
 
 node no_sound
 {
-     label = "C17";
+     label = "C16";
      position = (1708 586);
      states = ("yes" "no");
 }
 
 node no_recognize_storage_device
 {
-     label = "C18";
+     label = "C17";
      position = (1377 622);
      states = ("yes" "no");
 }
 
 node motherboard_damage
 {
-     label = "C19";
+     label = "C18";
      position = (1418 438);
      states = ("yes" "no");
 }
 
 node cant_connect_to_internet
 {
-     label = "C20";
+     label = "C19";
      position = (279 448);
      states = ("yes" "no");
 }
 
 node network_card_damage
 {
-     label = "C21";
+     label = "C20";
      position = (638 313);
      states = ("yes" "no");
 }
 
 node foreign_artifacts
 {
-     label = "C22";
+     label = "C21";
      position = (898 724);
      states = ("yes" "no");
 }
 
 node dropped_computer
 {
-     label = "C23";
+     label = "C22";
      position = (597 695);
      states = ("yes" "no");
 }
 
 node graphic_card_damage
 {
-     label = "C24";
+     label = "C23";
      position = (622 511);
      states = ("yes" "no");
 }
 
 node video_driver_damage
 {
-     label = "C25";
+     label = "C24";
      position = (870 508);
      states = ("yes" "no");
 }
 
 node lost_contact_with_motherboard_damage
 {
-     label = "C26";
+     label = "C25";
      position = (1120 519);
      states = ("yes" "no");
 }
 
 node input_devices_are_not_working
 {
-     label = "C27";
+     label = "C26";
      position = (1103 737);
      states = ("yes" "no");
 }
 
 node black_display
 {
-     label = "C28";
+     label = "C27";
      position = (1587 787);
      states = ("yes" "no");
 }
 
 node display_driver_damage
 {
-     label = "C29";
+     label = "C28";
      position = (1398 732);
      states = ("yes" "no");
 }
 
 node display_damage
 {
-     label = "C30";
+     label = "C29";
      position = (1714 681);
      states = ("yes" "no");
 }
 
 node input_drivers_damage
 {
-     label = "C31";
+     label = "C30";
      position = (598 784);
      states = ("yes" "no");
 }
 
 node input_devices_damage
 {
-     label = "C32";
+     label = "C31";
      position = (862 791);
      states = ("yes" "no");
 }
 
 node dropped_input_devices
 {
-     label = "C33";
+     label = "C32";
      position = (1304 860);
      states = ("yes" "no");
 }
 
 node ram_damage
 {
-     label = "C34";
+     label = "C33";
      position = (80 410);
      states = ("yes" "no");
 }
 
 node processor_damage
 {
-     label = "C35";
+     label = "C34";
      position = (316 523);
      states = ("yes" "no");
 }
 
 node os_damage
 {
-     label = "C36";
+     label = "C35";
      position = (291 653);
      states = ("yes" "no");
 }
 
 node out_of_date_or_corrupt_hardware_drivers_damage
 {
-     label = "C37";
+     label = "C36";
      position = (307 768);
      states = ("yes" "no");
 }
 
 node os_loading
 {
-     label = "C38";
+     label = "C37";
      position = (29 534);
      states = ("yes" "no");
 }
 
 node corrupt_system_files_damage
 {
-     label = "C39";
+     label = "C38";
      position = (80 644);
      states = ("yes" "no");
 }
 
 node it_takes_long_time_to_save_files
 {
-     label = "C40";
+     label = "C39";
      position = (80 723);
      states = ("yes" "no");
 }
 
 node SSD_damage
 {
-     label = "C41";
+     label = "C40";
      position = (91 865);
      states = ("yes" "no");
 }
 
 node network_driver_damage
 {
-     label = "C42";
+     label = "C41";
      position = (13 318);
      states = ("yes" "no");
 }
 
 node output_devices_damage
 {
-     label = "C43";
+     label = "C42";
      position = (1052 914);
      states = ("yes" "no");
 }
 
 node output_driver_damage
 {
-     label = "C44";
+     label = "C43";
      position = (740 903);
      states = ("yes" "no");
 }
 
 node output_devices_are_not_working
 {
-     label = "C45";
+     label = "C44";
      position = (890 858);
      states = ("yes" "no");
 }
 
-potential (plugged_in_during_thunderstorm)
+node vague_messages
 {
- data = ( 0.7 0.3 );
+     label = "C45";
+     position = (187 532);
+     states = ("yes" "no");
 }
 
-potential (high_surge_voltages | plugged_in_during_thunderstorm)
+potential (high_surge_voltages)
 {
- data = (( 0.6 0.4 )
-( 0.0 1.0 ));
+ data = ( 0.01 0.99 );
 }
 
 potential (pc_wont_turn_on)
@@ -341,8 +335,8 @@ potential (pc_wont_turn_on)
 potential (power_supply_damage | high_surge_voltages pc_wont_turn_on)
 {
  data = ((( 0.9 0.1 )
-( 0.0 1.0 ))
-(( 0.2 0.8 )
+( 0.8 0.2 ))
+(( 0.3 0.7 )
 ( 0.0 1.0 )));
 }
 
@@ -386,7 +380,7 @@ potential (freeze)
  data = ( 0.01 0.99 );
 }
 
-potential (virus_damage | periodically_restarting slow_internet antivirus_failure lost_data blue_screen slow_computer)
+potential (security_damage | periodically_restarting slow_internet antivirus_failure lost_data blue_screen slow_computer)
 {
  data = ((((((( 1.0 0.0 )
 ( 0.9 0.1 ))
@@ -407,11 +401,11 @@ potential (virus_damage | periodically_restarting slow_internet antivirus_failur
 ((((( 0.9 0.1 )
 ( 0.8 0.2 ))
 (( 0.8 0.2 )
-( 0.5 0.5 )))
+( 0.7 0.3 )))
 ((( 0.8 0.2 )
-( 0.5 0.5 ))
-(( 0.5 0.5 )
-( 0.2 0.8 ))))
+( 0.7 0.3 ))
+(( 0.6 0.4 )
+( 0.5 0.5 ))))
 (((( 0.5 0.5 )
 ( 0.2 0.8 ))
 (( 0.8 0.2 )
@@ -423,11 +417,11 @@ potential (virus_damage | periodically_restarting slow_internet antivirus_failur
 (((((( 0.9 0.1 )
 ( 0.8 0.2 ))
 (( 0.8 0.2 )
-( 0.5 0.5 )))
+( 0.7 0.3 )))
 ((( 0.8 0.2 )
-( 0.5 0.5 ))
+( 0.6 0.4 ))
 (( 0.5 0.5 )
-( 0.2 0.8 ))))
+( 0.5 0.5 ))))
 (((( 0.8 0.2 )
 ( 0.5 0.5 ))
 (( 0.5 0.5 )
@@ -437,13 +431,13 @@ potential (virus_damage | periodically_restarting slow_internet antivirus_failur
 (( 0.5 0.5 )
 ( 0.2 0.8 )))))
 ((((( 0.8 0.2 )
-( 0.5 0.5 ))
-(( 0.5 0.5 )
-( 0.2 0.8 )))
+( 0.6 0.4 ))
+(( 0.7 0.3 )
+( 0.5 0.5 )))
 ((( 0.5 0.5 )
-( 0.2 0.8 ))
-(( 0.2 0.8 )
-( 0.1 0.9 ))))
+( 0.5 0.5 ))
+(( 0.7 0.3 )
+( 0.5 0.5 ))))
 (((( 0.5 0.5 )
 ( 0.2 0.8 ))
 (( 0.2 0.8 )
@@ -619,7 +613,7 @@ potential (processor_damage | periodically_restarting freeze blue_screen)
 
 potential (os_damage | pc_wont_turn_on blue_screen)
 {
- data = ((( 1.0 0.0 )
+ data = ((( 0.7 0.3 )
 ( 0.3 0.7 ))
 (( 0.3 0.7 )
 ( 0.0 1.0 )));
@@ -627,7 +621,7 @@ potential (os_damage | pc_wont_turn_on blue_screen)
 
 potential (out_of_date_or_corrupt_hardware_drivers_damage | blue_screen pc_wont_turn_on)
 {
- data = ((( 1.0 0.0 )
+ data = ((( 0.65 0.35 )
 ( 0.4 0.6 ))
 (( 0.2 0.8 )
 ( 0.0 1.0 )));
@@ -638,10 +632,12 @@ potential (os_loading)
  data = ( 0.01 0.99 );
 }
 
-potential (corrupt_system_files_damage | os_loading)
+potential (corrupt_system_files_damage | vague_messages os_loading)
 {
- data = (( 0.8 0.2 )
-( 0.0 1.0 ));
+ data = ((( 0.8 0.2 )
+( 0.7 0.3 ))
+(( 0.8 0.2 )
+( 0.0 1.0 )));
 }
 
 potential (it_takes_long_time_to_save_files)
@@ -676,6 +672,11 @@ potential (output_driver_damage | output_devices_are_not_working)
 }
 
 potential (output_devices_are_not_working)
+{
+ data = ( 0.01 0.99 );
+}
+
+potential (vague_messages)
 {
  data = ( 0.01 0.99 );
 }
