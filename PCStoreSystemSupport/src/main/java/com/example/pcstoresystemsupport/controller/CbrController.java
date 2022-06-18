@@ -38,16 +38,6 @@ public class CbrController {
 
     @PostMapping(value= "/findSimilarPCs")
     public ResponseEntity<List<String>> estimateValue(@RequestBody PCDto pcDto) throws SWRLParseException, SQWRLException, IOException {
-       // System.out.println(pcDto);
-//       // ObjectMapper mapper = new ObjectMapper();
-
-
-       //Object to JSON in file
-        //mapper.writeValue(new File(System.getProperty("user.dir")+"/data/a.json"),new PC(new Motherboard(),new Processor(),new Gpu(),new CpuCooler(),new Ram()) );
-
-//Object to JSON in String
-        //String jsonInString = mapper.writeValueAsString(user);
-        cbrService.startCbr(pcDto,recommendingComponentsService.findPcs());
-        return null;
+        return  new ResponseEntity<>(cbrService.startCbr(pcDto, recommendingComponentsService.findPcs()), HttpStatus.OK);
     }
 }
