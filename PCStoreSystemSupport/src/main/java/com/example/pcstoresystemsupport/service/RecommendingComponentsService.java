@@ -1,6 +1,6 @@
 package com.example.pcstoresystemsupport.service;
 
-import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
+import com.example.pcstoresystemsupport.dtos.*;
 import com.example.pcstoresystemsupport.model.PC;
 import org.swrlapi.parser.SWRLParseException;
 import org.swrlapi.sqwrl.exceptions.SQWRLException;
@@ -28,4 +28,9 @@ public interface RecommendingComponentsService {
     List<ComponentEstimationDTO>  findProcessorsForEstimation() throws SWRLParseException, SQWRLException;
     List<ComponentEstimationDTO>  findMotherboardsForEstimation() throws SWRLParseException, SQWRLException;
     List<PC> findPcs() throws SWRLParseException, SQWRLException;
+    List<ProcessorDto> findProcessorsForCbr() throws SWRLParseException, SQWRLException;
+    List<MotherboardDto> findMotherboardsForCbr() throws SWRLParseException, SQWRLException;
+    List<RamDto> findRamsForCbr() throws SWRLParseException, SQWRLException;
+    List<GpuDto> findGpusForCbr() throws SWRLParseException, SQWRLException;
+    List<CpuCoolerDto> findCoolersForCbr() throws SWRLParseException, SQWRLException;
 }

@@ -1,6 +1,6 @@
 package com.example.pcstoresystemsupport.controller;
 
-import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
+import com.example.pcstoresystemsupport.dtos.*;
 import com.example.pcstoresystemsupport.service.RecommendingComponentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -97,5 +97,26 @@ public class RecommendingComponentsController {
     @PostMapping(value= "/findCompatibleKeyboards/{motherboard}")
     public ResponseEntity<List<String>> findCompatibleKeyboards(@PathVariable("motherboard") String motherboard) throws SWRLParseException, SQWRLException {
         return new ResponseEntity<>(recommendingComponentsService.findCompatibleKeyboards(motherboard), HttpStatus.OK);
+    }
+
+    @GetMapping(value= "/processorsForCbr")
+    public ResponseEntity<List<ProcessorDto>> processorsForCbr() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findProcessorsForCbr(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/motherboardsForCbr")
+    public ResponseEntity<List<MotherboardDto>> motherboardsForCbr() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findMotherboardsForCbr(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/ramsForCbr")
+    public ResponseEntity<List<RamDto>> ramsForCbr() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findRamsForCbr(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/gpusForCbr")
+    public ResponseEntity<List<GpuDto>> gpusForCbr() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findGpusForCbr(), HttpStatus.OK);
+    }
+    @GetMapping(value= "/coolersForCbr")
+    public ResponseEntity<List<CpuCoolerDto>> coolersForCbr() throws SWRLParseException, SQWRLException {
+        return new ResponseEntity<>(recommendingComponentsService.findCoolersForCbr(), HttpStatus.OK);
     }
 }

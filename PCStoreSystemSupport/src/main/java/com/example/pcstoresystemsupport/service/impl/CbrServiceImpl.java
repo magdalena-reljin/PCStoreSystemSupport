@@ -1,5 +1,8 @@
 package com.example.pcstoresystemsupport.service.impl;
 
+import com.example.pcstoresystemsupport.connector.CsvConnector;
+import com.example.pcstoresystemsupport.dtos.*;
+import com.example.pcstoresystemsupport.model.*;
 import com.example.pcstoresystemsupport.service.CbrService;
 import org.springframework.stereotype.Service;
 import ucm.gaia.jcolibri.casebase.LinealCaseBase;
@@ -15,7 +18,10 @@ import ucm.gaia.jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import ucm.gaia.jcolibri.method.retrieve.RetrievalResult;
 import ucm.gaia.jcolibri.method.retrieve.selection.SelectCases;
 
+import java.net.CookieHandler;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class CbrServiceImpl implements CbrService {
@@ -24,9 +30,13 @@ public class CbrServiceImpl implements CbrService {
     CBRCaseBase _caseBase;  /** CaseBase object */
 
     NNConfig simConfig;  /** KNN configuration */
+    public static List<PC> pcs= new ArrayList<>();
+
 
     public void configure() throws ExecutionException {
-       // _connector =  new CsvConnector();
+        System.out.println("CONFIGURE ");
+        System.out.println("CONFIGURE PC LIST  "+getPcs().size());
+        _connector =  new CsvConnector(this.pcs);
 
         _caseBase = new LinealCaseBase();  // Create a Lineal case base for in-memory organization
 
@@ -59,6 +69,8 @@ public class CbrServiceImpl implements CbrService {
 
     }
 
+
+
     public CBRCaseBase preCycle() throws ExecutionException {
         _caseBase.init(_connector);
         java.util.Collection<CBRCase> cases = _caseBase.getCases();
@@ -67,21 +79,38 @@ public class CbrServiceImpl implements CbrService {
         return _caseBase;
     }
 
+    public List<PC> getPcs() {
+        return this.pcs;
+    }
+
+    public void setPcs(List<PC> pcs) {
+        this.pcs = pcs;
+    }
 
     @Override
-    public void startCbr() {
+    public List<String> startCbr(PCDto pcDto, List<PC> myPCs) {
         StandardCBRApplication recommender = new CbrServiceImpl();
         try {
+            setPcs(myPCs);
+            if(this.pcs.size()>0)
             recommender.configure();
 
             recommender.preCycle();
 
             CBRQuery query = new CBRQuery();
-          //  CaseDescription caseDescription = new CaseDescription();
-
+            MotherboardDto motherboardDto=pcDto.getMotherboard();
+            ProcessorDto processorDto=pcDto.getProcessor();
+            RamDto ramDto=pcDto.getRam();
+            GpuDto gpuDto=pcDto.getGpu();
+            CpuCoolerDto cpuCoolerDto=pcDto.getCooler();
+            Motherboard motherboard=new Motherboard(motherboardDto.getName(),motherboardDto.getProducer(),motherboardDto.getRamSlotCapacity(),motherboardDto.getMaxInternalMemory(),motherboardDto.getNumOfMemorySlots(),motherboardDto.getRamSlotType(),motherboardDto.getSocket(),motherboardDto.getGpuSlot());
+            Processor processor=new Processor(processorDto.getName(),processorDto.getMotherboardSocket(),processorDto.getFrequency(),processorDto.getTdp(),processorDto.getNumOfCores(),processorDto.getOperatingMode());
+            Ram ram=new Ram(ramDto.getName(),ramDto.getProducer(),ramDto.getCapacity(),ramDto.getFrequency(),ramDto.getType());
+            Gpu gpu=new Gpu(gpuDto.getName(),gpuDto.getMemorySize(),gpuDto.getMemoryType(),gpuDto.getMinPSU());
+            CpuCooler cooler=new CpuCooler(cpuCoolerDto.getName(),cpuCoolerDto.getTdp(),cpuCoolerDto.getMaxFanSpeed(),cpuCoolerDto.getNoiseLevel());
+            PC newCase=new PC(motherboard,processor,gpu,cooler,ram);
             // TODO
-
-           // query.setDescription( caseDescription );
+            query.setDescription( newCase );
 
             recommender.cycle(query);
 
@@ -89,5 +118,6 @@ public class CbrServiceImpl implements CbrService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 }

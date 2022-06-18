@@ -1,49 +1,44 @@
 package com.example.pcstoresystemsupport.connector;
 
+import com.example.pcstoresystemsupport.dtos.PCDto;
+import com.example.pcstoresystemsupport.model.PC;
+import com.example.pcstoresystemsupport.service.RecommendingComponentsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.swrlapi.sqwrl.SQWRLQueryEngine;
 import ucm.gaia.jcolibri.cbrcore.CBRCase;
 import ucm.gaia.jcolibri.cbrcore.CaseBaseFilter;
 import ucm.gaia.jcolibri.cbrcore.Connector;
 import ucm.gaia.jcolibri.exception.InitializingException;
-import ucm.gaia.jcolibri.util.FileIO;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 public class CsvConnector implements Connector {
+    private SQWRLQueryEngine queryEngine;
+    private List<PC> pcs=new ArrayList<>();
+    public CsvConnector(List<PC> pcs1) {
+        System.out.println("CsvConnector LIST size:  "+pcs1.size());
+        for(PC pc: pcs1)
+         this.pcs.add(pc);
+    }
+
     @Override
     public Collection<CBRCase> retrieveAllCases() {
         LinkedList<CBRCase> cases = new LinkedList<CBRCase>();
+        System.out.println("LISTA U CSV KONEKTORU   "+this.pcs.size());
+        System.out.println("*******************************************************");
 
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(FileIO.openFile("data/example.csv")));
-            if (br == null)
-                throw new Exception("Error opening file");
-
-            String line = "";
-            while ((line = br.readLine()) != null) {
-                if (line.startsWith("#") || (line.length() == 0))
-                    continue;
-                String[] values = line.split(";");
-
-                CBRCase cbrCase = new CBRCase();
-
-               // CaseDescription caseDescription = new CaseDescription();
-
-                // TODO
-
-              //  cbrCase.setDescription(caseDescription);
-                cases.add(cbrCase);
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        for(PC pc: this.pcs){
+            CBRCase cbrCase = new CBRCase();
+            cbrCase.setDescription(pc);
+            cases.add(cbrCase);
         }
+
         return cases;
     }
-
     @Override
     public Collection<CBRCase> retrieveSomeCases(CaseBaseFilter arg0) {
         return null;

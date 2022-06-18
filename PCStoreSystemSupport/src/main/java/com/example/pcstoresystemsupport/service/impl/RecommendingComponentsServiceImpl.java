@@ -1,6 +1,6 @@
 package com.example.pcstoresystemsupport.service.impl;
 
-import com.example.pcstoresystemsupport.dtos.ComponentEstimationDTO;
+import com.example.pcstoresystemsupport.dtos.*;
 import com.example.pcstoresystemsupport.model.*;
 import com.example.pcstoresystemsupport.service.MyOntologyService;
 import com.example.pcstoresystemsupport.service.RecommendingComponentsService;
@@ -546,8 +546,8 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
     @Override
     public List<PC> findPcs() throws SWRLParseException, SQWRLException {
         queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
-
-        List<PC>  pcs= new ArrayList<>();
+        System.err.println("USAAO U  pcs   ");
+        List<PC> pcs= new ArrayList<>();
 
         SQWRLResult result1= queryEngine.runSQWRLQuery("q44", "PC(?x) ^ hasMotherboard(?x,?y) " +
                 "^ hasProcessor(?x,?z) ^ hasRAM(?x,?r) ^ hasCooler(?x,?c) ^ hasGpu(?x,?g) -> sqwrl:select(?y,?z,?r,?c,?g) ");
@@ -610,31 +610,113 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
                     Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(2).get(0),2)),
                     Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(3).get(0),3)));
 
-            System.out.println("pcccc"+new PC(mod,pro,g,cool,ra));
             pcs.add(new PC(mod,pro,g,cool,ra));
-
+            System.out.println(new PC(mod,pro,g,cool,ra));
 
         }
 
-
-
-
-
-
-
-        /*String socket=result1.getColumn(0).get(0).toString().substring(1);
-        for(int i=0 ; i< result2.getColumn(0).size() ; i++){
-            processors.add(new ComponentEstimationDTO(findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i) +" ["+
-                    findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)+ " cores, "+
-                    findDetailsFromQueryWithoutTypes(result2.getColumn(1).get(i),i)+"MHz,"+
-                    "TDP "+findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)+"W"
-                    +"]",findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)));
-        }*/
         return pcs;
     }
 
+    @Override
+    public List<ProcessorDto> findProcessorsForCbr() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
 
+        List<ProcessorDto> processors= new ArrayList<>();
 
+        SQWRLResult result3= queryEngine.runSQWRLQuery("q50", "Processor(?x)"+
+                "^ processorName(?x,?name) ^ processorFrequency(?x,?freq) " +
+                "^ processorTDP(?x,?tdp) ^ numberOfCores(?x,?noc) ^ processorIsCompatibleWithSocket(?x,?s) ^processorOperatingMode(?x,?op)-> sqwrl:select(?name,?freq,?tdp,?noc,?s,?op) ");
+        for(int i=0 ; i< result3.getColumn(0).size() ; i++){
+            processors.add(new ProcessorDto(findDetailsFromQueryWithoutTypes(result3.getColumn(0).get(i),i),result3.getColumn(4).get(0).toString().substring(1),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result3.getColumn(1).get(i),i)),Integer.parseInt(findDetailsFromQueryWithoutTypes(result3.getColumn(2).get(i),i)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result3.getColumn(3).get(i),i)),result3.getColumn(5).get(i).toString().substring(1)));
+
+        }
+        return processors;
+    }
+
+    @Override
+    public List<MotherboardDto> findMotherboardsForCbr() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        List<MotherboardDto> motherboards= new ArrayList<>();
+
+        SQWRLResult result2= queryEngine.runSQWRLQuery("q51", "Motherboard(?x) ^ motherboardName(?x,?y) " +
+                " ^ containsSocket(?x,?s) ^ motherBoardProducer(?x,?p) ^ RamSlotCapacity(?x,?r) ^maximumInternalMemory(?x,?m) ^numberOfMemorySlots(?x,?num) ^containsRAMSlot(?x,?ramSlot) ^containsGraphicCardSlots(?x,?gpu) -> sqwrl:select(?y,?s,?p,?r,?m,?num,?ramSlot,?gpu)  ");
+        System.out.println("FOOOOOOOOR   "+result2.getColumn(0));
+
+        for(int i=0 ; i< result2.getColumn(0).size() ; i++){
+            motherboards.add(new MotherboardDto(findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i),findDetailsFromQueryWithoutTypes(result2.getColumn(2).get(i),i)
+                    ,Integer.parseInt(findDetailsFromQueryWithoutTypes(result2.getColumn(3).get(i),i)),Integer.parseInt(findDetailsFromQueryWithoutTypes(result2.getColumn(4).get(i),i)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result2.getColumn(5).get(i),i)),
+                    result2.getColumn(6).get(i).toString().substring(1)
+                    ,result2.getColumn(1).get(i).toString().substring(1),result2.getColumn(7).get(i).toString().substring(1)));
+            System.out.println("FOOOOOOOOR   "+findDetailsFromQueryWithoutTypes(result2.getColumn(0).get(i),i));
+        }
+        return motherboards;
+    }
+
+    @Override
+    public List<RamDto> findRamsForCbr() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        List<RamDto> rams= new ArrayList<>();
+
+        SQWRLResult result4= queryEngine.runSQWRLQuery("q52", "RAM(?x) ^ "+
+                " ramProducer(?x,?producer) ^ ramName(?x, ?name)^" +
+                " ramMemoryCapacity(?x,?capacity) ^ramTypeIsCompatibleWithSlotType(?x,?type) ^ ramFrequency(?x,?mcs) ->" +
+                " sqwrl:select(?producer,?name,?capacity,?mcs,?type)  ");
+        for(int i=0 ; i< result4.getColumn(0).size() ; i++){
+            rams.add(new RamDto(findDetailsFromQueryWithoutTypes(result4.getColumn(1).get(i),i),findDetailsFromQueryWithoutTypes(result4.getColumn(0).get(i),i),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result4.getColumn(2).get(i),i)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result4.getColumn(3).get(i),i)),
+                    result4.getColumn(4).get(0).toString().substring(1)));
+
+        }
+        return rams;
+    }
+
+    @Override
+    public List<GpuDto> findGpusForCbr() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        List<GpuDto> gpus= new ArrayList<>();
+
+        SQWRLResult result5= queryEngine.runSQWRLQuery(
+                "q53", "GraphicsCard(?x) " +
+                        "^graphicCardName(?x, ?name)" +
+                        "^minimumPSUForGraphicCard(?x, ?minimumPSU)" +
+                        "^memoryTypeOfGraphicCard(?x, ?memoryType)" +
+                        "^memorySizeOfGraphicCard(?x, ?memorySize)" +
+                        " -> sqwrl:select(?name, ?minimumPSU, ?memoryType, ?memorySize)");
+
+        for(int i=0 ; i< result5.getColumn(0).size() ; i++){
+            gpus.add(new GpuDto(findDetailsFromQueryWithoutTypes(result5.getColumn(0).get(i),i),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result5.getColumn(3).get(i),i)),
+                    findDetailsFromQueryWithoutTypes(result5.getColumn(2).get(i),i),
+                    Double.parseDouble(findDetailsFromQueryWithoutTypes(result5.getColumn(1).get(i),i))));
+
+        }
+        return gpus;
+    }
+    @Override
+    public List<CpuCoolerDto> findCoolersForCbr() throws SWRLParseException, SQWRLException {
+        queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
+
+        List<CpuCoolerDto> coolers= new ArrayList<>();
+
+        SQWRLResult result6= queryEngine.runSQWRLQuery("q54", "CpuCooler(?x) ^" +
+                "coolerTDP(?x,?cooler) ^coolerName(?x,?name)" +
+                "^ maxFanSpeed(?x,?speed) ^ noiseLevel(?x,?level) -> sqwrl:select(?name,?cooler,?speed,?level) ");
+        for(int i=0 ; i< result6.getColumn(0).size() ; i++){
+            coolers.add(new CpuCoolerDto(findDetailsFromQueryWithoutTypes(result6.getColumn(0).get(i),i),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(1).get(i),i)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(2).get(i),i)),
+                    Integer.parseInt(findDetailsFromQueryWithoutTypes(result6.getColumn(3).get(i),i))));
+        }
+        return coolers;
+    }
 
 
 }

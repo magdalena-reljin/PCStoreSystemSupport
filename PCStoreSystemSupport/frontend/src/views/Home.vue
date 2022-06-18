@@ -87,6 +87,8 @@ export default {
          this.$router.push("/faultProbability")
        },
        similarPc: function () {
+
+        this.$router.push("/similarpcs")
             axios
            .get("http://localhost:8081/cbr/proba")
            .then((response) => {

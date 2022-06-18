@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import RecommendingComponents from '../views/RecommendingComponents.vue'
 import EstimatingValue from '../views/EstimatingValue.vue'
 import FaultProbability from '../views/FaultProbability'
+import SimilarPCs from '../views/SimilarPCs'
 const routes = [
   
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/faultProbability',
     name: 'FaultProbability',
     component: FaultProbability
+  },
+  {
+    path: '/similarpcs',
+    name: 'SimilarPCs',
+    component: SimilarPCs
   },
   
    
