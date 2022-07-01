@@ -77,13 +77,13 @@ public class Processor implements CaseComponent {
 
     @Override
     public String toString() {
-        return "Processor{" +
+        return "Processor [" +
                 "name='" + name + '\'' +
                 ", motherboardSocket='" + motherboardSocket + '\'' +
                 ", frequency=" + frequency +
                 ", tdp=" + tdp +
                 ", numOfCores=" + numOfCores +
                 ", operatingMode='" + operatingMode + '\'' +
-                '}';
+                "]\n";
     }
 }

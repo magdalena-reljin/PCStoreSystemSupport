@@ -57,11 +57,11 @@ public class Gpu implements CaseComponent {
 
     @Override
     public String toString() {
-        return "Gpu{" +
+        return "Gpu [" +
                 "name='" + name + '\'' +
                 ", memorySize=" + memorySize +
                 ", memoryType='" + memoryType + '\'' +
                 ", minPSU=" + minPSU +
-                '}';
+                "] \n";
     }
 }

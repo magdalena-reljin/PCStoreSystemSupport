@@ -57,11 +57,11 @@ public class CpuCooler implements CaseComponent {
 
     @Override
     public String toString() {
-        return "CpuCooler{" +
+        return "CpuCooler [" +
                 "name='" + name + '\'' +
                 ", tdp=" + tdp +
                 ", maxFanSpeed=" + maxFanSpeed +
                 ", noiseLevel=" + noiseLevel +
-                '}';
+                "]\n";
     }
 }

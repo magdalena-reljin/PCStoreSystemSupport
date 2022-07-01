@@ -68,12 +68,12 @@ public class Ram implements CaseComponent {
 
     @Override
     public String toString() {
-        return "Ram{" +
+        return "Ram [" +
                 "name='" + name + '\'' +
                 ", producer='" + producer + '\'' +
                 ", capacity=" + capacity +
                 ", frequency=" + frequency +
                 ", type='" + type + '\'' +
-                '}';
+                "]\n";
     }
 }

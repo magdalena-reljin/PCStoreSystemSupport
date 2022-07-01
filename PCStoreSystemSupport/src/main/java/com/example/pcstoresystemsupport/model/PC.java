@@ -66,12 +66,6 @@ public class PC implements CaseComponent {
 
     @Override
     public String toString() {
-        return "PC{" +
-                "motherboard=" + motherboard +
-                ", processor=" + processor +
-                ", gpu=" + gpu +
-                ", cooler=" + cooler +
-                ", ram=" + ram +
-                '}';
+        return "PC\n" + motherboard + processor + gpu + cooler + ram + "";
     }
 }

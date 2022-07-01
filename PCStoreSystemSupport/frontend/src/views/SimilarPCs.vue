@@ -31,7 +31,7 @@
           <label><b>Processor:</b></label>
           <select v-model="selectedProcessor" class="form-select">
             <option  v-for="(processor,key) in processors" :key="key" :value="key" >
-                    {{processor.name}}
+                    {{processor.name}}[{{processor.numOfCores}},{{processor.motherboardSocket}},{{processor.frequency}}MHz,TDP:{{processor.tdp}},{{processor.operatingMode}}]
             </option>
         </select>
           
@@ -42,7 +42,7 @@
           <label><b>Graphic card:</b></label>
           <select v-model="selectedGPU" class="form-select" >
             <option v-for="(gpu,key) in gpus" :key="key" :value="key">
-                    {{gpu.name}}
+                    {{gpu.name}}[{{gpu.memoryType}} {{gpu.memorySize}}GB, minPsu:{{gpu.minPSU}}]
             </option>
         </select>
           
@@ -53,7 +53,7 @@
           <label><b>RAM:</b></label>
           <select v-model="selectedRAM" class="form-select" >
             <option v-for="(ram,key) in rams" :key="key" :value="key">
-                    {{ram.name}}
+                    {{ram.producer}} {{ram.name}} [{{ram.type}} {{ram.capacity}}GB, {{ram.frequency}}MHz]
             </option>
         </select>
           
@@ -65,7 +65,7 @@
           <label><b>Cooler:</b></label>
           <select v-model="selectedCooler" class="form-select" >
             <option v-for="(cooler,key) in coolers" :key="key" :value="key">
-                    {{cooler.name}}
+                    {{cooler.name}} [TDP: {{cooler.tdp}}, {{cooler.maxFanSpeed}}, {{cooler.noiseLevel}}]
             </option>
         </select>
           
@@ -95,7 +95,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reception-4" viewBox="0 0 16 16">
   <path d="M0 11.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-5zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-8zm4-3a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-11z"/>
 </svg>
-<b> &nbsp;&nbsp;{{result}}</b>
+<b> &nbsp;&nbsp;{{format(result)}}</b>
     </a>
 </div>
 
@@ -185,7 +185,7 @@ export default {
            this.gPar=this.gpus[this.selectedGPU]
            this.rPar=this.rams[this.selectedRAM]
            this.cPar=this.coolers[this.selectedCooler]
-           
+           this.results=[]
            axios
            .post("http://localhost:8081/cbr/findSimilarPCs",
            {
@@ -200,6 +200,9 @@ export default {
             })
 
        },
+       format: function(value){
+         return value.replaceAll('*', '\n')
+       }
 
     }
    

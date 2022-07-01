@@ -546,7 +546,7 @@ public class RecommendingComponentsServiceImpl implements RecommendingComponents
     @Override
     public List<PC> findPcs() throws SWRLParseException, SQWRLException {
         queryEngine = SWRLAPIFactory.createSQWRLQueryEngine(myOntologyService.createOntology());
-        System.err.println("USAAO U  pcs   ");
+        System.out.println("Finding PC's  . . .   ");
         List<PC> pcs= new ArrayList<>();
 
         SQWRLResult result1= queryEngine.runSQWRLQuery("q44", "PC(?x) ^ hasMotherboard(?x,?y) " +

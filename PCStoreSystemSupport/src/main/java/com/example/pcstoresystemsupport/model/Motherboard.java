@@ -99,7 +99,7 @@ public class Motherboard implements CaseComponent {
 
     @Override
     public String toString() {
-        return "Motherboard{" +
+        return "Motherboard [" +
                 "name='" + name + '\'' +
                 ", producer='" + producer + '\'' +
                 ", ramSlotCapacity=" + ramSlotCapacity +
@@ -108,6 +108,6 @@ public class Motherboard implements CaseComponent {
                 ", ramSlotType='" + ramSlotType + '\'' +
                 ", socket='" + socket + '\'' +
                 ", gpuSlot='" + gpuSlot + '\'' +
-                '}';
+                "]\n";
     }
 }
