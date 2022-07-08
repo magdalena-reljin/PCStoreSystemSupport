@@ -1,7 +1,12 @@
 # PCStoreSystemSupport
 ## Description
 
-Full stack academic project made for course Knowledge Engineering at Faculty of Technical Sciences, Novi Sad.
+Full stack academic project made for course Knowledge Engineering at Faculty of Technical Sciences, Novi Sad. The following tasks were realized using ontology written in Protege. 
+- Recommending computer components using SWRL java api and SWQL 
+- Computer value estimation for purpose (home, work, gaming, data mining, etc...) using Fuzzy logic
+- Computer fault probability using Bayesian network
+- Finding similar PCs using Case-based reasoning
+
 
 |       Student 1       |       Student 2       |       Student 3       |   
 |:----------------------:|:----------------------:|:----------------------:|
